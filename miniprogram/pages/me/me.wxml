@@ -1,0 +1,65 @@
+<view class="top">
+	<view class="center">
+		<view class="center_top">
+            <view wx:if="{{userInfo.avatarUrl}}" class="user_info" > 
+               <image class="user_icon" src="{{userInfo.avatarUrl}}" ></image>
+               <view class="user_name" >{{userInfo.nickName}}</view>
+               
+            </view>
+            <view wx:else class="userBtn">
+                <text class="btnImg cuIcon-people" bindtap="getUserProfile"> </text>
+            </view>
+            
+		</view>
+		<view class="center_down">
+			<view class="center_rank">
+				<text class="rank_text">健康档案：</text>
+			</view>
+			<view class="center_score">
+                <text class="rank_text" wx:if="{{state}}" style="color: #3dcaa7;">已完善</text>
+                <text class="rank_text" style="color: #ca593d;" wx:else>未完善</text>
+			</view>
+		</view>
+	</view>
+	<image src='http://docfile.funkingka.cn/FqzmiFqvXbHg-cfbquNRlawHUgHt' mode='scaleToFill' class='gif-wave'></image>
+</view>
+
+
+
+<view class="user_content" >
+    <navigator url="/pages/me/information/index">
+        <view class="user_information">
+            <view class="iconfont icon-geren"></view>
+            <view class="jiankang">健康档案</view>
+            <view class="info_arrow"> </view>
+        </view>   
+        
+    </navigator>
+ 
+    <navigator url="/pages/me/record/index" >
+        <view class="user_record">
+             <view class="iconfont icon-jilu1" ></view>
+            <view class="zhenduan">诊断记录</view>
+            <view class="re_arrow"> </view>
+        </view>       
+    </navigator>
+    
+
+    <navigator url="/pages/me/aboutus/index" >
+        <view class="user_aboutus">
+            <view class="iconfont icon-guanyu" ></view>
+            <view class="guanyu">关于我们</view>
+            <view class="us_arrow"> </view>
+        </view>       
+    </navigator>
+
+    <navigator url="/pages/me/help/index" >
+        <view class="user_help">
+            <view class="iconfont icon-bangzhu" ></view>
+            <view class="bangzhu">帮助与反馈</view>
+            <view class="help_arrow"> </view>
+        </view>       
+    </navigator>
+
+
+</view>
