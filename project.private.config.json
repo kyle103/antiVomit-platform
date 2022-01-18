@@ -65,6 +65,12 @@
           "pathName": "pages/chatroom/chatroom",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/doctor/doctor",
+          "query": "",
+          "scene": null
         }
       ]
     }
