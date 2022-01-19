@@ -38,7 +38,6 @@ Page({
         },
         success: res => {
           resolve(res)
-
         },
         fail: res => {
           reject(res)
@@ -53,7 +52,8 @@ Page({
     wx.cloud.callFunction({
       name: 'auth',
       success: res => {
-        console.log(res)
+        app.globalData.openid = res.result.result.openid
+        console.log("globalData",app.globalData)
         if (res.result.errCode == -1) {
           console.log('--未登录--')
           this.setData({
@@ -65,6 +65,7 @@ Page({
             login: true,
             userInfo:res.result.result.userInfo
           })
+          
         }
       },
       fail: res => {

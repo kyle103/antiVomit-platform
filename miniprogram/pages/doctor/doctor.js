@@ -47,33 +47,14 @@ Page({
         console.log("complete")
       }
     })
-
-    // api.getRequestData('doctor_first_page/list',{},'GET',false).then((res)=>{
-    //   console.log("res_doctor---",res);
-    //   this.setData({ 
-    //     article_list:res.data.data
-    //   })
-    //   console.log(this.data.article_list)
-    // })
-    // wx.request({               
-    //   url:'http://127.0.0.1/get/consult/doctor_list?page='+this.data.page,
-    //   data:{
-    //     //categoryType:this.data.tabCur+1
-    //   },
-    //   success: (res) => {
-    //     this.setData({ 
-    //       doctor_list:res.data.data
-    //     })
-    //   }
-    // })  
   },
 
   // 跳转详细对话框
-  toDetail:function(){
-    // let index=e.currentTarget.dataset.index;
+  toDetail:function(e){
+    let openid = e.currentTarget.dataset.index;
+    console.log(openid)
     wx.navigateTo({
-      // url: '/pages/chat/chat?index='+index,
-      url:'/pages/chat/chat'
+      url: '/pages/chatroom/chatroom?openid='+ openid,
     })
   },
 
@@ -90,33 +71,6 @@ Page({
       wx.showLoading({
         title: '正在加载中...',
       })
-    //   wx.request({               
-    //     url:'http://127.0.0.1/get/consult/doctor_list?page='+this.data.page,
-    //     data:{
-    //       //categoryType:this.data.tabCur+1
-    //     },
-    //     success: (res) => {
-    //       var goodsList = this.data.doctor_list;
-    //       const newGoods = res.data.data
-    //       if (newGoods.length <= 0) {
-    //         //this.lock = true
-    //         wx.hideLoading()
-    //         wx.showToast({
-    //           title: '已经到底了！',
-    //           icon: 'none'
-    //         })
-    //         this.setData({
-    //           hasMore: false
-    //         })
-    //         return
-    //       }
-    //       wx.hideLoading()
-    //       goodsList = [...goodsList, ...newGoods]    //取数组里的一个值，然后再赋值到一个新数组里
-    //       this.setData({
-    //         doctor_list: goodsList
-    //       }) 
-    //   }
-    // })  
   },
 
   /**

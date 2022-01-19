@@ -20,16 +20,25 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    roomId: {
-      type: Number,
+    hisopenid:{
+      type: String,
       observer: function (newVal, oldVal) {
         if (newVal != undefined && newVal != null) {
           // console.log(newVal)
           this.initWatcher(newVal)
         }
-
       }
-    }
+    },
+    // roomId: {
+    //   type: Number,
+    //   observer: function (newVal, oldVal) {
+    //     if (newVal != undefined && newVal != null) {
+    //       // console.log(newVal)
+    //       this.initWatcher(newVal)
+    //     }
+
+    //   }
+    // }
   },
   /**
    * 组件注册页面生命周期
@@ -65,7 +74,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    openid: app.globalData.openid || wx.getStorageSync('openid'),
+    openid:app.globalData.openid,
     scrollId: '',
     systemInfo: {},
     //消息记录列表
@@ -104,6 +113,7 @@ Component({
         chatList: []
       }, () => {
         that.reqMsgHis();
+        console.log("my id",this.data.openid)
       })
     },
     // 请求聊天记录
@@ -117,6 +127,7 @@ Component({
         name: 'cloud-msg-his',
         data: {
           step: that.data.chatList.length,
+          hisopenid:that.properties.hisopenid,
           roomId: that.properties.roomId
         },
         success: res => {
@@ -153,6 +164,7 @@ Component({
             }
 
           })
+          console.log(this.data.chatList)
         },
         fail: res => {
           console.log(res)

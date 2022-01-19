@@ -4,6 +4,7 @@
         wx:item="item"
         wx:key="id"
         bindtap="toDetail"
+        data-index="{{item.openid}}"
         bindscrolltolower="scrolltolower">
         <!-- <image class="background" src="/images/方框1.png"></image> -->
         <view class="avatar">

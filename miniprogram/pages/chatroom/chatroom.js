@@ -14,6 +14,7 @@ Page({
     //输入框距离
     InputBottom: 0,
     roomId:1,
+    hisopenid:'',
     userInfo: {},
     content: '',
     groups: [{
@@ -129,7 +130,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    let openid = options.openid;
+    console.log("聊天室"+openid)
+    this.setData({
+      hisopenid:openid
+    })
   },
 
   /**
@@ -143,7 +148,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
