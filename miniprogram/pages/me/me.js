@@ -52,7 +52,8 @@ Page({
     wx.cloud.callFunction({
       name: 'auth',
       success: res => {
-        app.globalData.openid = res.result.result.openid
+        app.globalData.openid = res.result.result.openid;
+        app.globalData.usertype = res.result.result.type;
         console.log("globalData",app.globalData)
         if (res.result.errCode == -1) {
           console.log('--未登录--')

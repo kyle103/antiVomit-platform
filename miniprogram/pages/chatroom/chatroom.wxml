@@ -1,7 +1,7 @@
 <mp-toptips msg="{{errMsg}}" type="error" show="{{errMsg}}"></mp-toptips>
 <music-player songInfo="{{songInfo}}" style="position:fixed;width:100%;z-index:999" />
 <!--聊天内容-->
-<chat-box hisopenid="{{hisopenid}}"></chat-box>
+<chat-box doctorOpenid="{{doctorOpenid}}" patientOpenid="{{patientOpenid}}"></chat-box>
 
 <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
   <view class="action">

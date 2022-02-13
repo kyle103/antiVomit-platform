@@ -20,7 +20,16 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    hisopenid:{
+    doctorOpenid:{
+      type: String,
+      observer: function (newVal, oldVal) {
+        if (newVal != undefined && newVal != null) {
+          // console.log(newVal)
+          this.initWatcher(newVal)
+        }
+      }
+    },
+    patientOpenid:{
       type: String,
       observer: function (newVal, oldVal) {
         if (newVal != undefined && newVal != null) {
@@ -50,6 +59,7 @@ Component({
   },
   lifetimes: {
     attached() {
+      console.log("加入页面节点")
       var that = this;
       that.initMessageHistory();
       //初始化监听器
@@ -177,13 +187,15 @@ Component({
     //初始化聊天监听器
     initWatcher() {
       var that = this;
+      console.log("prop",that.properties.doctorOpenid,that.properties.patientOpenid)
       this.messageWatcher = db.collection('chat-msgs').where({
-        roomId: that.properties.roomId,
+        doctorOpenid: that.properties.doctorOpenid,
+        patientOpenid: that.properties.patientOpenid,
         _createTime: _.gt(timeutil.TimeCode())
       }).watch({
         onChange: function (snapshot) {
           //只打印变动的信息
-          // console.log(snapshot)
+          console.log(snapshot)
           if (snapshot.docChanges.length != 0) {
             console.log(snapshot.docChanges)
             let tarr = []

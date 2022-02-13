@@ -9,13 +9,10 @@ const _ = db.command;
 const timeutil = require('./timeutil');
 
 // 用户信息表名称
-const USER = 'chat-users';
+const USER = 'users';
 // 用户信息记录表
 const MSG = 'chat-msgs';
-// 用户违法消息记录表
-const MSG_BAN = 'chat-msgs-ban';
-// 用户禁言名单
-const BUSER = 'chat-users-ban';
+
 // 云函数入口函数 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -26,49 +23,28 @@ exports.main = async (event, context) => {
   let userInfo = _userInfo_.data.userInfo;
   // 获取消息类型
   let msgType = event.msgType || 'text';
-  // 获取会话房间号
-  let roomId = event.roomId || 1
+  // 获取消息主体内容
+  let content = event.content;
+  let roomID = event.roomID;
 
   // 根据消息类型 -- 进行不同逻辑处理
   switch (msgType) {
     case 'text': {
-      // 获取消息主体内容
-      let content = event.content;
-      // 安全内容审查
-      let res = await ContentSafe(content)
-      console.log(res)
-      if (res.result.code == 200) {
-        // 内容安全校验通过写入数据
-        return await db.collection(MSG).add({
-          data: {
-            roomId,
-            openid,
-            msgType,
-            content,
-            userInfo,
-            _createTime: timeutil.TimeCode()
-          }
-        })
-      } else {
-        //发布违规内容的写入记录表
-        await db.collection(MSG_BAN).add({
-          data: {
-            roomId,
-            openid,
-            msgType,
-            content,
-            userInfo,
-            _createTime: timeutil.TimeCode()
-          }
-        })
-        return res.result
-      }
+      // 写入数据
+      return await db.collection(MSG).add({
+        data: {
+          openid,
+          msgType,
+          content,
+          userInfo,
+          roomID,
+          _createTime: timeutil.TimeCode()
+        }
+      })
       break
     }
     case 'image': {
       let content = event.content;
-      let res = await ImageSafe(event.content)
-      console.log(res)
       //将图片传入云存储
       const hash = crypto.createHash('md5');
       hash.update(content, 'utf8');
@@ -81,55 +57,18 @@ exports.main = async (event, context) => {
       })
       console.log(upData)
       let fileID = upData.fileID;
-      if (res.result.code == 200) {
-        // 内容安全校验通过写入数据
-        return await db.collection(MSG).add({
-          data: {
-            roomId,
-            openid,
-            msgType,
-            content:fileID,
-            userInfo,
-            _createTime: timeutil.TimeCode()
-          }
-        })
-      } else {
-        //发布违规内容的写入记录表
-        await db.collection(MSG_BAN).add({
-          data: {
-            roomId,
-            openid,
-            msgType,
-            content:fileID,
-            userInfo,
-            _createTime: timeutil.TimeCode()
-          }
-        })
-        return res.result
-      }
+      // 写入数据
+      return await db.collection(MSG).add({
+        data: {
+          openid,
+          msgType,
+          content:fileID,
+          userInfo,
+          roomID,
+          _createTime: timeutil.TimeCode()
+        }
+      })
       break
     }
   }
-}
-async function ContentSafe(content) {
-  //文本内容安全校验
-  return await cloud.callFunction({
-    name: 'openapi',
-    data: {
-      action: 'msgSecCheck',
-      content: content
-    }
-  })
-}
-async function ImageSafe(content) {
-  // console.log(content)
-  //图片内容安全校验
-  return await cloud.callFunction({
-    name: 'openapi',
-    data: {
-      action: 'imgSecCheck',
-      contentType: 'image/png',
-      value: content
-    }
-  })
 }

@@ -1,5 +1,5 @@
 // pages/doctor/doctor.js
-
+const app = getApp();
 Page({
 
   /**
@@ -7,9 +7,9 @@ Page({
    */
   data: {
     page:1,
-    doctor_list:[
-      
-    ]
+    doctor_list:[],
+    doctorID:"",
+    patientID:""
   },
 
   /**
@@ -23,7 +23,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+  
   },
 
   /**
@@ -51,11 +51,39 @@ Page({
 
   // 跳转详细对话框
   toDetail:function(e){
-    let openid = e.currentTarget.dataset.index;
-    console.log(openid)
-    wx.navigateTo({
-      url: '/pages/chatroom/chatroom?openid='+ openid,
+    let hisopenid = e.currentTarget.dataset.index;
+    console.log("对方id",hisopenid)
+    //自己身份
+    if(app.globalData.usertype === 'patient'){
+      console.log('病人')
+      this.setData({
+        doctorID:hisopenid,
+        patientID:app.globalData.openid
+      })
+    }
+    
+    //查找chat-rooms
+    var roomID;
+    wx.cloud.callFunction({
+      name: 'cloud-chatrooms',
+      data: {
+        action: 'query',
+        patientID:this.data.patientID,
+        doctorID:this.data.doctorID
+      },
+      success: res => {
+        console.log('success',res)
+        roomID = res.result.data[0]._id
+        console.log('roomID',roomID)
+        wx.navigateTo({
+          url: '/pages/chatroom/chatroom?roomID='+ roomID,
+        })
+      },
+      fail:error => {
+        console.log(error);
+      }
     })
+      
   },
 
   // 上拉刷新

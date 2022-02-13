@@ -13,8 +13,7 @@ Page({
     login: false,
     //输入框距离
     InputBottom: 0,
-    roomId:1,
-    hisopenid:'',
+    roomID:"",
     userInfo: {},
     content: '',
     groups: [{
@@ -39,20 +38,16 @@ Page({
               title: '信息发送',
               mask:true
             })
+
             wx.cloud.callFunction({
               name: 'cloud-msg-push',
               data: {
-                roomId:that.data.roomId,
+                roomID:that.data.roomID,
                 msgType: 'image',
-                content: bufferData
+                content: bufferData,
               },
               success: res => {
-                console.log(res)
-                if (res.result.code == 300) {
-                  that.setData({
-                    errMsg: res.result.msg
-                  })
-                }
+                
               },
               fail: res => {
                 console.log(res)
@@ -92,48 +87,38 @@ Page({
   },
   async submit() {
     var that = this;
-    if (this.data.login) {
-      //已登录用户
-      wx.showLoading({
-        title: '信息发送',
-      })
-      wx.cloud.callFunction({
-        name: 'cloud-msg-push',
-        data: {
-          roomId:that.data.roomId,
-          msgType: 'text',
-          content: that.data.content
-        },
-        success: res => {
-          console.log(res)
-          if (res.result.code == 300) {
-            that.setData({
-              errMsg: res.result.msg
-            })
-          }
-
-          console.log(res)
-        },
-        fail: res => {
-          console.log(res)
-        },
-        complete: res => {
-          this.setData({
-            content: ''
-          })
-          wx.hideLoading();
-        }
-      })
-    } 
+    wx.showLoading({
+      title: '信息发送',
+    })
+    wx.cloud.callFunction({
+      name: 'cloud-msg-push',
+      data: {
+        roomID:that.data.roomID,
+        msgType: 'text',
+        content: that.data.content,
+      },
+      success: res => {
+        
+      },
+      fail: res => {
+        console.log(res)
+      },
+      complete: res => {
+        this.setData({
+          content: ''
+        })
+        wx.hideLoading();
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let openid = options.openid;
-    console.log("聊天室"+openid)
+    let roomID = options.roomID;
+    console.log("聊天室"+roomID)
     this.setData({
-      hisopenid:openid
+      roomID:roomID
     })
   },
 
