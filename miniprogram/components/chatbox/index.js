@@ -20,34 +20,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    doctorOpenid:{
-      type: String,
-      observer: function (newVal, oldVal) {
-        if (newVal != undefined && newVal != null) {
-          // console.log(newVal)
-          this.initWatcher(newVal)
-        }
-      }
-    },
-    patientOpenid:{
-      type: String,
-      observer: function (newVal, oldVal) {
-        if (newVal != undefined && newVal != null) {
-          // console.log(newVal)
-          this.initWatcher(newVal)
-        }
-      }
-    },
-    // roomId: {
-    //   type: Number,
-    //   observer: function (newVal, oldVal) {
-    //     if (newVal != undefined && newVal != null) {
-    //       // console.log(newVal)
-    //       this.initWatcher(newVal)
-    //     }
 
-    //   }
-    // }
+    roomID: {
+      type: String,
+      observer: function (newVal, oldVal) {
+        if (newVal != undefined && newVal != null) {
+          // console.log(newVal)
+          this.initWatcher(newVal)
+        }
+
+      }
+    }
   },
   /**
    * 组件注册页面生命周期
@@ -137,8 +120,8 @@ Component({
         name: 'cloud-msg-his',
         data: {
           step: that.data.chatList.length,
-          hisopenid:that.properties.hisopenid,
-          roomId: that.properties.roomId
+          // hisopenid:that.properties.hisopenid,
+          roomID: that.properties.roomID
         },
         success: res => {
           console.log(res)
@@ -187,10 +170,9 @@ Component({
     //初始化聊天监听器
     initWatcher() {
       var that = this;
-      console.log("prop",that.properties.doctorOpenid,that.properties.patientOpenid)
+  
       this.messageWatcher = db.collection('chat-msgs').where({
-        doctorOpenid: that.properties.doctorOpenid,
-        patientOpenid: that.properties.patientOpenid,
+        roomID: that.properties.roomID,
         _createTime: _.gt(timeutil.TimeCode())
       }).watch({
         onChange: function (snapshot) {
