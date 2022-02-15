@@ -15,5 +15,5 @@ exports.main = async (event, context) => {
   let step = event.step;
   // 获取房间号
   let roomID = event.roomID || "";
-  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(20).orderBy('_createTime','desc').get();
+  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(10).orderBy('_createTime','desc').get();
 }

@@ -2,15 +2,20 @@
 const app = getApp();
 // 转发
 const db = wx.cloud.database();
+// 获取命令行符号
+const _ = db.command;
 // 聊天侦听器
 var chatWatcher = null
-// 获取计时器函数
+// 时间工具类
+const timeutil = require('./timeutil');
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     login: false,
+    step:0,
     //输入框距离
     InputBottom: 0,
     roomID:"",
@@ -129,6 +134,16 @@ Page({
     this.setData({
       roomID:roomID
     })
+
+    //设置滚动高度
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          systemInfo: res
+        })
+      }
+    })
   },
 
   /**
@@ -143,15 +158,18 @@ Page({
    */
   onShow: function () {
     var that = this;
-    //初始化消息历史
-    this.setData({
-      chatList: []
-    }, () => {
-      // that.reqMsgHis();
-    })
-
     //开启监听
     that.initWatcher()
+    
+    // //初始化消息历史
+    // this.setData({
+    //   chatList: []
+    // }, () => {
+    //   that.reqMsgHis();
+    // })
+
+    // //开启监听
+    // that.initWatcher()
   },
 
   // 请求聊天记录
@@ -227,11 +245,12 @@ Page({
   initWatcher() {
     var that = this
     chatWatcher = db.collection('chat-msgs')
-    .orderBy('_createTime','asc')
-    // .orderBy('_createTime','desc')
-    .limit(10)
+    // .orderBy('_createTime','asc')
+    // // .orderBy('_createTime','desc')
+    // .limit(10)
     .where({
-      roomID: this.data.roomID
+      roomID: this.data.roomID,
+      // _createTime: _.gt(timeutil.TimeCode())
     })
     .watch({
       onChange: function(snapshot) {
@@ -251,6 +270,7 @@ Page({
                 scrollId: 'msg-' + parseInt(len - 1)
               })
             }, 100)
+            console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
           })
         }
       },
