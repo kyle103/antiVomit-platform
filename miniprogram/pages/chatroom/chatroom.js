@@ -15,11 +15,18 @@ Page({
     InputBottom: 0,
     roomID:"",
     userInfo: {},
+    openid:app.globalData.openid,
+    scrollId: '',
+    systemInfo: {},
+    //消息记录列表
+    chatList: [],
+    //标记触顶事件
+    isTop: false,
     content: '',
     groups: [{
       text: '点歌',
       value: 1
-    }]
+    }],
   },
   selectImg() {
     var that = this;
@@ -85,6 +92,8 @@ Page({
       }
     })
   },
+
+  //发送消息
   async submit() {
     var that = this;
     wx.showLoading({
@@ -98,7 +107,7 @@ Page({
         content: that.data.content,
       },
       success: res => {
-        
+        // console.log(res)
       },
       fail: res => {
         console.log(res)
@@ -133,14 +142,142 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this;
+    //初始化消息历史
+    this.setData({
+      chatList: []
+    }, () => {
+      // that.reqMsgHis();
+    })
+
+    //开启监听
+    that.initWatcher()
+  },
+
+  // 请求聊天记录
+  reqMsgHis() {
+    var that = this;
+    wx.showLoading({
+      title: '获取历史记录',
+      mask: true
+    })
+    wx.cloud.callFunction({
+      name: 'cloud-msg-his',
+      data: {
+        step: that.data.chatList.length,
+        roomID: that.data.roomID
+      },
+      success: res => {
+        console.log(res)
+        let tarr = res.result.data
+        let newsLen = tarr.length
+        if (newsLen == 0) {
+          //查无数据
+          setTimeout(function () {
+            wx.showToast({
+              title: '到顶了',
+              icon: 'none'
+            })
+          }, 300)
+
+        }
+        tarr = tarr.reverse()
+        that.setData({
+          chatList: tarr.concat(that.data.chatList)
+        }, () => {
+          let len = that.data.chatList.length
+          if (that.data.isTop) {
+            setTimeout(function () {
+              that.setData({
+                scrollId: 'msg-' + parseInt(newsLen)
+              })
+            }, 100)
+          } else {
+            setTimeout(function () {
+              that.setData({
+                scrollId: 'msg-' + parseInt(len - 1)
+              })
+            }, 100)
+          }
+
+        })
+        console.log("消息列表",this.data.chatList)
+      },
+      fail: res => {
+        console.log(res)
+      },
+      complete: res => {
+        wx.hideLoading();
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    try {
+      this.messageWatcher.close()
+    } catch (error) {
+      console.log('--消息监听器关闭失败--')
+    }
+  },
 
+  //初始化聊天监听器
+  initWatcher() {
+    var that = this
+    chatWatcher = db.collection('chat-msgs')
+    .orderBy('_createTime','asc')
+    // .orderBy('_createTime','desc')
+    .limit(10)
+    .where({
+      roomID: this.data.roomID
+    })
+    .watch({
+      onChange: function(snapshot) {
+        console.log('snapshot', snapshot)
+        if (snapshot.docChanges.length != 0) {
+          console.log(snapshot.docChanges)
+          let tarr = []
+          snapshot.docChanges.forEach(function (ele, index) {
+            tarr.push(ele.doc)
+          })
+          that.setData({
+            chatList: that.data.chatList.concat(tarr)
+          }, () => {
+            let len = that.data.chatList.length
+            setTimeout(function () {
+              that.setData({
+                scrollId: 'msg-' + parseInt(len - 1)
+              })
+            }, 100)
+          })
+        }
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
+  },
+
+  // 预览图片
+  viewImage(e) {
+    // console.log(e)
+    let url = e.currentTarget.dataset.url;
+    wx.previewImage({
+      urls: [url],
+    })
+  },
+
+  //触顶事件
+  tapTop() {
+    console.log('--触顶--')
+    var that = this;
+    that.setData({
+      isTop: true
+    }, () => {
+      this.reqMsgHis();
+    })
   },
 
   /**

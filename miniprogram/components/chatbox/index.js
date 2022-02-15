@@ -38,22 +38,25 @@ Component({
   pageLifetimes: {
     show: function () {
       // 页面被展示
+      console.log("页面被展示")
+      var that = this;
+      that.initMessageHistory();
     },
   },
   lifetimes: {
     attached() {
       console.log("加入页面节点")
-      var that = this;
-      that.initMessageHistory();
+      // var that = this;
+      // that.initMessageHistory();
       //初始化监听器
       // that.initWatcher();
-      wx.getSystemInfo({
-        success: function (res) {
-          that.setData({
-            systemInfo: res
-          })
-        }
-      })
+      // wx.getSystemInfo({
+      //   success: function (res) {
+      //     that.setData({
+      //       systemInfo: res
+      //     })
+      //   }
+      // })
     },
     detached() {
       try {
@@ -157,7 +160,7 @@ Component({
             }
 
           })
-          console.log(this.data.chatList)
+          console.log("消息列表",this.data.chatList)
         },
         fail: res => {
           console.log(res)
