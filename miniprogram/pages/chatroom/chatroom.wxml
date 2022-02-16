@@ -62,8 +62,7 @@
 
 <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
   <view class="action">
-    <text class="cuIcon-add text-grey" bindtap="showAction"></text>
-    <text class="cuIcon-discover text-grey" bindtap="selectImg"></text>
+    <text class="cuIcon-add text-grey" bindtap="selectImg"></text>
   </view>
   <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" model:value="{{content}}"
     adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>

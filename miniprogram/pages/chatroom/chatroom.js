@@ -14,8 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    login: false,
-    step:0,
+    first: false,
     //输入框距离
     InputBottom: 0,
     roomID:"",
@@ -86,18 +85,7 @@ Page({
       InputBottom: 0
     })
   },
-  showAction() {
-    wx.showActionSheet({
-      itemList: ['A', 'B', 'C'],
-      success(res) {
-        console.log(res.tapIndex)
-      },
-      fail(res) {
-        console.log(res.errMsg)
-      }
-    })
-  },
-
+  
   //发送消息
   async submit() {
     var that = this;
@@ -144,6 +132,15 @@ Page({
         })
       }
     })
+
+    //初始化消息历史
+    this.setData({
+      chatList: []
+    }, () => {
+      // that.reqMsgHis();
+    })
+    //开启监听
+    that.initWatcher()
   },
 
   /**
@@ -157,19 +154,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    //开启监听
-    that.initWatcher()
     
-    // //初始化消息历史
-    // this.setData({
-    //   chatList: []
-    // }, () => {
-    //   that.reqMsgHis();
-    // })
-
-    // //开启监听
-    // that.initWatcher()
   },
 
   // 请求聊天记录
@@ -234,50 +219,50 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    try {
-      this.messageWatcher.close()
-    } catch (error) {
-      console.log('--消息监听器关闭失败--')
-    }
+    
   },
 
   //初始化聊天监听器
   initWatcher() {
     var that = this
-    chatWatcher = db.collection('chat-msgs')
-    // .orderBy('_createTime','asc')
-    // // .orderBy('_createTime','desc')
-    // .limit(10)
-    .where({
-      roomID: this.data.roomID,
-      // _createTime: _.gt(timeutil.TimeCode())
-    })
-    .watch({
-      onChange: function(snapshot) {
-        console.log('snapshot', snapshot)
-        if (snapshot.docChanges.length != 0) {
-          console.log(snapshot.docChanges)
-          let tarr = []
-          snapshot.docChanges.forEach(function (ele, index) {
-            tarr.push(ele.doc)
-          })
-          that.setData({
-            chatList: that.data.chatList.concat(tarr)
-          }, () => {
-            let len = that.data.chatList.length
-            setTimeout(function () {
-              that.setData({
-                scrollId: 'msg-' + parseInt(len - 1)
-              })
-            }, 100)
-            console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
-          })
+
+      chatWatcher = db.collection('chat-msgs')
+      .where({
+        roomID: this.data.roomID,
+      })
+      .watch({
+        onChange: function(snapshot) {
+          console.log('snapshot', snapshot)
+          // if(!that.data.first){
+          //   that.setData({
+          //     first:true
+          //   })
+          // }
+          // else if (snapshot.docChanges.length != 0) {
+          if (snapshot.docChanges.length != 0) {
+            console.log(snapshot.docChanges)
+            let tarr = []
+            snapshot.docChanges.forEach(function (ele, index) {
+              tarr.push(ele.doc)
+            })
+            that.setData({
+              chatList: that.data.chatList.concat(tarr)
+            }, () => {
+              let len = that.data.chatList.length
+              setTimeout(function () {
+                that.setData({
+                  scrollId: 'msg-' + parseInt(len - 1)
+                })
+              }, 100)
+              console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
+            })
+          }
+        },
+        onError: function(err) {
+          console.error('the watch closed because of error', err)
         }
-      },
-      onError: function(err) {
-        console.error('the watch closed because of error', err)
-      }
-    })
+      })
+
   },
 
   // 预览图片
@@ -304,7 +289,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    try {
+      chatWatcher.close()
+    } catch (error) {
+      console.log('--消息监听器关闭失败--')
+    }
   },
 
   /**
