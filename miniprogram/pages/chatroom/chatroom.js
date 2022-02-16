@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    first: false,
+    // first: false,
     //输入框距离
     InputBottom: 0,
     roomID:"",
@@ -27,10 +27,6 @@ Page({
     //标记触顶事件
     isTop: false,
     content: '',
-    groups: [{
-      text: '点歌',
-      value: 1
-    }],
   },
   selectImg() {
     var that = this;
@@ -226,7 +222,7 @@ Page({
   initWatcher() {
     var that = this
 
-      chatWatcher = db.collection('chat-msgs')
+      this.chatWatcher = db.collection('chat-msgs')
       .where({
         roomID: this.data.roomID,
       })
@@ -290,7 +286,7 @@ Page({
    */
   onUnload: function () {
     try {
-      chatWatcher.close()
+      this.chatWatcher.close()
     } catch (error) {
       console.log('--消息监听器关闭失败--')
     }
