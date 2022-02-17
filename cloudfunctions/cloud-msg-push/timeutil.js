@@ -1,5 +1,7 @@
 function TimeCode() {
   var date = new Date();
+  //北京时间增加8小时
+  date.setTime(date.getTime()+8*1000*3600)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
   var day = date.getDate()

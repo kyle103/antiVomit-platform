@@ -38,7 +38,9 @@ exports.main = async (event, context) => {
           content,
           userInfo,
           roomID,
+          // _createTime: Date()
           _createTime: timeutil.TimeCode()
+          // _createTime: TimeCode()
         }
       })
       break
@@ -71,4 +73,8 @@ exports.main = async (event, context) => {
       break
     }
   }
+}
+
+function TimeCode(){
+ 
 }

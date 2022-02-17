@@ -200,7 +200,7 @@ Page({
           }
 
         })
-        console.log("消息列表",this.data.chatList)
+        console.log("历史消息列表",this.data.chatList)
       },
       fail: res => {
         console.log(res)

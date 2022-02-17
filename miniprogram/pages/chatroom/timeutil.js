@@ -1,14 +1,16 @@
 function TimeCode() {
-  var date = new Date();
-  var year = date.getFullYear()
-  var month = date.getMonth() + 1
-  var day = date.getDate()
+  // var date = new Date();
+  // var year = date.getFullYear()
+  // var month = date.getMonth() + 1
+  // var day = date.getDate()
 
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
+  // var hour = date.getHours()
+  // var minute = date.getMinutes()
+  // var second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  // return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+
+  return new Date().toLocaleString()
 }
 //获取日期
 function _formatTime(time) {
