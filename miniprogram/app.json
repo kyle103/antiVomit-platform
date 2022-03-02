@@ -2,10 +2,10 @@
   "pages": [
     "pages/me/me",
     "pages/index/index",
-    "pages/doctor/chatroom/chatroom",
     "pages/home/home",
     "pages/road/road",
     "pages/doctor/doctor",
+    "pages/doctor/chatroom/chatroom",
     "pages/articles/articles",
     "pages/articles/addArticle/addArticle",
     "pages/articles/articleDetail/articleDetail"
@@ -14,7 +14,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "止吐辅助平台",
+    "navigationBarTitleText": "吐无忧",
     "navigationBarTextStyle": "black"
   },
   "useExtendedLib": {
