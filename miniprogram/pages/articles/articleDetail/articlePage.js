@@ -1,4 +1,4 @@
-// pages/stats/stats.js
+// pages/articles/articleDetail/articlePage.js
 Page({
 
   /**

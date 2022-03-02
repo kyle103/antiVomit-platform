@@ -2,12 +2,13 @@
   "pages": [
     "pages/me/me",
     "pages/index/index",
-    "pages/chatroom/chatroom",
+    "pages/doctor/chatroom/chatroom",
     "pages/home/home",
-    "pages/tips/tips",
-    "pages/tipDetail/tipDetail",
+    "pages/road/road",
     "pages/doctor/doctor",
-    "pages/stats/stats"
+    "pages/articles/articles",
+    "pages/articles/addArticle/addArticle",
+    "pages/articles/articleDetail/articleDetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -21,7 +22,7 @@
   },
   "usingComponents": {
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
-    "mp-toptips":"weui-miniprogram/toptips/toptips"
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
@@ -40,7 +41,7 @@
         "selectedIconPath": "images/首页.png"
       },
       {
-        "pagePath": "pages/stats/stats",
+        "pagePath": "pages/road/road",
         "text": "抗吐之路",
         "iconPath": "images/诊断.png",
         "selectedIconPath": "images/诊断.png"
@@ -52,7 +53,7 @@
         "selectedIconPath": "images/聊天.png"
       },
       {
-        "pagePath": "pages/tips/tips",
+        "pagePath": "pages/articles/articles",
         "text": "科普",
         "iconPath": "images/论坛.png",
         "selectedIconPath": "images/论坛.png"

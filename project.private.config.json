@@ -71,6 +71,12 @@
           "pathName": "pages/doctor/doctor",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/addArticle/addArticle",
+          "query": "",
+          "scene": null
         }
       ]
     }

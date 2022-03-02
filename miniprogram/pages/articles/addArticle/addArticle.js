@@ -1,11 +1,14 @@
-// pages/tips/tips.js
+// pages/addArticle/addArticle.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    link:"",
+    title:"",
+    pic:"",
+    content:""
   },
 
   /**
@@ -15,6 +18,33 @@ Page({
 
   },
 
+  inputLink:function(res){ 
+    this.setData({
+      link: res.detail.value
+    })
+  },
+
+  inputTitle:function(res){ 
+    this.setData({
+      title: res.detail.value
+    })
+  },
+
+  inputPic:function(res){ 
+    this.setData({
+      pic: res.detail.value
+    })
+  },
+
+  inputContent:function(res){ 
+    this.setData({
+      content: res.detail.value
+    })
+  },
+
+  addArticle(){
+    console.log(this.data)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
