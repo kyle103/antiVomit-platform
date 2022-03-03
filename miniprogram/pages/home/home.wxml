@@ -1,0 +1,41 @@
+<!--pages/home/home.wxml
+yuantu  492*280-->
+<view class="swiper1">
+<swiper autoplay="true" circular="true" indicator-dots="true" interval="4000" indicator-active-color="#ff0000">
+<swiper-item>
+<navigator url="/pages/index05/index05" >
+  <image  mode="widthFix" src="https://img.alicdn.com/tfs/TB1FjZ7VWL7gK0jSZFBXXXZZpXa-520-280.png"></image>
+</navigator>
+</swiper-item>
+
+<swiper-item>
+<navigator url="" >
+  <image  mode="widthFix" src="https://gtms03.alicdn.com/tps/i3/TB1gXd1JXXXXXapXpXXvKyzTVXX-520-280.jpg"></image>
+</navigator>
+</swiper-item>
+<swiper-item>
+<navigator url="">
+  <image  mode="widthFix" src="https://gtms01.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></image>
+</navigator>
+</swiper-item>
+</swiper>
+</view>
+
+
+
+<navigator url="/pages/index04/index04" hover-class="none">
+  <button class='btn1' style="width: 80%;"  >
+    <image  class='btnImg' src='../../images/p1.png'></image>
+    <view>担心呕吐，我需要评估</view>
+ </button>
+</navigator>
+
+
+
+
+<navigator url="/pages/index04/index04" hover-class="none">
+  <button class='btn2' style="width: 80%;">
+    <image class='btnImg1' src='../../images/p2.png'></image>
+    <view>发生呕吐，我需要帮助</view>
+ </button>
+</navigator>
