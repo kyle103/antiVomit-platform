@@ -8,7 +8,13 @@
     "pages/doctor/chatroom/chatroom",
     "pages/articles/articles",
     "pages/articles/addArticle/addArticle",
-    "pages/articles/articleDetail/articleDetail"
+    "pages/articles/articleDetail/articleDetail",
+    "pages/index3/index3",
+    "pages/au/au",
+    "pages/detail/detail",
+    "pages/stats/stats",
+    "pages/index1/index1",
+    "pages/publishByq/publishByq"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -41,7 +47,7 @@
         "selectedIconPath": "images/首页.png"
       },
       {
-        "pagePath": "pages/road/road",
+        "pagePath": "pages/stats/stats",
         "text": "抗吐之路",
         "iconPath": "images/诊断.png",
         "selectedIconPath": "images/诊断.png"

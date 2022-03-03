@@ -28,6 +28,7 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
@@ -38,9 +39,11 @@
     "showES6CompileOption": false,
     "useCompilerPlugins": false
   },
+  "showES6CompileOption": false,
+  "minifyWXML": true,
   "appid": "wx08b3231c299d8058",
   "projectname": "antiVomit",
-  "libVersion": "2.20.1",
+  "libVersion": "2.22.0",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {

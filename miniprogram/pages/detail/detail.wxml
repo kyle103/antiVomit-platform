@@ -1,0 +1,127 @@
+<view class="message">
+
+<view class="left">
+  <image src="{{action.faceImg}}" class="face-img"></image>
+</view>
+<view class="right">
+  <view class="nickname">{{action.nickName}}</view>
+    <view>{{action.text}}</view>
+
+  <view class="imags-wrap">
+
+    <block wx:for="{{action.images}}" wx:key="index">
+
+      <block wx:if="{{action.images.length == 1}}">
+        <!-- 单图布局 -->
+        <image src="{{item}}" class="image-1" bindtap="previewImg" data-src="{{item}}"></image>
+      </block>
+
+
+      <block wx:if="{{action.images.length == 2 || action.images.length == 3}}">
+        <!-- 2-3张图布局 -->
+        <image src="{{item}}" class="image-2-3" bindtap="previewImg" data-src="{{item}}"></image>
+      </block>
+
+
+      <block wx:if="{{action.images.length == 4}}">
+        <!-- 4图布局 -->
+        <image src="{{item}}" class="image-4" bindtap="previewImg" data-src="{{item}}"></image>
+      </block>
+
+      <block wx:if="{{action.images.length > 4}}">
+        <!-- 5-9张图布局 -->
+        <image src="{{item}}" class="image-5-9" bindtap="previewImg" data-src="{{item}}"></image>
+      </block>
+
+    </block>
+
+  </view>
+
+    <view class="time-delete">
+      <view class="time">{{action.time}}</view>
+      <view class="delete" bindtap="delete" wx:if="{{openid == action._openid}}">删除</view>
+    </view>
+
+    <view class="hudong-box">
+      <view class="hudong-cell">
+      <image src="../../images/3.1转发.png" class="hudong-img"></image>
+      <view>分享</view>
+      </view>
+
+      <view class="hudong-cell">
+      <image src="../../images/评论.png" class="hudong-img"></image>
+      <view>评论</view>
+      </view>
+
+      <view class="hudong-cell" bindtap="prizeAction">
+      <image src="../../images/点赞.png" class="hudong-img"></image>
+      <view>点赞</view>
+      </view>
+    </view>
+
+</view>
+
+</view>
+
+<view class="prize-box" wx:if="{{action.prizeList.length > 0}}">
+  <view>
+    <image class="prize-blue-img" src="../../images/点赞.png"></image>
+  </view>
+  <view class="prize-img-box">
+
+    <block wx:for="{{action.prizeList}}">
+      <image class="prize-img" src="{{item.faceImg}}"></image>
+    </block>
+
+  </view>
+</view>
+
+<view class="comment-box">
+  <view class="comment-left">
+    <image src="../../images/评论.png" class="comment-log"></image>
+  </view>
+
+  <view class="comment-right">
+    <view class="comment-one">
+      <image src="../../images/个人.png" class="comment-face"></image>
+      <view class="comment-content">
+        <view class="nickname-time">
+          <view class="comment-nickname">昵称</view>
+          <view class="comment-time">2020-11-11 11:11</view>
+        </view>
+        <view class="comment-text">
+        评论评论评论评论评论评论评论评论
+        </view>
+      </view>
+    </view>
+
+    <view class="comment-one">
+      <image src="../../images/个人.png" class="comment-face"></image>
+      <view class="comment-content">
+        <view class="nickname-time">
+          <view class="comment-nickname">昵称</view>
+          <view class="comment-time">2020-11-11 11:11</view>
+        </view>
+        <view class="comment-text">
+        评论评论评论评论评论评论评论评论评论评论
+        </view>
+      </view>
+    </view>
+  
+  </view>
+
+
+
+</view>
+
+<view style="height: 100rpx"></view>
+
+<view class="pub-comment">
+  <view class="pub-left">
+    <input class="pub-input" placeholder="评论"></input>
+  </view>
+
+  <view class="pub-button">发送</view>
+
+
+</view>
