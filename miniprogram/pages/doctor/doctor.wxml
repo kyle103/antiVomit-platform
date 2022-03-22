@@ -1,5 +1,5 @@
 <scroll-view scroll-y="false">
-  <view class="doctor_floor bg-gradual-blue"
+  <view class="doctor_floor light bg-purple"
         wx:for="{{doctor_list}}"
         wx:item="item"
         wx:key="id"

@@ -29,6 +29,13 @@
           "pathName": "pages/articles/addArticle/addArticle",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/articles/articles",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }
