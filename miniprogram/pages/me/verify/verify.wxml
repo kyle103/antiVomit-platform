@@ -3,9 +3,34 @@
 
     <view class="itembar">
         <view class="tip">真实姓名：</view>
-        <input class="input" name="name" value="{{na}}"
-             bindinput="nameInput"/> 
+        <!-- <input class="input" name="name" value="{{name}}"
+             bindinput="nameInput"/>  -->
+        <searchbar
+          placeholder="请输入姓名查找"
+          bind:handleSearch="search"
+          bind:cancelSearch="cancelSearch"
+        ></searchbar>    
     </view>
+    <scroll-view hidden="{{visible}}" style="height: 320px;" scroll-y="false">
+      <view class="none" hidden="{{none}}">
+        <text class="cuIcon-edit"></text>
+        <view>暂时没有搜索结果</view>
+      </view>
+      <view class="doctor_floor light bg-purple {{index === selected ? 'active' : ''}}"
+            wx:for="{{doctors}}"
+            wx:item="item"
+            wx:key="id"
+            bindtap="select"
+            data-index="{{index}}"
+            data-documentid="{{item._id}}">
+            <view class="info"> 
+              <text class="name">{{item.name}}</text>
+              <text class="title">{{item.title}}</text>
+              <view class="hospital">{{item.hospital}}</view>
+              <view class="excel">擅长：{{item.excel}}</view>
+            </view>   
+      </view>
+    </scroll-view>
 
     <view class="auth">
       <view class="tip">请上传资格证书：</view>
@@ -23,7 +48,7 @@
       </view>
     </view>
     
-    <view class="btn">
+    <view class="btn" bindtap="submit">
       <button id="commit-btn">提交</button>
     </view>
 </view>

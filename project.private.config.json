@@ -55,6 +55,13 @@
           "name": "",
           "pathName": "pages/me/verify/verify",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/me/checkVerify/checkVerify",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }

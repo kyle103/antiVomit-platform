@@ -17,7 +17,8 @@
     "pages/index1/index1",
     "pages/publishByq/publishByq",
     "pages/me/type/type",
-    "pages/me/verify/verify"
+    "pages/me/verify/verify",
+    "pages/me/checkVerify/checkVerify"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

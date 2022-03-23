@@ -7,6 +7,12 @@ Page({
   data: {
     // bufferData:'',
     tempFilePaths: [],
+    name:'',
+    none:true,
+    visible:true,
+    doctors:[],
+    documentID:'',
+    selected:-1
   },
 
   /**
@@ -92,8 +98,66 @@ Page({
   //   })
   // },
 
+  nameInput(e){
+    this.setData({
+      name:e.detail.value
+    })
+  },
+
+  search:function(event){
+    this.setData({
+      none:true,
+    })
+    wx.showLoading({
+      title: '搜索中',
+    })
+    wx.cloud.callFunction({
+      name: 'cloud-doctor',
+      data: {
+        action: 'searchName',
+        keywords:event.detail
+      },
+      success:res => {
+        console.log('获取医生搜索结果success',res)
+        if(res.result.data.length===0){
+          this.setData({
+            none:false
+          })
+        }
+        this.setData({
+          doctors:res.result.data,
+          visible:false
+        })
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      },
+      fail:err => {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    })
+  },
+
+  cancelSearch:function(event){
+    this.setData({
+      none:true,
+      visible:true
+    })
+  },
+
+  select(e){
+    let documentID = e.currentTarget.dataset.documentid
+    this.setData({
+      documentID:documentID,
+      selected:Number(e.currentTarget.dataset.index)
+    })
+  },
+
   submit:function(params) {
     let that = this
+    console.log(this.data.name)
     wx.showLoading({
       title: '上传中',
       mask:true
@@ -102,19 +166,21 @@ Page({
     wx.cloud.callFunction({
       name: 'cloud-verify',
       data: {
+        action:'upload',
+        // name:that.data.name,
+        documentID:that.data.documentID,
         openid:wx.getStorageSync('openid'),
         images: that.data.tempFilePaths
       },
       success: res => {
+        wx.hideLoading();
         wx.showToast({
           title: '上传成功！',
         })
       },
       fail: res => {
-        console.log(res)
-      },
-      complete: res => {
         wx.hideLoading();
+        console.log(res)
       }
     })
   },

@@ -1,0 +1,30 @@
+/* 搜索框 */
+
+/* 无结果 */
+.none{
+  margin: auto;
+  width: 500rpx;
+  font-size: 40px;
+  text-align: center;
+}
+
+/* 文章列表 */
+scroll-view{
+  background-color: white;
+}
+.article-item{
+  border-bottom: solid #d3d3d3;
+  width: 100%;
+  /* height: 320rpx; */
+  padding: 30rpx;
+}
+.group {
+  display: flex;
+  flex-wrap: wrap;
+}
+.group .image_item {
+  width: 300rpx;
+  height: 300rpx;
+  margin-right: 10rpx;
+  position: relative;
+}

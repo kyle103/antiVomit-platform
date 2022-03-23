@@ -1,15 +1,3 @@
-<!-- <view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
-    <view class="search-form round">
-        <text class="cuIcon-search" bindtap="search"></text>
-        <input bindinput="handleInput"
-          bindconfirm="handleConfirm"
-          type="text"
-          value="{{inputValue}}"
-          placeholder="点击搜索" 
-          confirm-type="search" 
-          input="searchIcon"></input>
-    </view>
-</view> -->
 <searchbar
   placeholder="请输入关键字"
   bind:handleSearch="search"

@@ -1,0 +1,29 @@
+<scroll-view style="height: 720px;" scroll-y="false">
+  <view class="none" hidden="{{none}}">
+    <text class="cuIcon-edit"></text>
+    <view>暂时没有提交的验证</view>
+  </view>
+  <view class="article-item"
+        wx:for="{{verifyList}}"
+        wx:item="item"
+        wx:key="id"
+        bindtap="toDetail"
+        data-index="{{item.openid}}">
+        <view>选择认证身份：</view>
+        <view class="info"> 
+          <text class="name">{{item.doctor.name}}</text>
+          <text class="title">{{item.doctor.title}}</text>
+          <view class="hospital">{{item.doctor.hospital}}</view>
+          <view class="excel">擅长：{{item.doctor.excel}}</view>
+        </view>   
+
+        <view>认证材料：</view>
+        <view class="group"
+            wx:item="item"
+            wx:for="{{item.images}}"
+            wx:key="*this">
+            <image class="image_item" src="{{item}}" mode="aspectFit" bindtap="previewImg" data-url="{{item}}">           
+            </image>      
+        </view>
+  </view>
+</scroll-view>

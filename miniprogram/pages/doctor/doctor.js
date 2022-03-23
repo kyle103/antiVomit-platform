@@ -39,6 +39,9 @@ Page({
     })
     wx.cloud.callFunction({
       name: 'cloud-doctor',
+      data:{
+        action:'doctorList'
+      },
       success: res => {
         console.log(res.result.data)
         this.setData({
