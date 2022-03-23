@@ -7,14 +7,36 @@ const db = cloud.database();
 const _ = db.command;
 // 时间工具类
 const timeutil = require('./timeutil');
-
 // 用户信息表名称
 const USER = 'users';
-// 用户信息记录表
+// 消息记录表
 const MSG = 'chat-msgs';
-
-// 云函数入口函数 
+// 云函数入口函数
 exports.main = async (event, context) => {
+  switch (event.action) {
+    case 'queryMsg': {
+      return queryMsg(event)
+    }
+    case 'addMsg': {
+      return addMsg(event)
+    }
+    default: {
+      return
+    }
+  }
+  
+}
+//查找聊天记录
+async function queryMsg(event) {
+  // 获取房间号
+  let roomID = event.roomID || "";
+  let step = event.step  || 0;
+  let limit = event.limit || 10;
+  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(limit).orderBy('_createTime','desc').get();
+}
+
+//添加聊天记录
+async function addMsg(event) {
   const wxContext = cloud.getWXContext()
   // 获取用户唯一身份识别ID
   let openid = wxContext.OPENID || event.openid;
@@ -73,8 +95,4 @@ exports.main = async (event, context) => {
       break
     }
   }
-}
-
-function TimeCode(){
- 
 }

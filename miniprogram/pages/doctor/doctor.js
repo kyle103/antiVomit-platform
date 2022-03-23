@@ -57,6 +57,7 @@ Page({
     })
   },
 
+  // 我的咨询显示聊天最后一条消息，废案
   queryMsg:function(){
     let that = this
     return new Promise((resolve,reject)=>{
@@ -193,6 +194,7 @@ Page({
 
   // 跳转详细对话框
   toDetail:function(e){
+    let that = this
     let hisopenid = e.currentTarget.dataset.index;
     console.log("对方id",hisopenid)
     //自己身份
@@ -201,9 +203,13 @@ Page({
       this.setData({
         doctorID:hisopenid,
         patientID:app.globalData.openid
+      },()=>{
+        that.findRoom()
       })
     }
-    
+  },
+
+  findRoom(){
     //查找chat-rooms
     var roomID;
     wx.cloud.callFunction({
@@ -247,7 +253,6 @@ Page({
         console.log(error);
       }
     })
-      
   },
 
   // 上拉刷新

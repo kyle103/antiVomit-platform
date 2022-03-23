@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/me/me",
+    "pages/me/information/index",
     "pages/index/index",
     "pages/home/home",
     "pages/road/road",
@@ -14,7 +15,9 @@
     "pages/detail/detail",
     "pages/stats/stats",
     "pages/index1/index1",
-    "pages/publishByq/publishByq"
+    "pages/publishByq/publishByq",
+    "pages/me/type/type",
+    "pages/me/verify/verify"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

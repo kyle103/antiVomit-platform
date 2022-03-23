@@ -34,6 +34,27 @@
           "name": "",
           "pathName": "pages/articles/articles",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/me/information/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/me/type/type",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/me/verify/verify",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }

@@ -28,6 +28,8 @@ Page({
     isTop: false,
     content: '',
   },
+  
+  
   selectImg() {
     var that = this;
     wx.chooseImage({
@@ -47,8 +49,9 @@ Page({
             })
 
             wx.cloud.callFunction({
-              name: 'cloud-msg-push',
+              name: 'cloud-msg',
               data: {
+                action:'addMsg',
                 roomID:that.data.roomID,
                 msgType: 'image',
                 content: bufferData,
@@ -89,8 +92,9 @@ Page({
       title: '信息发送',
     })
     wx.cloud.callFunction({
-      name: 'cloud-msg-push',
+      name: 'cloud-msg',
       data: {
+        action:'addMsg',
         roomID:that.data.roomID,
         msgType: 'text',
         content: that.data.content,
@@ -161,8 +165,9 @@ Page({
       mask: true
     })
     wx.cloud.callFunction({
-      name: 'cloud-msg-his',
+      name: 'cloud-msg',
       data: {
+        action:'queryMsg',
         step: that.data.chatList.length,
         roomID: that.data.roomID
       },
@@ -221,43 +226,36 @@ Page({
   //初始化聊天监听器
   initWatcher() {
     var that = this
-
-      this.chatWatcher = db.collection('chat-msgs')
-      .where({
-        roomID: this.data.roomID,
-      })
-      .watch({
-        onChange: function(snapshot) {
-          console.log('snapshot', snapshot)
-          // if(!that.data.first){
-          //   that.setData({
-          //     first:true
-          //   })
-          // }
-          // else if (snapshot.docChanges.length != 0) {
-          if (snapshot.docChanges.length != 0) {
-            console.log(snapshot.docChanges)
-            let tarr = []
-            snapshot.docChanges.forEach(function (ele, index) {
-              tarr.push(ele.doc)
-            })
-            that.setData({
-              chatList: that.data.chatList.concat(tarr)
-            }, () => {
-              let len = that.data.chatList.length
-              setTimeout(function () {
-                that.setData({
-                  scrollId: 'msg-' + parseInt(len - 1)
-                })
-              }, 100)
-              console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
-            })
-          }
-        },
-        onError: function(err) {
-          console.error('the watch closed because of error', err)
+    this.chatWatcher = db.collection('chat-msgs')
+    .where({
+      roomID: this.data.roomID,
+    })
+    .watch({
+      onChange: function(snapshot) {
+        console.log('snapshot', snapshot)
+        if (snapshot.docChanges.length != 0) {
+          console.log(snapshot.docChanges)
+          let tarr = []
+          snapshot.docChanges.forEach(function (ele, index) {
+            tarr.push(ele.doc)
+          })
+          that.setData({
+            chatList: that.data.chatList.concat(tarr)
+          }, () => {
+            let len = that.data.chatList.length
+            setTimeout(function () {
+              that.setData({
+                scrollId: 'msg-' + parseInt(len - 1)
+              })
+            }, 100)
+            console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
+          })
         }
-      })
+      },
+      onError: function(err) {
+        console.error('the watch closed because of error', err)
+      }
+    })
 
   },
 
@@ -276,9 +274,11 @@ Page({
     var that = this;
     that.setData({
       isTop: true
-    }, () => {
-      this.reqMsgHis();
-    })
+    }, 
+    // () => {
+    //   this.reqMsgHis();
+    // }
+    )
   },
 
   /**

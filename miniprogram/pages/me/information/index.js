@@ -1,6 +1,3 @@
-const {
-  APIURL,
-} = require('../../../api/config.js');
 const app = getApp()
 Page({
 

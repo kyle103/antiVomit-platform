@@ -1,0 +1,31 @@
+<!--pages/me/verify/verify.wxml-->
+<view class="components">
+
+    <view class="itembar">
+        <view class="tip">真实姓名：</view>
+        <input class="input" name="name" value="{{na}}"
+             bindinput="nameInput"/> 
+    </view>
+
+    <view class="auth">
+      <view class="tip">请上传资格证书：</view>
+      <view class="group">
+        <view class="image_group"
+            wx:for="{{tempFilePaths}}"
+            wx:key="*this">
+            <image class="image_item" src="{{item}}" mode="aspectFit" bindtap="previewImg" data-index="{{index}}">   
+            <icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>             
+            </image>      
+        </view>
+        <view class="selectpic" bindtap="loadpic">
+          <text class="cuIcon-add text-grey"></text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="btn">
+      <button id="commit-btn">提交</button>
+    </view>
+</view>
+
+

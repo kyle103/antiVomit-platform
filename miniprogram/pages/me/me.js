@@ -24,6 +24,9 @@ Page({
             login: true,
             userInfo:userInfo
           })
+          wx.navigateTo({
+            url: './information/index',
+          })
         })
       }
     })
@@ -34,6 +37,7 @@ Page({
       wx.cloud.callFunction({
         name: 'cloud-user',
         data: {
+          action:'addUser',
           userInfo: userInfo
         },
         success: res => {
@@ -47,26 +51,29 @@ Page({
 
   },
 
+  //身份校验
   userAuth() {
-    //身份校验
     wx.cloud.callFunction({
-      name: 'auth',
+      name: 'cloud-user',
+      data:{
+        action:'auth'
+      },
       success: res => {
-        app.globalData.openid = res.result.result.openid;
-        app.globalData.usertype = res.result.result.type;
-        console.log("globalData",app.globalData)
+        console.log(res)
         if (res.result.errCode == -1) {
           console.log('--未登录--')
           this.setData({
             login: false
           })
         } else {
-          console.log('--已登录--')
+          console.log('--已登录--',res)
+          // app.globalData.openid = res.result.result.openid;
+          app.globalData.usertype = res.result.result.usertype;
+          console.log("globalData",app.globalData)
           this.setData({
             login: true,
             userInfo:res.result.result.userInfo
           })
-          
         }
       },
       fail: res => {
@@ -78,6 +85,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //身份校验
     this.userAuth();
   },
   /**
