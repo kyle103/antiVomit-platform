@@ -12,8 +12,9 @@ exports.main = async (event, context) => {
   // 用户身份唯一识别ID
   var openid = wxContext.OPENID;
   // 获取步骤
-  let step = event.step;
+  let step = event.step  || 0;
+  let limit = event.limit || 10;
   // 获取房间号
   let roomID = event.roomID || "";
-  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(10).orderBy('_createTime','desc').get();
+  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(limit).orderBy('_createTime','desc').get();
 }

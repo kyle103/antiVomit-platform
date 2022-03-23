@@ -5,7 +5,7 @@ page {
 .top {
   width: 100%;
   height: 250px;
-  background: #23EBB9;
+  background: #b2aaff;
   padding-top: 15px;
   position: relative;
 }

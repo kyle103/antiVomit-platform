@@ -13,6 +13,12 @@ exports.main = async (event, context) => {
     case 'query': {
       return queryRoom(event)
     }
+    case 'patientRooms': {
+      return patientRooms(event)
+    }
+    case 'doctorRooms': {
+      return doctorRooms(event)
+    }
     case 'add': {
       return addRoom(event)
     }
@@ -26,6 +32,18 @@ async function queryRoom(event) {
   console.log(event)
   let res =  await db.collection('chat-rooms').where({patientID:event.patientID,doctorID:event.doctorID}).get();
   console.log("存在房间",res)
+  return res;
+}
+
+//用户是病人，查找自己咨询过的医生
+async function patientRooms(event) {
+  let res =  await db.collection('chat-rooms').where({patientID:event.patientID}).get();
+  return res;
+}
+
+//用户是医生，查找咨询过自己的病人
+async function doctorRooms(event) {
+  let res =  await db.collection('chat-rooms').where({doctorID:event.doctorID}).get();
   return res;
 }
 
