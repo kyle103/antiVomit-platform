@@ -3,8 +3,7 @@ const app = getApp()
 
 Page({
   data:{
-    userInfo: {},
-    login: false,
+    userInfo: {}, 
     state:false,
   },
 
@@ -14,19 +13,17 @@ Page({
       success: res => {
         let userInfo = res.userInfo
         let that=this
-        wx.showLoading({
-          title: '获取用户信息',
+        wx.navigateTo({
+          url: './information/index',
         })
+        app.globalData.userInfo = userInfo
         this.userRegister(userInfo).then(r => {
           console.log(r)
-          wx.hideLoading();
           that.setData({
             login: true,
             userInfo:userInfo
           })
-          wx.navigateTo({
-            url: './information/index',
-          })
+          
         })
       }
     })
@@ -53,19 +50,21 @@ Page({
 
   //身份校验
   userAuth() {
+    wx.showLoading()
     wx.cloud.callFunction({
       name: 'cloud-user',
       data:{
         action:'auth'
       },
       success: res => {
-        console.log(res)
-        if (res.result.errCode == -1) {
+        if(res.result.errCode == -1) {
           console.log('--未登录--')
-          this.setData({
-            login: false
+          wx.hideLoading() 
+          wx.redirectTo({
+            url: '/pages/me/type/type',
           })
-        } else {
+        } 
+        else if(res.result.result.status==='registered'){
           console.log('--已登录--',res)
           // app.globalData.openid = res.result.result.openid;
           app.globalData.usertype = res.result.result.usertype;
@@ -74,9 +73,23 @@ Page({
             login: true,
             userInfo:res.result.result.userInfo
           })
+          wx.hideLoading() 
+        }
+        else if(res.result.result.status==='pending'){
+          wx.hideLoading() 
+          wx.redirectTo({
+            url: '/pages/me/pending/pending',
+          })
+        }
+        else if(res.result.result.status==='rejected'){
+          wx.hideLoading() 
+          wx.redirectTo({
+            url: '/pages/me/type/type?status=rejected',
+          })
         }
       },
       fail: res => {
+        wx.hideLoading() 
         console.log(res)
       }
     })

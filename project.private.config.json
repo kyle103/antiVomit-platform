@@ -62,6 +62,13 @@
           "name": "",
           "pathName": "pages/me/checkVerify/checkVerify",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/me/pending/pending",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }

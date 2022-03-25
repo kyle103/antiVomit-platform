@@ -1,5 +1,9 @@
 // app.js
 App({
+  globalData :{
+    openid:null,
+    userInfo:null
+  },
   onLaunch: function () {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
@@ -25,13 +29,10 @@ App({
           that.globalData.openid=res.result.openid
           wx.setStorageSync('openid', res.result.openid)
         }
-      })     
+      })  
+      
+      
     }
     
   },
-  globalData :{
-    openid:null,
-    userInfo:null
-  }
- 
 });

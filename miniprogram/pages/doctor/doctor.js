@@ -40,7 +40,7 @@ Page({
     wx.cloud.callFunction({
       name: 'cloud-doctor',
       data:{
-        action:'doctorList'
+        action:'yesDoctorList'
       },
       success: res => {
         console.log(res.result.data)

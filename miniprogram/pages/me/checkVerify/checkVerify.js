@@ -1,4 +1,5 @@
 // pages/me/checkVerify/checkVerify.js
+const app = getApp()
 Page({
 
   /**
@@ -20,74 +21,109 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    this.getVerifyList().then(
-      res=>{
-        verifyList = res.verifyList
-        tmpImgList = res.tmpImgList
-        // 获取全体医生列表,筛选与认证人名字相同的医生
+    wx.cloud.callFunction({
+      name: 'cloud-user',
+      data: {
+        action:'verifyList',
+      },
+      success: res => {
+        console.log(res)
+        verifyList = res.result.data
+        //所有图片
+        verifyList.forEach(element => {
+          element.images.forEach(url=>{
+            tmpImgList.push(url)
+          })
+        });
+        //  获取全体医生列表,筛选与认证人名字相同的医生
         wx.cloud.callFunction({
           name: 'cloud-doctor',
+          data:{
+            action:'pendingDoctorList'
+          },
           success: res => {
+            console.log(res)
             let doctorList = res.result.data
-            for(let i in verifyList){
-              doctorList.forEach(doctor=>{
-                if(verifyList[i].documentID===doctor.documentID){
+            for(let i=0;i<verifyList.length;i++){
+              for(let doctor of doctorList){
+                if(verifyList[i].documentID===doctor._id){
                   verifyList[i].doctor = doctor
                   break
                 }
-              }) 
+              }
             }
-            wx.hideLoading({
-              success: (res) => {},
+            that.setData({
+              verifyList:verifyList,
+              tempFilePaths:tmpImgList
+            },()=>{
+              console.log(that.data)
             })
+            wx.hideLoading()
           },
           fail: res => {
-            console.log("fail",res)
-            wx.hideLoading({
-              success: (res) => {},
-            })
+            console.log("请求医生fail",res)
+            wx.hideLoading()
           },
         })
+      },
+      fail: res => {
+        wx.hideLoading();
+        console.log(res)
       }
-    ).then(res=>{
-      that.setData({
-        verifyList:verifyList,
-        tempFilePaths:tmpImgList
-      },()=>{
-        console.log(that.data)
-      })
     })
   },
 
-  // 获取认证列表
-  getVerifyList(){
-    let verifyList = []
-    let tmpImgList = []
-    return new Promise((resolve,reject)=>{
-      wx.cloud.callFunction({
-        name: 'cloud-verify',
-        data: {
-          action: 'verifyList',
-        },
-        success:res => {
-          console.log('获取认证列表success',res)
-          verifyList = res.result.data
-          //所有图片
-          verifyList.forEach(element => {
-            element.images.forEach(url=>{
-              tmpImgList.push(url)
-            })
-          });
-          resolve({
-            verifyList,
-            tmpImgList
-          })
-        },
-        fail:err => {
-          reject(err)
-        }
-      })
+  yes(e){
+    console.log(e)
+    // 用户status
+    wx.cloud.callFunction({
+      name: 'cloud-user',
+      data: {
+        action:'yesDoctor',
+        openid:e.currentTarget.dataset.index
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: res => {
+        console.log(res)
+      }
     })
+    // doctor openid绑定
+    wx.cloud.callFunction({
+      name: 'cloud-doctor',
+      data: {
+        action:'yesDoctor',
+        openid:e.currentTarget.dataset.index,
+        documentID:e.currentTarget.dataset.documentid
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
+    // 刷新页面
+    
+  },
+  no(e){
+    // 用户status
+    wx.cloud.callFunction({
+      name: 'cloud-user',
+      data: {
+        action:'noDoctor',
+        openid:e.currentTarget.dataset.index
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
+    // 刷新页面
+
   },
 
   /**

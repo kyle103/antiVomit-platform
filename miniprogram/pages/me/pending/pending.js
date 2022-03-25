@@ -1,19 +1,18 @@
-// pages/me/type/type.js
-const app = getApp()
+// pages/me/pending/pending.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
 
   /**
@@ -28,41 +27,6 @@ Page({
    */
   onShow: function () {
 
-  },
-
-  getUserProfile(e) {
-    return new Promise((resolve,reject)=>{
-      
-    }) 
-  },
-
-
-  toDoctor:function(params) {
-    wx.getUserProfile({
-      desc: '用户登录',
-      success: res => {
-        let userInfo = res.userInfo
-        let that=this
-        app.globalData.userInfo = userInfo
-        wx.navigateTo({
-          url: '../verify/verify',
-        })
-      }
-    })
-  },
-
-  toPatient:function(params) {
-    wx.getUserProfile({
-      desc: '用户登录',
-      success: res => {
-        let userInfo = res.userInfo
-        let that=this
-        app.globalData.userInfo = userInfo
-        wx.navigateTo({
-          url: '../information/index',
-        })
-      }
-    })
   },
 
   /**

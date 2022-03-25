@@ -1,4 +1,5 @@
 // pages/me/verify/verify.js
+const app = getApp()
 Page({
 
   /**
@@ -19,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -155,6 +156,7 @@ Page({
     })
   },
 
+  
   submit:function(params) {
     let that = this
     console.log(this.data.name)
@@ -162,25 +164,32 @@ Page({
       title: '上传中',
       mask:true
     })
-
     wx.cloud.callFunction({
-      name: 'cloud-verify',
+      name: 'cloud-user',
       data: {
-        action:'upload',
-        // name:that.data.name,
+        action:'addDoctor',
         documentID:that.data.documentID,
-        openid:wx.getStorageSync('openid'),
+        userInfo:app.globalData.userInfo,
+        usertype:'doctor',
         images: that.data.tempFilePaths
       },
       success: res => {
         wx.hideLoading();
-        wx.showToast({
-          title: '上传成功！',
+        wx.showModal({
+          title: '上传成功',
+          content: '管理员将尽快审核',
+          showCancel:false,
+          success (res) {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '../pending/pending',
+              })
+            }
+          }
         })
       },
       fail: res => {
         wx.hideLoading();
-        console.log(res)
       }
     })
   },

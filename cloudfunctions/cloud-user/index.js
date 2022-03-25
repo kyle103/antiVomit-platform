@@ -11,8 +11,17 @@ exports.main = async (event, context) => {
     case 'auth': {
       return auth(event)
     }
-    case 'addUser': {
-      return addUser(event)
+    case 'addDoctor': {
+      return addDoctor(event)
+    }
+    case 'verifyList': {
+      return verifyList(event)
+    }
+    case 'yesDoctor': {
+      return yesDoctor(event)
+    }
+    case 'noDoctor': {
+      return noDoctor(event)
     }
     default: {
       return
@@ -37,16 +46,41 @@ async function auth(event) {
   }
 }
 
-//新增用户
-async function addUser(event) {
+async function addDoctor(event) {
   const wxContext = cloud.getWXContext()
-  let openid = wxContext.OPENID
-  let usertype = event.usertype || 'patient'
+  let openid = wxContext.OPENID;
   return await db.collection(USER).doc(openid).set({
     data:{
       openid,
       userInfo:event.userInfo,
-      usertype:usertype
+      usertype:event.usertype,
+      status:'pending',
+      documentID:event.documentID,
+      images:event.images
+    }
+  })
+}
+
+async function verifyList(event) {
+  return await db.collection(USER).where({
+    status:'pending'
+  }).get();
+}
+
+async function yesDoctor(event) {
+  let openid = event.openid
+  return await db.collection(USER).doc(openid).update({
+    data:{
+      status:'registered',
+    }
+  })
+}
+
+async function noDoctor(event) {
+  let openid = event.openid
+  return await db.collection(USER).doc(openid).update({
+    data:{
+      status:'rejected',
     }
   })
 }
