@@ -1,0 +1,58 @@
+.page {
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+  }
+   
+  .swiper-tab {
+    display: flex;
+    flex-direction: row;
+    line-height: 80rpx;
+    margin-top: 30rpx;
+    border-bottom: 2rpx solid #777;
+  
+  }
+   
+  .tab-item {
+    width: 30%;
+    background-color: rgb(230, 225, 235);
+    border-radius: 30rpx;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;/*加粗*/
+    margin-left: 15%;
+    color: #777;
+  }
+   
+  .swiper {
+    height: 1400rpx;
+    background: #4057d6;
+  }
+   
+  .on {
+    color: blue;
+    border-bottom: 5rpx solid blue;
+  }
+  .sub{
+    background-color:#ffffff;
+    width: 100%;
+    height: 550rpx;
+    border-radius: 20rpx;
+    letter-spacing: 3rpx;
+  }
+.text{
+  height: 505rpx;
+  width: 650rpx;
+}
+  .place-holder {
+    font-size: 30rpx;
+}
+.back2{
+  background-color: #f1f0f0;
+}
+.history{
+  background-color: #ffffff;
+  width: 100%;
+  height: 550rpx;
+  border-radius: 20rpx;
+  letter-spacing: 3rpx;
+}

@@ -1,0 +1,64 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "",
+                    "pathName": "pages/doctor/chatroom/chatroom",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/doctor/doctor",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/articles/addArticle/addArticle",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "学习情况查看",
+                    "pathName": "pages/Calendar1/Calendar1",
+                    "query": "",
+                    "scene": null,
+                    "launchMode": "default"
+                },
+                {
+                    "name": "学习情况",
+                    "pathName": "pages/index1/index1",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "近况提交",
+                    "pathName": "pages/submit/submit",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "环形图",
+                    "pathName": "pages/rounded/rounded",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

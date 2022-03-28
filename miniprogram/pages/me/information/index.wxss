@@ -1,0 +1,163 @@
+/* pages/information/index.wxss */
+page {
+  background-color: #a1a09e0b;
+}
+.indexMust {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+input{
+  text-align: right;
+}
+
+.na {
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.na .name {
+  margin-left: 15rpx;
+}
+
+.se {
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.se .sex {
+  margin-left: 15rpx;
+}
+.se .radio-group {
+  /* transform: scale(0.7); */
+  /* position: absolute; */
+  /* left: 65%; */
+  /* font-size: 50rpx; */
+  margin-right: 15rpx;
+}
+
+.bir{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.bir .birthday { 
+  margin-left: 15rpx;
+}
+.bir .dateChoose {
+  margin-right: 10rpx;  
+}
+
+.indexChoose {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.hei{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.hei .height {
+  margin-left: 15rpx;
+  width: 60%;
+}
+.hei .input {
+  margin-right: 10rpx;  
+}
+
+.wei{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.wei .weight {
+  margin-left: 15rpx;
+  width: 60%;
+}
+.wei .input {
+  margin-right: 10rpx;  
+}
+
+.bm{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.bm .BMI {
+  margin-left: 15rpx;
+  width: 60%;
+}
+.bm .input {
+  margin-right: 10rpx;  
+
+}
+
+.ill{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.ill .illness {
+  margin-left: 15rpx;
+}
+.ill .input {
+  margin-right: 10rpx;  
+}
+
+.smo{
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  top: 25%;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.smo .smoke {
+  margin-left: 15rpx;
+}
+.smo .smokeChoose {
+  margin-right: 25rpx;
+  
+}
+.saveBtn {
+  margin-top: 70rpx;
+  background-color: #69ca75;
+  color: white;
+}

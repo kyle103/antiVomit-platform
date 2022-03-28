@@ -1,0 +1,25 @@
+.garage-status{
+  bottom: 20%;
+  position: absolute;
+  left: 20%;
+}
+
+.desc-text{
+  color: rgb(163, 159, 154);
+  top: 100rpx;
+  left: 95rpx;
+  position: absolute;
+}
+.status-count{
+  position: absolute;
+  top:160rpx;
+  left: 100rpx;
+  font-size: xx-large;
+  color: rgb(199, 48, 68);
+}
+.mubiao{
+  position: absolute;
+  top: 260rpx;
+  left: 95rpx;
+  color: rgb(163, 159, 154);
+}

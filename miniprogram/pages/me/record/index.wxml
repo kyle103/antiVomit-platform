@@ -1,0 +1,27 @@
+<!--pages/history/history.wxml-->
+<view class="cart">
+	<view class="content">
+		<!-- 通过 isTouchMove 的值来对应移动位置-->
+		<view class="item {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{record_list}}" wx:key="item.id">
+			<view class="item-left" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
+				<view class="imgs">
+					<image src="{{item.userAvatar}}" mode="aspectFill"></image>
+				</view>
+				<view class="context">
+					<view class="title">{{item.realName}}</view>
+					<view class="bottoms">
+            <view class="duration" wx:if="{{!item.diagnoseResult}}">抑郁症概率低</view>
+            <view class="duration" wx:else>抑郁症概率高</view>
+            <view class="date">诊断时间:{{item.updateTime}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="frame">
+				<view class="goto" data-id="{{item.id}}" bindtap="goto">前往</view>
+				<view class="delete" data-id="{{item.id}}" bindtap="delItem">删除</view>
+			</view>
+			
+			
+		</view>
+	</view>
+</view>

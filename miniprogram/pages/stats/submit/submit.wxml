@@ -1,0 +1,39 @@
+<view class="page">
+ 
+ <!--顶部导航栏-->
+ <view class="swiper-tab">
+   <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">填写此次近况</view>
+   <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">历史评估查询</view>
+ </view>
+
+ <!--内容主体-->
+ <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
+   <swiper-item class="back1">
+    <view style="width: 90%;margin:10% auto;"  class="sub">
+      <label class="itemTitle">呕吐相关情况说明:</label>
+        <textarea class="text" type="text"  placeholder-class="place-holder" placeholder="点击开始记录" 	confirm-type="done" maxlength="300">
+        </textarea>
+    </view>
+
+    <view style="width: 90%;margin:8% auto;"  class="sub">
+      <label class="itemTitle">呕吐相关情况说明:</label>
+        <textarea class="text" type="text"  placeholder-class="place-holder" placeholder="点击开始记录" 	confirm-type="done" maxlength="300">
+        </textarea>
+    </view>
+   </swiper-item>
+
+
+
+
+   <swiper-item class="back2">
+    <view style="width: 90%;margin:10% auto;"  class="history">
+      <view style="margin: 0 auto; font-weight: 600;">历史评估次数：</view>
+    </view>
+
+    <view style="width: 90%;margin:10% auto;"  class="history">
+      <view style="margin: 0 auto; font-weight: 600;">此次风险评分：</view>
+    </view>
+   </swiper-item>
+
+ </swiper>
+</view>

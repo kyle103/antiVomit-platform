@@ -1,0 +1,5 @@
+<input type="text" style="background-color: bisque;"placeholder="请输入文章链接，如https://mp.weixin.qq.com/s/Qit8903kglRXih2MOz4V1w" value="{{link}}" bindinput="inputLink"/>
+<input type="text" style="background-color: bisque;"placeholder="请输入文章标题" value="{{title}}" bindinput="inputTitle"/>
+<input type="text" style="background-color: bisque;"placeholder="请输入图片链接" value="{{pic}}" bindinput="inputPic"/>
+<input type="text" style="background-color: bisque;"placeholder="请输入文章内容前几十个字" value="{{content}}" bindinput="inputContent"/>
+<button bindtap="addArticle" style="background-color: rgb(196, 231, 255);">确认</button>
