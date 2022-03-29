@@ -2,7 +2,7 @@
   "pages": [
     "pages/me/me",
     "pages/me/type/type",
-    "pages/me/information/index",
+    "pages/me/information/information",
     "pages/index/index",
     "pages/home/home",
     "pages/road/road",

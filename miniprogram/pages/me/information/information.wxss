@@ -1,0 +1,66 @@
+/* pages/information/index.wxss */
+page {
+  background-color: #a1a09e0b;
+}
+input{
+  text-align: right;
+}
+
+.itembar {
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+
+.tip {
+  margin-left: 15rpx;
+}
+.medicineBar{
+  margin-top: 5rpx;
+  background-color: #fff;
+  padding: 20rpx ;
+  font-size: 35rpx;
+}
+.medicineInput{
+  text-align: left;
+}
+.medicine{
+  word-wrap: break-word;
+}
+.date{
+  margin-top: 10rpx;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  display: flex;
+}
+.picker{
+  font-size: 30rpx;
+  flex-shrink: 0;
+}
+.icongroup{
+  flex-shrink: 0;
+}
+.iconbg{
+  display: inline-block;
+  margin: 0 5rpx;
+  background-color: #b2aaff;
+  width: 60rpx;
+  text-align: center;
+}
+.iconbg text{
+  color: white;
+}
+
+.saveBtn {
+  margin-top: 70rpx;
+  background-color: #b2aaff;
+  color: white;
+}
+.saveBtn:active {
+  background-color: #6600ff;
+}
+

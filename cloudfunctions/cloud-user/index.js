@@ -14,6 +14,9 @@ exports.main = async (event, context) => {
     case 'addDoctor': {
       return addDoctor(event)
     }
+    case 'addPatient': {
+      return addPatient(event)
+    }
     case 'verifyList': {
       return verifyList(event)
     }
@@ -57,6 +60,20 @@ async function addDoctor(event) {
       status:'pending',
       documentID:event.documentID,
       images:event.images
+    }
+  })
+}
+
+async function addPatient(event) {
+  const wxContext = cloud.getWXContext()
+  let openid = wxContext.OPENID;
+  return await db.collection(USER).doc(openid).set({
+    data:{
+      openid,
+      userInfo:event.userInfo,
+      usertype:'patient',
+      status:'registered',
+      patientInfo:event.patientInfo
     }
   })
 }

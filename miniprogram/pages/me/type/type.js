@@ -42,7 +42,6 @@ Page({
       desc: '用户登录',
       success: res => {
         let userInfo = res.userInfo
-        let that=this
         app.globalData.userInfo = userInfo
         wx.navigateTo({
           url: '../verify/verify',
@@ -56,10 +55,9 @@ Page({
       desc: '用户登录',
       success: res => {
         let userInfo = res.userInfo
-        let that=this
         app.globalData.userInfo = userInfo
         wx.navigateTo({
-          url: '../information/index',
+          url: '../information/information',
         })
       }
     })

@@ -39,10 +39,10 @@
         },
         {
           "name": "",
-          "pathName": "pages/me/information/index",
+          "pathName": "pages/me/information/information",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "",
@@ -69,8 +69,8 @@
           "name": "",
           "pathName": "pages/me/pending/pending",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
