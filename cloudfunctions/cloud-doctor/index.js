@@ -10,6 +10,9 @@ exports.main = async (event, context) => {
     case 'searchName': {
       return searchName(event)
     }
+    case 'doctorDetail': {
+      return doctorDetail(event)
+    }
     case 'pendingDoctorList': {
       return pendingDoctorList(event)
     }
@@ -34,6 +37,12 @@ async function searchName(event) {
       options:'i',
     }),
     openid:_.eq('')
+  }).get();
+}
+
+async function doctorDetail(event) {
+  return await db.collection('doctor').where({
+    openid:event.doctorID
   }).get();
 }
 

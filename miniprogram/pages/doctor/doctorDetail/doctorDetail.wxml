@@ -1,0 +1,51 @@
+<view class="top">
+	<view class="center">
+		<view class="center_top">
+            <view class="user_info" > 
+               <image class="user_icon" src="{{photo}}" ></image>
+               <view class="user_name" >{{name}}</view>
+            </view>
+		</view>
+		<!-- <view class="center_down"> -->
+			<view class="center_down">
+        <view class="center_rank">
+          <text class="rank_text">医院:</text>
+        </view>
+        <view class="center_score">
+          <text class="rank_text">{{hospital}}</text>
+        </view>
+      </view>
+      <view class="center_down">
+        <view class="center_rank">
+          <text class="rank_text">科室:</text>
+        </view>
+        <view class="center_score">
+          <text class="rank_text">{{department}}</text>
+        </view>
+      </view>
+      <view class="center_down">
+        <view class="center_rank">
+          <text class="rank_text">职称:</text>
+        </view>
+        <view class="center_score">
+          <text class="rank_text">{{title}}</text>
+        </view>
+      </view>
+		<!-- </view> -->
+	</view>
+</view>
+
+<view class="content">
+  <view class="title">医生简介</view>
+  <view class="body">
+    {{description}}
+  </view>
+  <view class="title">医生擅长</view>
+  <view class="body">
+    {{excel}}
+  </view>
+</view>
+
+<view class="btn" bindtap="submit">
+  <button id="commit-btn">咨询</button>
+</view>

@@ -207,55 +207,11 @@ Page({
         doctorID:hisopenid,
         patientID:app.globalData.openid
       },()=>{
-        that.findRoom()
+        wx.navigateTo({
+          url: '/pages/doctor/doctorDetail/doctorDetail?doctorID='+ hisopenid,
+        })
       })
     }
-  },
-
-  findRoom(){
-    //查找chat-rooms
-    var roomID;
-    wx.cloud.callFunction({
-      name: 'cloud-chatrooms',
-      data: {
-        action: 'query',
-        patientID:this.data.patientID,
-        doctorID:this.data.doctorID
-      },
-      success: res => {
-        console.log('查找聊天室success',res)
-        if(res.result.data.length===0){
-          console.log("无聊天室，需要创建")
-          wx.cloud.callFunction({
-            name: 'cloud-chatrooms',
-            data: {
-              action: 'add',
-              patientID:this.data.patientID,
-              doctorID:this.data.doctorID
-            },
-            success:res => {
-              console.log('添加聊天室success',res)
-              roomID = res.result._id
-              console.log('roomID',roomID)
-              wx.navigateTo({
-                url: '/pages/doctor/chatroom/chatroom?roomID='+ roomID,
-              })
-            }
-          })
-        }
-        else{
-          console.log("有聊天室")
-          roomID = res.result.data[0]._id
-          console.log('roomID',roomID)
-          wx.navigateTo({
-            url: '/pages/doctor/chatroom/chatroom?roomID='+ roomID,
-          })
-        }
-      },
-      fail:error => {
-        console.log(error);
-      }
-    })
   },
 
   // 上拉刷新

@@ -8,8 +8,8 @@
     <view class="itembar">
         <view class="tip">*性别： </view> 
         <radio-group name="sex">
-          <label><radio value="男"/>男</label>
-          <label><radio value="女"/>女</label>
+          <label><radio value="男" checked="{{sex==='男'}}"/>男</label>
+          <label><radio value="女" checked="{{sex==='女'}}"/>女</label>
         </radio-group>
         <!-- <radio-group class="radio-group" bindchange="sexInput">
             <radio  value="男" checked="{{sex=='男'}}">男</radio>
