@@ -29,7 +29,8 @@
 </view>
 
 <view wx:elif="{{currentTab==1}}">
-  <scroll-view scroll-y="false">
+  <scroll-view scroll-y="false" wx:if="{{usertype==='patient'}}">
+    <!-- 病人的我的咨询,if和for不能一起 -->
     <view class="doctor_floor light bg-purple"
           wx:for="{{mydoctors}}"
           wx:item="item"
@@ -47,6 +48,26 @@
             <view class="hospital">{{item.hospital}}</view>
             <view class="excel">擅长：{{item.excel}}</view>
             <!-- <view class="excel">{{item.msg}}</view> -->
+          </view>   
+    </view>
+  </scroll-view>
+  <scroll-view scroll-y="false" wx:else>
+    <!-- 医生的我的咨询 -->
+    <view class="doctor_floor light bg-purple"
+          wx:for="{{mypatients}}"
+          wx:item="item"
+          wx:key="id"
+          bindtap="toDetail"
+          data-index="{{item.openid}}"
+          bindscrolltolower="scrolltolower">
+          <view class="avatar">
+              <view class="cu-avatar radius" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+          </view>   
+          <view class="info"> 
+            <text class="name">{{item.patientInfo.name}}</text>
+            <text class="sex">{{item.patientInfo.sex}}</text>
+            <view class="hospital">{{item.patientInfo.hospital}}</view>
+            <view class="illness">现主要诊断：{{item.patientInfo.illness}}</view>
           </view>   
     </view>
   </scroll-view>

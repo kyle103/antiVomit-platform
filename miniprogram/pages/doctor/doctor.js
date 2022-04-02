@@ -9,6 +9,7 @@ Page({
     page:1,
     doctor_list:[],
     mydoctors:[],
+    mypatients:[],
     doctorID:"",
     patientID:"",
     navbar: ['医生列表', '我的咨询'],
@@ -19,7 +20,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    // 请求医生数据
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.cloud.callFunction({
+      name: 'cloud-doctor',
+      data:{
+        action:'yesDoctorList'
+      },
+      success: res => {
+        console.log(res.result.data)
+        this.setData({
+          doctor_list:res.result.data,
+          usertype:app.globalData.usertype
+        })
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      },
+      fail: res => {
+        console.log("fail",res)
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      },
+    })
   },
 
   /**
@@ -33,31 +59,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 请求医生数据
-    wx.showLoading({
-      title: '加载中',
-    })
-    wx.cloud.callFunction({
-      name: 'cloud-doctor',
-      data:{
-        action:'yesDoctorList'
-      },
-      success: res => {
-        console.log(res.result.data)
-        this.setData({
-          doctor_list:res.result.data
-        })
-        wx.hideLoading({
-          success: (res) => {},
-        })
-      },
-      fail: res => {
-        console.log("fail",res)
-        wx.hideLoading({
-          success: (res) => {},
-        })
-      },
-    })
+    
   },
 
   // 我的咨询显示聊天最后一条消息，废案
@@ -146,7 +148,7 @@ Page({
     }
     else{
       // 我的咨询
-      //自己身份
+      // 自己身份
       if(app.globalData.usertype === 'patient'){
         console.log('病人')
         wx.showLoading({
@@ -183,6 +185,62 @@ Page({
             that.setData({
               mydoctors:mydoctors
             })
+          },
+          fail:error => {
+            console.log(error);   
+          },
+          complete:res => {
+            wx.hideLoading()
+          }
+        })
+      }
+      else{
+        console.log('医生')
+        wx.showLoading({
+          title: '加载中',
+        })
+        wx.cloud.callFunction({
+          name: 'cloud-chatrooms',
+          data: {
+            action: 'doctorRooms',
+            doctorID:app.globalData.openid,
+          },
+          success: res => {
+            console.log('查找记录success',res)
+            let mypatients = []
+            let tmpids = []
+            if(res.result.data.length===0){
+              console.log("没有记录")
+            }
+            else{
+              console.log('房间记录',res.result.data)
+              let rooms = res.result.data
+              for(let r of rooms){
+                tmpids.push(r.patientID)
+              }
+              console.log(tmpids)
+              wx.cloud.callFunction({
+                name:'cloud-user',
+                data:{
+                  action:'myPatients',
+                  openids:tmpids
+                },
+                success:res=>{
+                  console.log(res.result.data)
+                  mypatients = res.result.data
+                  that.setData({
+                    mypatients
+                  })
+                },
+                fail:err=>{
+                  console.log('fail',err)
+                }
+              })
+            }
+            // console.log('mydoctors',mydoctors)
+            // that.setData({
+            //   mydoctors:mydoctors
+            // })
           },
           fail:error => {
             console.log(error);   

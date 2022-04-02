@@ -26,6 +26,9 @@ exports.main = async (event, context) => {
     case 'noDoctor': {
       return noDoctor(event)
     }
+    case 'myPatients': {
+      return myPatients(event)
+    }
     default: {
       return
     }
@@ -100,4 +103,10 @@ async function noDoctor(event) {
       status:'rejected',
     }
   })
+}
+
+async function myPatients(event) {
+  return await db.collection(USER).where({
+    openid:_.in(event.openids)
+  }).get()
 }

@@ -32,7 +32,8 @@ async function queryMsg(event) {
   let roomID = event.roomID || "";
   let step = event.step  || 0;
   let limit = event.limit || 10;
-  return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(limit).orderBy('_createTime','desc').get();
+  return await db.collection(MSG).where({roomID:roomID}).skip(step).orderBy('_createTime','desc').get();
+  // return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(limit).orderBy('_createTime','desc').get();
 }
 
 //添加聊天记录
