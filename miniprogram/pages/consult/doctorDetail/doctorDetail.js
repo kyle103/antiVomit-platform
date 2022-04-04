@@ -35,7 +35,7 @@ Page({
               roomID = res.result._id
               console.log('roomID',roomID)
               wx.navigateTo({
-                url: '/pages/doctor/chatroom/chatroom?roomID='+ roomID,
+                url: '/pages/consult/chatroom/chatroom?roomID='+ roomID,
               })
             }
           })
@@ -45,7 +45,7 @@ Page({
           roomID = res.result.data[0]._id
           console.log('roomID',roomID)
           wx.navigateTo({
-            url: '/pages/doctor/chatroom/chatroom?roomID='+ roomID,
+            url: '/pages/consult/chatroom/chatroom?roomID='+ roomID,
           })
         }
       },

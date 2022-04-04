@@ -220,82 +220,6 @@ Page({
         }
       })
     }
-    else{
-      console.log('医生')
-      wx.showLoading({
-        title: '加载中',
-      })
-      wx.cloud.callFunction({
-        name: 'cloud-chatrooms',
-        data: {
-          action: 'doctorRooms',
-          doctorID:app.globalData.openid,
-        },
-        success: res => {
-          console.log('查找记录success',res)
-          let mypatients = []
-          let patientids = []
-          if(res.result.data.length===0){
-            console.log("没有记录")
-          }
-          else{
-            console.log('房间记录',res.result.data)
-            let rooms = res.result.data
-            let roomids = []
-            rooms.forEach(element => {
-              roomids.push(element._id)
-            });
-            // 是否有新消息
-            that.newMsg(roomids).then(
-              res=>{
-                console.log('newMsgs',res)
-                let newMsgs = res
-                // 请求病人信息
-                for(let r of rooms){
-                  patientids.push(r.patientID)
-                }
-                console.log('我的病人id',patientids)
-                wx.cloud.callFunction({
-                  name:'cloud-user',
-                  data:{
-                    action:'myPatients',
-                    openids:patientids
-                  },
-                  success:res=>{
-                    console.log(res.result.data)
-                    mypatients = res.result.data
-                    for(let patient of mypatients){
-                      if(newMsgs.includes(patient.openid)){
-                        patient.newMsg = true
-                      }
-                      else{
-                        patient.newMsg = false
-                      }
-                    }
-                    console.log('我的病人',mypatients)
-                    that.setData({
-                      mypatients
-                    })
-                  },
-                  fail:err=>{
-                    console.log('fail',err)
-                  }
-                })
-              },
-              err=>{
-
-              }
-            ) 
-          }
-        },
-        fail:error => {
-          console.log(error);   
-        },
-        complete:res => {
-          wx.hideLoading()
-        }
-      })
-    }
   },
 
   // 是否有新消息
@@ -336,7 +260,7 @@ Page({
         patientID:app.globalData.openid
       },()=>{
         wx.navigateTo({
-          url: '/pages/doctor/doctorDetail/doctorDetail?doctorID='+ hisopenid,
+          url: '/pages/consult/doctorDetail/doctorDetail?doctorID='+ hisopenid,
         })
       })
     }

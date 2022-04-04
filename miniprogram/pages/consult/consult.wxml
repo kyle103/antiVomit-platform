@@ -1,0 +1,15 @@
+<view class="whole">
+  <image src="cloud://cloud1-1g1funj3c1f0e32e.636c-cloud1-1g1funj3c1f0e32e-1308469358/background/consult.jpg" alt="" mode="aspectFill"/>
+  <view class="question">
+    <view class="title">答疑解惑</view>
+    <view class="btn" bindtap="toQA">
+      公开Q&A
+    </view>
+  </view>
+  <view class="consult">
+    <view class="title">线上咨询</view>
+    <view class="btn" bindtap="toConsult">
+      一对一咨询
+    </view>
+  </view>
+</view>

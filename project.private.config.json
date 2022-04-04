@@ -41,8 +41,8 @@
           "name": "",
           "pathName": "pages/me/information/information",
           "query": "",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "",
@@ -71,6 +71,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/consult/consult",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }
