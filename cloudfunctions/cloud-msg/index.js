@@ -17,8 +17,14 @@ exports.main = async (event, context) => {
     case 'queryMsg': {
       return queryMsg(event)
     }
+    case 'queryUnreadMsg': {
+      return queryUnreadMsg(event)
+    }
     case 'addMsg': {
       return addMsg(event)
+    }
+    case 'readMsg': {
+      return readMsg(event)
     }
     default: {
       return
@@ -34,6 +40,30 @@ async function queryMsg(event) {
   let limit = event.limit || 10;
   return await db.collection(MSG).where({roomID:roomID}).skip(step).orderBy('_createTime','desc').get();
   // return await db.collection(MSG).where({roomID:roomID}).skip(step).limit(limit).orderBy('_createTime','desc').get();
+}
+
+//查找未读聊天记录
+async function queryUnreadMsg(event) {
+  const wxContext = cloud.getWXContext()
+  // 获取用户唯一身份识别ID
+  let openid = wxContext.OPENID || event.openid;
+  console.log("openid",openid,event.rooms)
+  return await db.collection(MSG).where({
+    roomID:_.in(event.rooms),
+    read:false,
+    openid:_.neq(openid)
+  }).get();
+}
+
+// 已读
+async function readMsg(event) {
+  return await db.collection(MSG).where({
+    _id:_.in(event.id)
+  }).update({
+    data:{
+      read:true
+    }
+  });
 }
 
 //添加聊天记录
@@ -62,7 +92,8 @@ async function addMsg(event) {
           userInfo,
           roomID,
           // _createTime: Date()
-          _createTime: timeutil.TimeCode()
+          _createTime: timeutil.TimeCode(),
+          read:false
           // _createTime: TimeCode()
         }
       })
@@ -90,7 +121,8 @@ async function addMsg(event) {
           content:fileID,
           userInfo,
           roomID,
-          _createTime: timeutil.TimeCode()
+          _createTime: timeutil.TimeCode(),
+          read:false
         }
       })
       break

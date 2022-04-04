@@ -18,6 +18,7 @@ input{
 
 .tip {
   margin-left: 15rpx;
+  width: 10rem;
 }
 .medicineBar{
   margin-top: 5rpx;

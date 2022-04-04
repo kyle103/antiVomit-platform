@@ -184,7 +184,6 @@ Page({
               icon: 'none'
             })
           }, 300)
-
         }
         tarr = tarr.reverse()
         that.setData({
@@ -205,9 +204,10 @@ Page({
               })
             }, 100)
           // }
-
         })
         console.log("历史消息列表",this.data.chatList)
+        // 已读消息
+        this.readMsg(tarr)
       },
       fail: res => {
         console.log(res)
@@ -216,6 +216,24 @@ Page({
         if(!that.data.init){
           wx.hideLoading();
         }
+      }
+    })
+  },
+
+  readMsg(tarr){
+    // 已读消息
+    let readID = []
+    for(let msg of tarr){
+      if(msg.read===false&&msg.openid!=app.globalData.openid){
+        readID.push(msg._id)
+      }
+    }
+    console.log(readID)
+    wx.cloud.callFunction({
+      name:'cloud-msg',
+      data:{
+        action:'readMsg',
+        id:readID
       }
     })
   },
@@ -243,7 +261,7 @@ Page({
         console.log('snapshot', snapshot)
         if(!that.data.init){
           // docs
-          if (snapshot.docs.length != 0) {
+          if (snapshot.docs.length != 0&&snapshot.docChanges[0].dataType!="update") {
             console.log(snapshot.docChanges)
             let tarr = []
             snapshot.docChanges.forEach(function (ele, index) {
@@ -259,6 +277,8 @@ Page({
                 })
               }, 100)
               console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
+              // 已读消息
+              that.readMsg(tarr)
             })
           }
         }

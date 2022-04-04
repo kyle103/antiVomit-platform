@@ -48,7 +48,8 @@
             <view class="hospital">{{item.hospital}}</view>
             <view class="excel">擅长：{{item.excel}}</view>
             <!-- <view class="excel">{{item.msg}}</view> -->
-          </view>   
+          </view> 
+          <text class="cuIcon-newfill" hidden="{{!item.newMsg}}"></text>  
     </view>
   </scroll-view>
   <scroll-view scroll-y="false" wx:else>

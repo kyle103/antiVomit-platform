@@ -33,7 +33,7 @@
     </view>
 
     <view class="itembar">
-      <view class="tip">抗肿瘤治疗方案（所用药物、疗程）：</view>
+      <view class="tip" style="width: 100%;">抗肿瘤治疗方案（所用药物、疗程）：</view>
     </view>
     <view class="medicineBar"
         wx:for="{{medicineList}}"

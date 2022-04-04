@@ -30,7 +30,7 @@ Page({
         action:'yesDoctorList'
       },
       success: res => {
-        console.log(res.result.data)
+        console.log('已注册医生',res.result.data)
         this.setData({
           doctor_list:res.result.data,
           usertype:app.globalData.usertype
@@ -138,7 +138,6 @@ Page({
 
   //切换bar
   navbarTap: function (e) {
-    let that = this
     let curid = e.currentTarget.dataset.idx
     this.setData({
       currentTab: curid
@@ -148,109 +147,176 @@ Page({
     }
     else{
       // 我的咨询
-      // 自己身份
-      if(app.globalData.usertype === 'patient'){
-        console.log('病人')
-        wx.showLoading({
-          title: '加载中',
-        })
-        wx.cloud.callFunction({
-          name: 'cloud-chatrooms',
-          data: {
-            action: 'patientRooms',
-            patientID:app.globalData.openid,
-          },
-          success: res => {
-            console.log('查找记录success',res)
-            let mydoctors = []
-            if(res.result.data.length===0){
-              console.log("没有记录")
-            }
-            else{
-              console.log('房间记录',res.result.data)
-              let rooms = res.result.data
-              for(let i=0;i<rooms.length;i++){
-                // 医生信息
-                let curDoctor = {}
-                for(let doctor of that.data.doctor_list){
-                  if(doctor.openid===rooms[i].doctorID){
-                    curDoctor = doctor
-                    break;
-                  }
-                }
-                mydoctors.push(curDoctor)
-              }
-            }
-            console.log('mydoctors',mydoctors)
-            that.setData({
-              mydoctors:mydoctors
-            })
-          },
-          fail:error => {
-            console.log(error);   
-          },
-          complete:res => {
-            wx.hideLoading()
-          }
-        })
-      }
-      else{
-        console.log('医生')
-        wx.showLoading({
-          title: '加载中',
-        })
-        wx.cloud.callFunction({
-          name: 'cloud-chatrooms',
-          data: {
-            action: 'doctorRooms',
-            doctorID:app.globalData.openid,
-          },
-          success: res => {
-            console.log('查找记录success',res)
-            let mypatients = []
-            let tmpids = []
-            if(res.result.data.length===0){
-              console.log("没有记录")
-            }
-            else{
-              console.log('房间记录',res.result.data)
-              let rooms = res.result.data
-              for(let r of rooms){
-                tmpids.push(r.patientID)
-              }
-              console.log(tmpids)
-              wx.cloud.callFunction({
-                name:'cloud-user',
-                data:{
-                  action:'myPatients',
-                  openids:tmpids
-                },
-                success:res=>{
-                  console.log(res.result.data)
-                  mypatients = res.result.data
-                  that.setData({
-                    mypatients
-                  })
-                },
-                fail:err=>{
-                  console.log('fail',err)
-                }
-              })
-            }
-            // console.log('mydoctors',mydoctors)
-            // that.setData({
-            //   mydoctors:mydoctors
-            // })
-          },
-          fail:error => {
-            console.log(error);   
-          },
-          complete:res => {
-            wx.hideLoading()
-          }
-        })
-      }
+      this.myConsult()
     }
+  },
+
+  // 我的咨询
+  myConsult(){
+    let that = this
+    // 自己身份
+    if(app.globalData.usertype === 'patient'){
+      console.log('病人')
+      wx.showLoading({
+        title: '加载中',
+      })
+      wx.cloud.callFunction({
+        name: 'cloud-chatrooms',
+        data: {
+          action: 'patientRooms',
+          patientID:app.globalData.openid,
+        },
+        success: res => {
+          console.log('查找记录success',res)
+          let mydoctors = []
+          if(res.result.data.length===0){
+            console.log("没有记录")
+          }
+          else{
+            console.log('房间记录',res.result.data)
+            let rooms = res.result.data
+            let roomids = []
+            rooms.forEach(element => {
+              roomids.push(element._id)
+            });
+            // 是否有新消息
+            that.newMsg(roomids).then(
+              res=>{
+                console.log('newMsgs',res)
+                let newMsgs = res
+                for(let i=0;i<rooms.length;i++){
+                  // 医生信息
+                  let curDoctor = {}
+                  for(let doctor of that.data.doctor_list){
+                    if(doctor.openid===rooms[i].doctorID){
+                      curDoctor = doctor
+                      break;
+                    }
+                  }
+                  if(newMsgs.includes(curDoctor.openid)){
+                    curDoctor.newMsg = true
+                  }
+                  else{
+                    curDoctor.newMsg = false
+                  }
+                  mydoctors.push(curDoctor)
+                }
+                console.log('mydoctors',mydoctors)
+                that.setData({
+                  mydoctors:mydoctors
+                })
+              },
+              err=>{
+
+              }
+            )
+          }
+        },
+        fail:error => {
+          console.log(error);   
+        },
+        complete:res => {
+          wx.hideLoading()
+        }
+      })
+    }
+    else{
+      console.log('医生')
+      wx.showLoading({
+        title: '加载中',
+      })
+      wx.cloud.callFunction({
+        name: 'cloud-chatrooms',
+        data: {
+          action: 'doctorRooms',
+          doctorID:app.globalData.openid,
+        },
+        success: res => {
+          console.log('查找记录success',res)
+          let mypatients = []
+          let patientids = []
+          if(res.result.data.length===0){
+            console.log("没有记录")
+          }
+          else{
+            console.log('房间记录',res.result.data)
+            let rooms = res.result.data
+            // 是否有新消息
+            that.newMsg(roomids).then(
+              res=>{
+                console.log('newMsgs',res)
+                let newMsgs = res
+                // 请求病人信息
+                for(let r of rooms){
+                  patientids.push(r.patientID)
+                }
+                console.log('我的病人id',patientids)
+                wx.cloud.callFunction({
+                  name:'cloud-user',
+                  data:{
+                    action:'myPatients',
+                    openids:patientids
+                  },
+                  success:res=>{
+                    console.log(res.result.data)
+                    mypatients = res.result.data
+                    for(let patient of mypatients){
+                      if(newMsgs.includes(patient.openid)){
+                        patient.newMsg = true
+                      }
+                      else{
+                        patient.newMsg = false
+                      }
+                    }
+                    console.log('我的病人',mypatients)
+                    that.setData({
+                      mypatients
+                    })
+                  },
+                  fail:err=>{
+                    console.log('fail',err)
+                  }
+                })
+              },
+              err=>{
+
+              }
+            ) 
+          }
+        },
+        fail:error => {
+          console.log(error);   
+        },
+        complete:res => {
+          wx.hideLoading()
+        }
+      })
+    }
+  },
+
+  // 是否有新消息
+  newMsg(roomids){
+    let newMsgs = []
+    return new Promise((resolve,reject)=>{
+      wx.cloud.callFunction({
+        name:'cloud-msg',
+        data:{
+          action:'queryUnreadMsg',
+          rooms:roomids,
+          openid:app.globalData.openid
+        },
+        success:res=>{
+          let tmp = res.result.data
+          tmp.forEach((msg)=>{
+            newMsgs.push(msg.openid)
+          })
+          resolve(newMsgs)
+        },
+        fail:err=>{
+          reject(err)
+        }
+      })
+    })
   },
 
   // 跳转详细对话框

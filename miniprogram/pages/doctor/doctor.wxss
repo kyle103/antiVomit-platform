@@ -80,3 +80,8 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.cuIcon-newfill{
+  font-size: 50rpx;
+  color: red;
+}
