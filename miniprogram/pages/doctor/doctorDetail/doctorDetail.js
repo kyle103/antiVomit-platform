@@ -27,7 +27,7 @@ Page({
             name: 'cloud-chatrooms',
             data: {
               action: 'add',
-              patientID:this.data.patientID,
+              patientID:app.globalData.openid,
               doctorID:this.data.doctorID
             },
             success:res => {

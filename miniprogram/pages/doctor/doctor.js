@@ -241,6 +241,10 @@ Page({
           else{
             console.log('房间记录',res.result.data)
             let rooms = res.result.data
+            let roomids = []
+            rooms.forEach(element => {
+              roomids.push(element._id)
+            });
             // 是否有新消息
             that.newMsg(roomids).then(
               res=>{

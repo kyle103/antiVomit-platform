@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // bufferData:'',
+    bufferData:[],
     tempFilePaths: [],
     name:'',
     none:true,
@@ -76,29 +76,6 @@ Page({
     });
   },
 
-
-  // selectImg() {
-  //   var that = this;
-  //   wx.chooseImage({
-  //     count: 1,
-  //     sizeType: ['compressed'],
-  //     sourceType: ['album', 'camera'],
-  //     success: res => {
-  //       console.log(res)
-  //       wx.getFileSystemManager().readFile({
-  //         filePath: res.tempFilePaths[0], //选择图片返回的相对路径
-  //         encoding: 'base64', //编码格式
-  //         success: res => { //成功的回调
-  //           var bufferData = res.data;
-  //           that.setData({
-  //             bufferData:bufferData
-  //           })
-  //         }
-  //       })
-  //     }
-  //   })
-  // },
-
   nameInput(e){
     this.setData({
       name:e.detail.value
@@ -156,42 +133,73 @@ Page({
     })
   },
 
+  // 将图片上传至云存储空间
+  uploadImg(){
+    let that = this
+    return new Promise((resolve,reject)=>{
+      let filePaths = []
+      let tmps = that.data.tempFilePaths
+      tmps.forEach((tmp)=>{
+        let timestamp = (new Date()).valueOf();
+        wx.cloud.uploadFile({
+          // 指定上传到的云路径
+          cloudPath: timestamp + '.png',
+          // 指定要上传的文件的小程序临时文件路径
+          filePath: tmp,
+          // 成功回调
+          success: res => {
+            filePaths.push(res.fileID)
+            if(filePaths.length===tmps.length){
+              resolve(filePaths)
+            }
+          },
+        })
+      }) 
+    })
+  },
   
   submit:function(params) {
     let that = this
-    console.log(this.data.name)
     wx.showLoading({
       title: '上传中',
       mask:true
     })
-    wx.cloud.callFunction({
-      name: 'cloud-user',
-      data: {
-        action:'addDoctor',
-        documentID:that.data.documentID,
-        userInfo:app.globalData.userInfo,
-        usertype:'doctor',
-        images: that.data.tempFilePaths
-      },
-      success: res => {
-        wx.hideLoading();
-        wx.showModal({
-          title: '上传成功',
-          content: '管理员将尽快审核',
-          showCancel:false,
-          success (res) {
-            if (res.confirm) {
-              wx.redirectTo({
-                url: '../pending/pending',
-              })
-            }
+    // 将图片上传至云存储空间
+    this.uploadImg().then(
+      res=>{
+        console.log('图片路径',res)
+        let filePaths = res
+        wx.cloud.callFunction({
+          name: 'cloud-user',
+          data: {
+            action:'addDoctor',
+            documentID:that.data.documentID,
+            userInfo:app.globalData.userInfo,
+            usertype:'doctor',
+            images: filePaths
+            // images: that.data.tempFilePaths
+          },
+          success: res => {
+            wx.hideLoading();
+            wx.showModal({
+              title: '上传成功',
+              content: '管理员将尽快审核',
+              showCancel:false,
+              success (res) {
+                if (res.confirm) {
+                  wx.redirectTo({
+                    url: '../pending/pending',
+                  })
+                }
+              }
+            })
+          },
+          fail: res => {
+            wx.hideLoading();
           }
         })
-      },
-      fail: res => {
-        wx.hideLoading();
       }
-    })
+    )
   },
 
   /**
