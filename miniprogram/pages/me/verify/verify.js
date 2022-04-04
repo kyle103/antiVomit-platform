@@ -143,7 +143,7 @@ Page({
         let timestamp = (new Date()).valueOf();
         wx.cloud.uploadFile({
           // 指定上传到的云路径
-          cloudPath: timestamp + '.png',
+          cloudPath: 'verify/' + timestamp + '.png',
           // 指定要上传的文件的小程序临时文件路径
           filePath: tmp,
           // 成功回调
@@ -160,44 +160,44 @@ Page({
   
   submit:function(params) {
     let that = this
-    wx.showLoading({
-      title: '上传中',
-      mask:true
-    })
+    // wx.showLoading({
+    //   title: '上传中',
+    //   mask:true
+    // })
     // 将图片上传至云存储空间
     this.uploadImg().then(
       res=>{
         console.log('图片路径',res)
         let filePaths = res
-        wx.cloud.callFunction({
-          name: 'cloud-user',
-          data: {
-            action:'addDoctor',
-            documentID:that.data.documentID,
-            userInfo:app.globalData.userInfo,
-            usertype:'doctor',
-            images: filePaths
-            // images: that.data.tempFilePaths
-          },
-          success: res => {
-            wx.hideLoading();
-            wx.showModal({
-              title: '上传成功',
-              content: '管理员将尽快审核',
-              showCancel:false,
-              success (res) {
-                if (res.confirm) {
-                  wx.redirectTo({
-                    url: '../pending/pending',
-                  })
-                }
-              }
-            })
-          },
-          fail: res => {
-            wx.hideLoading();
-          }
-        })
+        // wx.cloud.callFunction({
+        //   name: 'cloud-user',
+        //   data: {
+        //     action:'addDoctor',
+        //     documentID:that.data.documentID,
+        //     userInfo:app.globalData.userInfo,
+        //     usertype:'doctor',
+        //     images: filePaths
+        //     // images: that.data.tempFilePaths
+        //   },
+        //   success: res => {
+        //     wx.hideLoading();
+        //     wx.showModal({
+        //       title: '上传成功',
+        //       content: '管理员将尽快审核',
+        //       showCancel:false,
+        //       success (res) {
+        //         if (res.confirm) {
+        //           wx.redirectTo({
+        //             url: '../pending/pending',
+        //           })
+        //         }
+        //       }
+        //     })
+        //   },
+        //   fail: res => {
+        //     wx.hideLoading();
+        //   }
+        // })
       }
     )
   },
