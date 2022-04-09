@@ -13,13 +13,16 @@
   <block wx:for="{{cloudImgList}}" wx:key="index">
     <view class="one-img">
       <image src="{{item}}" class="img-choose"></image>
-      <image  bindtap="deleteImg" data-index="{{index}}" src="../../images/删除.png" class="close-img"></image>
+      <image  bindtap="deleteImg" data-index="{{index}}" src="../../../images/删除.png" class="close-img"></image>
     </view>
  </block>
-
+ 
 
   <view class="one-img" wx:if="{{cloudImgList.length<9}}">
-    <image src="../../images/加号.png" class="img-choose" bindtap="chooseImage"></image>
+    <image src="../../../images/加号.png" class="img-choose" bindtap="chooseImage"></image>
   </view>
 
 </view>
+
+
+<view bindtap="chooseAddress" class="choose-localtion">{{localtion}}</view>

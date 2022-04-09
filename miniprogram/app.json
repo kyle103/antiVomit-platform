@@ -1,84 +1,90 @@
 {
-  "pages": [
-    "pages/me/me",
-    "pages/me/type/type",
-    "pages/me/information/information",
-    "pages/index/index",
-    "pages/home/home",
-    "pages/road/road",
-    "pages/consult/consult",
-    "pages/consult/doctor/doctor",
-    "pages/consult/chatroom/chatroom",
-    "pages/consult/doctorDetail/doctorDetail",
-    "pages/consult/patient/patient",
-    "pages/articles/articles",
-    "pages/articles/addArticle/addArticle",
-    "pages/articles/articleDetail/articleDetail",
-    "pages/index3/index3",
-    "pages/au/au",
-    "pages/detail/detail",
-    "pages/stats/stats",
-    "pages/index1/index1",
-    "pages/publishByq/publishByq",
-    "pages/me/verify/verify",
-    "pages/me/checkVerify/checkVerify",
-    "pages/me/pending/pending",
-    "pages/consult/question/question"
-  ],
-  "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "吐无忧",
-    "navigationBarTextStyle": "black"
-  },
-  "useExtendedLib": {
-    "weui": true
-  },
-  "usingComponents": {
-    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
-    "mp-toptips": "weui-miniprogram/toptips/toptips"
-  },
-  "sitemapLocation": "sitemap.json",
-  "style": "v2",
-  "lazyCodeLoading": "requiredComponents",
-  "tabBar": {
-    "color": "#bbbbbb",
-    "selectedColor": "#6ec2aa",
-    "backgroundColor": "white",
-    "position": "bottom",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页",
-        "iconPath": "images/首页.png",
-        "selectedIconPath": "images/首页.png"
-      },
-      {
-        "pagePath": "pages/stats/stats",
-        "text": "抗吐之路",
-        "iconPath": "images/诊断.png",
-        "selectedIconPath": "images/诊断.png"
-      },
-      {
-        "pagePath": "pages/consult/consult",
-        "text": "咨询",
-        "iconPath": "images/聊天.png",
-        "selectedIconPath": "images/聊天.png"
-      },
-      {
-        "pagePath": "pages/articles/articles",
-        "text": "科普",
-        "iconPath": "images/论坛.png",
-        "selectedIconPath": "images/论坛.png"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "text": "个人中心",
-        "iconPath": "images/个人.png",
-        "selectedIconPath": "images/个人.png"
-      }
-    ]
-  }
+    "pages": [
+        "pages/me/me",
+        "pages/me/type/type",
+        "pages/me/information/information",
+        "pages/index/index",
+        "pages/home/home",
+        "pages/road/road",
+        "pages/articles/articles",
+        "pages/articles/addArticle/addArticle",
+        "pages/articles/articleDetail/articleDetail",
+        "pages/au/au",
+        "pages/stats/stats",
+        "pages/stats/me1/me1",
+        "pages/stats/publishByq/publishByq",
+        "pages/stats/detail/detail",
+        "pages/index3/index3",
+        "pages/index1/index1",
+        "pages/submit/submit",
+        "pages/home/tweet/tweet",
+        "pages/home/tweet/tweet3/tweet3",
+        "pages/home/tweet/tweet2/tweet2",
+
+        "pages/consult/consult",
+        "pages/consult/doctor/doctor",
+        "pages/consult/chatroom/chatroom",
+        "pages/consult/doctorDetail/doctorDetail",
+        "pages/consult/patient/patient",
+        "pages/me/verify/verify",
+        "pages/me/checkVerify/checkVerify",
+        "pages/me/pending/pending",
+        "pages/consult/question/question"
+    ],
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "吐无忧",
+        "navigationBarTextStyle": "black"
+    },
+    "useExtendedLib": {
+        "weui": true
+    },
+    "usingComponents": {
+        "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+        "mp-toptips": "weui-miniprogram/toptips/toptips"
+    },
+    "sitemapLocation": "sitemap.json",
+    "style": "v2",
+    "lazyCodeLoading": "requiredComponents",
+    "tabBar": {
+        "color": "#bbbbbb",
+        "selectedColor": "#6ec2aa",
+        "backgroundColor": "white",
+        "position": "bottom",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "首页",
+                "iconPath": "images/首页.png",
+                "selectedIconPath": "images/首页.png"
+            },
+            {
+                "pagePath": "pages/stats/stats",
+                "text": "抗吐之路",
+                "iconPath": "images/诊断.png",
+                "selectedIconPath": "images/诊断.png"
+            },
+            {
+                "pagePath": "pages/consult/consult",
+                "text": "咨询",
+                "iconPath": "images/聊天.png",
+                "selectedIconPath": "images/聊天.png"
+            },
+            {
+                "pagePath": "pages/articles/articles",
+                "text": "科普",
+                "iconPath": "images/论坛.png",
+                "selectedIconPath": "images/论坛.png"
+            },
+            {
+                "pagePath": "pages/me/me",
+                "text": "个人中心",
+                "iconPath": "images/个人.png",
+                "selectedIconPath": "images/个人.png"
+            }
+        ]
+    }
 }

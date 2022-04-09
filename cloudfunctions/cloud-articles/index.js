@@ -4,7 +4,12 @@ const cloud = require('wx-server-sdk')
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 })
+<<<<<<< HEAD
+
+const request = require('request')
+=======
 const db = cloud.database();
+>>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -16,9 +21,12 @@ exports.main = async (event, context) => {
     case 'addArticle': {
       return addArticle(event)
     }
+<<<<<<< HEAD
+=======
     case 'searchArticles':{
       return searchArticles(event)
     }
+>>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
     default: {
       return
     }
@@ -26,15 +34,39 @@ exports.main = async (event, context) => {
 }
 
 async function articleList(event) {
+<<<<<<< HEAD
+  request({
+    method: 'POST',
+    url: 'http://api.weixin.qq.com/cgi-bin/material/batchget_material',
+    data: {
+      type: 'news',
+      offset:0,
+      count:20
+    },
+    header:{
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success(res){
+      console.log(res)
+      return res
+    },
+    fail (err){
+      console.log(err)
+    }
+  })
+=======
   // 获取步骤
   let step = event.step || 0;
   return await db.collection('articles').skip(step).limit(10).orderBy('date','desc').get();
+>>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
 }
 
 async function addArticle(event){
   
 }
 
+<<<<<<< HEAD
+=======
 async function searchArticles(event){
   let step = event.step || 0;
   let keywords = event.keywords || "";
@@ -82,3 +114,4 @@ function compare(a,b){
   return 0
 }
 
+>>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824

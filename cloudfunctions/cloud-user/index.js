@@ -7,6 +7,17 @@ const _ = db.command;
 const USER = 'users';
 // 云函数入口函数
 exports.main = async (event, context) => {
+<<<<<<< HEAD
+  const wxContext = cloud.getWXContext()
+  let openid = wxContext.OPENID
+  return await db.collection(USER).doc(openid).set({
+    data:{
+      openid,
+      userInfo:event.userInfo
+    }
+  })
+}
+=======
   switch (event.action) {
     case 'auth': {
       return auth(event)
@@ -104,9 +115,13 @@ async function noDoctor(event) {
     }
   })
 }
+<<<<<<< HEAD
+>>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
+=======
 
 async function myPatients(event) {
   return await db.collection(USER).where({
     openid:_.in(event.openids)
   }).get()
 }
+>>>>>>> 91bc431b9826f5efcdf05ed95a00ec4b7bd6b175

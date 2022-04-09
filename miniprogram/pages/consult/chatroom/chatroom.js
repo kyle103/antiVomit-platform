@@ -29,8 +29,6 @@ Page({
     content: '',
     init:true
   },
-  
-  
   selectImg() {
     var that = this;
     wx.chooseImage({

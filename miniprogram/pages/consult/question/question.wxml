@@ -1,6 +1,6 @@
 <!--pages/luntan/luntan.wxml-->
 <view class="page">
-  <image class="background" src="/images/背景页.png"></image>
+  <!-- <image class="background" src="/images/背景页.png"></image> -->
   <view class="search">
     <view class="searchBar">
       <icon class="weui-icon-search" type="search" size="24"></icon>

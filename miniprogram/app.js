@@ -1,15 +1,11 @@
 // app.js
 App({
-  globalData :{
-    openid:null,
-    userInfo:null
-  },
   onLaunch: function () {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
       wx.cloud.init({
-        env:"cloud1-1g1funj3c1f0e32e",
+        env:"cloud1-6ghb7lufff3f2835",
         // env 参数说明：
         //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
         //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
@@ -21,6 +17,11 @@ App({
         this.globalData.openid=wx.getStorageInfoSync('openid')
       }
       
+    if(wx.getStorageSync('userInfo')){
+      this.globalData.userInfo = wx.getStorageSync('userInfo')
+    }
+
+      
       var that = this;
       wx.cloud.callFunction({
         name:"getUserOpenid",
@@ -29,10 +30,14 @@ App({
           that.globalData.openid=res.result.openid
           wx.setStorageSync('openid', res.result.openid)
         }
-      })  
-      
-      
+      })     
     }
     
   },
+  globalData :{
+   
+    userInfo:null,
+    openid:null
+  }
+ 
 });

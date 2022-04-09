@@ -43,3 +43,8 @@
   right: 4rpx;
   top: 4rpx;
 }
+.choose-localtion {
+  margin: 50rpx 40rpx;
+  font-size: 36rpx;
+  color: rgb(90, 90, 90);
+}

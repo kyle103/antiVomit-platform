@@ -1,4 +1,4 @@
-// pages/publishByq/publishByq.js
+// pages/articles/articleDetail/articlePage.js
 Page({
 
   /**

@@ -12,6 +12,7 @@ Page({
         console.log(res)
 
         app.globalData.userInfo =res.userInfo
+        wx.setStorageSync('userInfo', res.userInfo)
         wx.navigateBack({
           success(res){
             wx.showToast({

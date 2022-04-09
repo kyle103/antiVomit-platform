@@ -57,3 +57,6 @@
   border-radius: 98rpx;
   border: 0; 
 }
+.words{
+  font-size: medium;
+}
