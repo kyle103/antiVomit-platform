@@ -27,6 +27,7 @@ Page({
     //标记触顶事件
     isTop: false,
     content: '',
+    init:true
   },
   selectImg() {
     var that = this;
@@ -135,7 +136,7 @@ Page({
     this.setData({
       chatList: []
     }, () => {
-      // that.reqMsgHis();
+      that.reqMsgHis();
     })
     //开启监听
     that.initWatcher()
@@ -166,7 +167,7 @@ Page({
       name: 'cloud-msg',
       data: {
         action:'queryMsg',
-        step: that.data.chatList.length,
+        // step: that.data.chatList.length,
         roomID: that.data.roomID
       },
       success: res => {
@@ -181,35 +182,56 @@ Page({
               icon: 'none'
             })
           }, 300)
-
         }
         tarr = tarr.reverse()
         that.setData({
           chatList: tarr.concat(that.data.chatList)
         }, () => {
           let len = that.data.chatList.length
-          if (that.data.isTop) {
+          // if (that.data.isTop) {
+          //   setTimeout(function () {
+          //     that.setData({
+          //       scrollId: 'msg-' + parseInt(newsLen)
+          //     })
+          //   }, 100)
+          // } 
+          // else {
             setTimeout(function () {
               that.setData({
-                scrollId: 'msg-' + parseInt(newsLen)
+                scrollId: 'msg-' + parseInt(newsLen-1)
               })
             }, 100)
-          } else {
-            setTimeout(function () {
-              that.setData({
-                scrollId: 'msg-' + parseInt(len - 1)
-              })
-            }, 100)
-          }
-
+          // }
         })
         console.log("历史消息列表",this.data.chatList)
+        // 已读消息
+        this.readMsg(tarr)
       },
       fail: res => {
         console.log(res)
       },
       complete: res => {
-        wx.hideLoading();
+        if(!that.data.init){
+          wx.hideLoading();
+        }
+      }
+    })
+  },
+
+  readMsg(tarr){
+    // 已读消息
+    let readID = []
+    for(let msg of tarr){
+      if(msg.read===false&&msg.openid!=app.globalData.openid){
+        readID.push(msg._id)
+      }
+    }
+    console.log(readID)
+    wx.cloud.callFunction({
+      name:'cloud-msg',
+      data:{
+        action:'readMsg',
+        id:readID
       }
     })
   },
@@ -225,28 +247,44 @@ Page({
   initWatcher() {
     var that = this
     this.chatWatcher = db.collection('chat-msgs')
+    // 按 _createTime 降序
+    .orderBy('_createTime', 'desc')
+    // 取排序之后的前 1 个，会不会快一点？
+    .limit(1)
     .where({
       roomID: this.data.roomID,
     })
     .watch({
       onChange: function(snapshot) {
         console.log('snapshot', snapshot)
-        if (snapshot.docChanges.length != 0) {
-          console.log(snapshot.docChanges)
-          let tarr = []
-          snapshot.docChanges.forEach(function (ele, index) {
-            tarr.push(ele.doc)
-          })
+        if(!that.data.init){
+          // docs
+          if (snapshot.docs.length != 0&&snapshot.docChanges[0].dataType!="update") {
+            console.log(snapshot.docChanges)
+            let tarr = []
+            snapshot.docChanges.forEach(function (ele, index) {
+              tarr.push(ele.doc)
+            })
+            that.setData({
+              chatList: that.data.chatList.concat(tarr)
+            }, () => {
+              let len = that.data.chatList.length
+              setTimeout(function () {
+                that.setData({
+                  scrollId: 'msg-' + parseInt(len - 1)
+                })
+              }, 100)
+              console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
+              // 已读消息
+              that.readMsg(tarr)
+            })
+          }
+        }
+        else{
           that.setData({
-            chatList: that.data.chatList.concat(tarr)
-          }, () => {
-            let len = that.data.chatList.length
-            setTimeout(function () {
-              that.setData({
-                scrollId: 'msg-' + parseInt(len - 1)
-              })
-            }, 100)
-            console.log("更新后chatList,scrollId",that.data.chatList,that.data.scrollId)
+            init:false
+          },()=>{
+            wx.hideLoading();
           })
         }
       },
@@ -269,14 +307,18 @@ Page({
   //触顶事件
   tapTop() {
     console.log('--触顶--')
-    var that = this;
-    that.setData({
-      isTop: true
-    }, 
+    wx.showToast({
+      title: '到顶了',
+      icon: 'none'
+    })
+    // var that = this;
+    // that.setData({
+    //   isTop: true
+    // }, 
     // () => {
-    //   this.reqMsgHis();
+    //   // this.reqMsgHis();
     // }
-    )
+    // )
   },
 
   /**

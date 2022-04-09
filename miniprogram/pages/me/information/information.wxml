@@ -1,0 +1,86 @@
+<form catchsubmit="formSubmit" catchreset="formReset">
+
+    <view class="itembar">
+        <view class="tip">*真实姓名：</view>
+        <input class="input" name="name" value="{{name}}"/>
+    </view>
+
+    <view class="itembar">
+        <view class="tip">*性别： </view> 
+        <radio-group name="sex">
+          <label><radio value="男" checked="{{sex==='男'}}"/>男</label>
+          <label><radio value="女" checked="{{sex==='女'}}"/>女</label>
+        </radio-group>
+        <!-- <radio-group class="radio-group" bindchange="sexInput">
+            <radio  value="男" checked="{{sex=='男'}}">男</radio>
+            <radio  value="女" checked="{{sex=='女'}}">女</radio>                  
+        </radio-group> -->
+    </view>
+    
+    <view class="itembar">
+        <view class="tip">*年龄：</view>
+        <input class="input" name="age" value="{{age}}"/>
+    </view>
+
+    <view class="itembar">
+        <view class="tip">*现主要诊断：</view>
+        <input class="input" name="illness" value="{{illness}}"/>
+    </view>
+
+    <view class="itembar">
+        <view class="tip">*就诊医院：</view>
+        <input class="input" name="hospital" value="{{hospital}}"/>
+    </view>
+
+    <view class="itembar">
+      <view class="tip" style="width: 100%;">抗肿瘤治疗方案（所用药物、疗程）：</view>
+    </view>
+    <view class="medicineBar"
+        wx:for="{{medicineList}}"
+        wx:key="*this">
+        <view class="medicine">{{item.medicine}}</view>
+        <view class="date">
+            <view class="picker">
+                开始时间: {{item.startdate}}
+            </view>
+            <view class="picker">
+                结束时间: {{item.enddate}}
+            </view>
+            <view class="icongroup">
+                <view class="iconbg">
+                    <text class="cuIcon-edit" data-index="{{index}}" bindtap="medicineEdit"></text>
+                </view>
+                <view class="iconbg">
+                    <text class="cuIcon-close" bindtap="medicineClose"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="medicineBar">
+      <input value="{{medicine}}" 
+      class="medicineInput"
+      bindblur="medicineBlur"
+      placeholder="请输入治疗方案"/>
+      <view class="date">
+        <picker mode="date" value="{{startdate}}" bindchange="bindStartDateChange">
+            <view class="picker">
+            开始时间: {{startdate}}
+            </view>
+        </picker>
+        <picker mode="date" value="{{enddate}}" bindchange="bindEndDateChange" class="enddate">
+            <view class="picker">
+            结束时间: {{enddate}}
+            </view>
+        </picker>
+        <view class="iconbg">
+          <text class="cuIcon-check" bindtap="medicineOK"></text>
+        </view>
+      </view>
+      
+    </view>
+
+    <view class="save">
+    <button style="width:200rpx" class="saveBtn" formType="submit">保存</button>
+    </view>
+</form>
+

@@ -1,11 +1,11 @@
 {
     "pages": [
         "pages/me/me",
+        "pages/me/type/type",
+        "pages/me/information/information",
         "pages/index/index",
         "pages/home/home",
         "pages/road/road",
-        "pages/doctor/doctor",
-        "pages/doctor/chatroom/chatroom",
         "pages/articles/articles",
         "pages/articles/addArticle/addArticle",
         "pages/articles/articleDetail/articleDetail",
@@ -19,7 +19,17 @@
         "pages/submit/submit",
         "pages/home/tweet/tweet",
         "pages/home/tweet/tweet3/tweet3",
-        "pages/home/tweet/tweet2/tweet2"
+        "pages/home/tweet/tweet2/tweet2",
+
+        "pages/consult/consult",
+        "pages/consult/doctor/doctor",
+        "pages/consult/chatroom/chatroom",
+        "pages/consult/doctorDetail/doctorDetail",
+        "pages/consult/patient/patient",
+        "pages/me/verify/verify",
+        "pages/me/checkVerify/checkVerify",
+        "pages/me/pending/pending",
+        "pages/consult/question/question"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -58,7 +68,7 @@
                 "selectedIconPath": "images/诊断.png"
             },
             {
-                "pagePath": "pages/doctor/doctor",
+                "pagePath": "pages/consult/consult",
                 "text": "咨询",
                 "iconPath": "images/聊天.png",
                 "selectedIconPath": "images/聊天.png"

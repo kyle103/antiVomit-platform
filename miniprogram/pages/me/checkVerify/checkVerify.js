@@ -74,7 +74,7 @@ Page({
   },
 
   yes(e){
-    console.log(e)
+    let that = this
     // 用户status
     wx.cloud.callFunction({
       name: 'cloud-user',
@@ -105,7 +105,16 @@ Page({
       }
     })
     // 刷新页面
-    
+    let verifyList = that.data.verifyList
+    for(let i=0;i<verifyList.length;i++){
+      if(verifyList[i].openid===e.currentTarget.dataset.index){
+        verifyList.splice(i,1)
+        break
+      }
+    }
+    that.setData({
+      verifyList
+    })
   },
   no(e){
     // 用户status
@@ -123,7 +132,16 @@ Page({
       }
     })
     // 刷新页面
-
+    let verifyList = this.data.verifyList
+    for(let i=0;i<verifyList.length;i++){
+      if(verifyList[i].openid===e.currentTarget.dataset.index){
+        verifyList.splice(i,1)
+        break
+      }
+    }
+    this.setData({
+      verifyList
+    })
   },
 
   /**

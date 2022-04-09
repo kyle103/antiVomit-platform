@@ -1,0 +1,41 @@
+/* pages/consult/consult.wxss */
+page{
+  height: 100%;
+  width: 100%;
+}
+.whole{
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+image{
+  z-index: -10;
+  height: 100%;
+  width: 100%;
+}
+.question{
+  position: absolute;
+  right: 100rpx;
+  top: 150rpx;
+}
+.consult{
+  position: absolute;
+  left: 50rpx;
+  bottom: 350rpx;
+}
+.title{
+  font-size: 50rpx;
+  font-weight: 700;
+  color: #7251ff;
+}
+.btn{
+  margin: 20rpx 0;
+  width: 200rpx;
+  height: 100rpx;
+  border-radius: 30rpx;
+  border:2rpx solid rgba(226, 222, 232,0.5);
+  font-size: large;
+  text-align: center;
+  line-height: 100rpx;
+  box-shadow:10px 10px 10px rgba(226, 222, 232,0.8);
+}

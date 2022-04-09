@@ -1,4 +1,5 @@
-// pages/me/aboutus/index.js
+// pages/consult/consult.js
+const app = getApp();
 Page({
 
   /**
@@ -6,6 +7,26 @@ Page({
    */
   data: {
 
+  },
+
+  toQA(){
+    wx.navigateTo({
+      url: '/pages/consult/question/question',
+    })
+  },
+
+  toConsult(){
+    if(app.globalData.usertype==='patient'){
+      wx.navigateTo({
+        url: '/pages/consult/doctor/doctor',
+      })
+    }
+    else if(app.globalData.usertype==='doctor'){
+      wx.navigateTo({
+        url: '/pages/consult/patient/patient',
+      })
+    }
+    
   },
 
   /**

@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-const cloud = require('wx-server-sdk')
-cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
-})
-const db = cloud.database()
-const MAX_LIMIT = 100
-exports.main = async (event, context) => {
-  // 先取出集合记录总数
-  const countResult = await db.collection('doctor').count()
-  const total = countResult.total
-  // 计算需分几次取
-  const batchTimes = Math.ceil(total / 100)
-  // 承载所有读操作的 promise 的数组
-  const tasks = []
-  for (let i = 0; i < batchTimes; i++) {
-    const promise = db.collection('doctor').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
-    tasks.push(promise)
-  }
-  // 等待所有
-  return (await Promise.all(tasks)).reduce((acc, cur) => {
-    return {
-      data: acc.data.concat(cur.data),
-      errMsg: acc.errMsg,
-    }
-  })
-=======
 const cloud = require('wx-server-sdk')
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -36,6 +9,9 @@ exports.main = async (event, context) => {
   switch (event.action) {
     case 'searchName': {
       return searchName(event)
+    }
+    case 'doctorDetail': {
+      return doctorDetail(event)
     }
     case 'pendingDoctorList': {
       return pendingDoctorList(event)
@@ -64,6 +40,12 @@ async function searchName(event) {
   }).get();
 }
 
+async function doctorDetail(event) {
+  return await db.collection('doctor').where({
+    openid:event.doctorID
+  }).get();
+}
+
 async function pendingDoctorList(event) {
   return await db.collection('doctor').where({
     openid:_.eq('')
@@ -82,5 +64,4 @@ async function yesDoctor(event) {
       openid:event.openid
     }
   });
->>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
 }

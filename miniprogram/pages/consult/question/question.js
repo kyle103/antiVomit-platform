@@ -1,5 +1,4 @@
-// pages/me/type/type.js
-const app = getApp()
+// pages/consult/question/question.js
 Page({
 
   /**
@@ -13,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
 
   /**
@@ -28,39 +27,6 @@ Page({
    */
   onShow: function () {
 
-  },
-
-  getUserProfile(e) {
-    return new Promise((resolve,reject)=>{
-      
-    }) 
-  },
-
-
-  toDoctor:function(params) {
-    wx.getUserProfile({
-      desc: '用户登录',
-      success: res => {
-        let userInfo = res.userInfo
-        app.globalData.userInfo = userInfo
-        wx.navigateTo({
-          url: '../verify/verify',
-        })
-      }
-    })
-  },
-
-  toPatient:function(params) {
-    wx.getUserProfile({
-      desc: '用户登录',
-      success: res => {
-        let userInfo = res.userInfo
-        app.globalData.userInfo = userInfo
-        wx.navigateTo({
-          url: '../information/information',
-        })
-      }
-    })
   },
 
   /**

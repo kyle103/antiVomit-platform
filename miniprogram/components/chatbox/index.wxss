@@ -145,7 +145,7 @@ movable-view image {
   color: white !important;
   padding: 8px 16px !important;
   font-size: 14px !important;
-  float: right;
+  /*float: right;*/
   display: inline-block;
   vertical-align: middle;
   margin-top: 5px;

@@ -27,7 +27,7 @@
 
 
 <view class="user_content" >
-    <navigator url="/pages/me/information/index">
+    <navigator url="/pages/me/information/information">
         <view class="user_information">
             <view class="iconfont icon-geren"></view>
             <view class="jiankang">健康档案</view>

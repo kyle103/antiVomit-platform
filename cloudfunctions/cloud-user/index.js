@@ -25,6 +25,9 @@ exports.main = async (event, context) => {
     case 'addDoctor': {
       return addDoctor(event)
     }
+    case 'addPatient': {
+      return addPatient(event)
+    }
     case 'verifyList': {
       return verifyList(event)
     }
@@ -33,6 +36,9 @@ exports.main = async (event, context) => {
     }
     case 'noDoctor': {
       return noDoctor(event)
+    }
+    case 'myPatients': {
+      return myPatients(event)
     }
     default: {
       return
@@ -72,6 +78,20 @@ async function addDoctor(event) {
   })
 }
 
+async function addPatient(event) {
+  const wxContext = cloud.getWXContext()
+  let openid = wxContext.OPENID;
+  return await db.collection(USER).doc(openid).set({
+    data:{
+      openid,
+      userInfo:event.userInfo,
+      usertype:'patient',
+      status:'registered',
+      patientInfo:event.patientInfo
+    }
+  })
+}
+
 async function verifyList(event) {
   return await db.collection(USER).where({
     status:'pending'
@@ -95,4 +115,13 @@ async function noDoctor(event) {
     }
   })
 }
+<<<<<<< HEAD
 >>>>>>> 1d945e35dfb7af60750f1a98c8da15f630ddd824
+=======
+
+async function myPatients(event) {
+  return await db.collection(USER).where({
+    openid:_.in(event.openids)
+  }).get()
+}
+>>>>>>> 91bc431b9826f5efcdf05ed95a00ec4b7bd6b175
