@@ -9,24 +9,38 @@ page{
   position: relative;
 }
 image{
+  height: 200rpx;
+  width: 300rpx;
+}
+.bg{
   z-index: -10;
   height: 100%;
   width: 100%;
 }
 .question{
   position: absolute;
-  right: 100rpx;
-  top: 150rpx;
+  left: 80rpx;
+  bottom: 450rpx;
+}
+.box{
+  display: flex;
+  align-items: center;
+  border: 1px solid #7251ff;
+  border-radius: 100rpx;
+  width: 600rpx;
+  background-color: white;
 }
 .consult{
   position: absolute;
-  left: 50rpx;
-  bottom: 350rpx;
+  left: 80rpx;
+  bottom: 200rpx;
 }
 .title{
   font-size: 50rpx;
   font-weight: 700;
-  color: #7251ff;
+  color:#7251ff;
+  height: 200rpx;
+  line-height: 200rpx;
 }
 .btn{
   margin: 20rpx 0;
@@ -35,6 +49,7 @@ image{
   border-radius: 30rpx;
   border:2rpx solid rgba(226, 222, 232,0.5);
   font-size: large;
+  font-weight: 600;
   text-align: center;
   line-height: 100rpx;
   box-shadow:10px 10px 10px rgba(226, 222, 232,0.8);

@@ -4,7 +4,7 @@ const app = getApp()
 Page({
   data:{
     userInfo: {}, 
-    state:false,
+    usertype:''
   },
 
   getUserProfile(e) {
@@ -71,7 +71,8 @@ Page({
           console.log("globalData",app.globalData)
           this.setData({
             login: true,
-            userInfo:res.result.result.userInfo
+            userInfo:res.result.result.userInfo,
+            usertype:res.result.result.usertype
           })
           wx.hideLoading() 
         }
@@ -112,12 +113,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // api.getRequestData('healthy/get_healthy_record/isfinish',{,'GET',false).then((res)=>{
-    //   console.log("state",res.data)
-    //   this.setData({
-    //     state:res.data.data
-    //   })
-    // })
+    
   },
 
   /**
