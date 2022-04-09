@@ -8,8 +8,11 @@ Page({
   data: {
     page:1,
     doctor_list:[],
+    mydoctors:[],
     doctorID:"",
-    patientID:""
+    patientID:"",
+    navbar: ['医生列表', '我的咨询'],
+    currentTab: 0,
   },
 
   /**
@@ -31,23 +34,170 @@ Page({
    */
   onShow: function () {
     // 请求医生数据
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
       name: 'cloud-doctor',
+      data:{
+        action:'yesDoctorList'
+      },
       success: res => {
         console.log(res.result.data)
         this.setData({
           doctor_list:res.result.data
         })
+        wx.hideLoading({
+          success: (res) => {},
+        })
       },
       fail: res => {
-        console.log("fail")
-        console.log(res)
+        console.log("fail",res)
+        wx.hideLoading({
+          success: (res) => {},
+        })
       },
     })
   },
 
+  // 我的咨询显示聊天最后一条消息，废案
+  queryMsg:function(){
+    let that = this
+    return new Promise((resolve,reject)=>{
+      wx.showLoading({
+        title: '加载中',
+      })
+      wx.cloud.callFunction({
+        name: 'cloud-chatrooms',
+        data: {
+          action: 'patientRooms',
+          patientID:app.globalData.openid,
+        },
+        success: res => {
+          console.log('查找记录success',res)
+          if(res.result.data.length===0){
+            console.log("没有记录")
+          }
+          else{
+            console.log('房间记录',res.result.data)
+            let rooms = res.result.data
+            let msgs = []
+            for(let i=0;i<rooms.length;i++){
+              let content = ''
+              // 最后一条消息
+              wx.cloud.callFunction({
+                name: 'cloud-msg-his',
+                data: {
+                  limit: 1,
+                  roomID: rooms[i]._id
+                },
+                success: res => {
+                  if(res.result.data[0].msgType==='image'){
+                    content = '[图片]'
+                  }
+                  else{
+                    content = res.result.data[0].content
+                  }
+                  console.log(content)
+                  // 医生信息
+                  let curDoctor = {}
+                  for(let doctor of that.data.doctor_list){
+                    if(doctor.openid===rooms[i].doctorID){
+                      curDoctor = doctor
+                      break;
+                    }
+                  }
+                  msgs.push({
+                    msg:content,
+                    doctor:curDoctor,
+                    roomID:rooms[i]._id
+                  })
+                  if(i===rooms.length-1){
+                    console.log(msgs)
+                    resolve(msgs)
+                  }
+                },
+                fail: res => {
+                  console.log(res)
+                }
+              })
+            }
+          }
+        },
+        fail:error => {
+          console.log(error);   
+        },
+        complete:res => {
+          wx.hideLoading()
+        }
+      })
+    })
+  },
+
+  //切换bar
+  navbarTap: function (e) {
+    let that = this
+    let curid = e.currentTarget.dataset.idx
+    this.setData({
+      currentTab: curid
+    })
+    if(curid===0){
+      this.onShow()
+    }
+    else{
+      // 我的咨询
+      //自己身份
+      if(app.globalData.usertype === 'patient'){
+        console.log('病人')
+        wx.showLoading({
+          title: '加载中',
+        })
+        wx.cloud.callFunction({
+          name: 'cloud-chatrooms',
+          data: {
+            action: 'patientRooms',
+            patientID:app.globalData.openid,
+          },
+          success: res => {
+            console.log('查找记录success',res)
+            let mydoctors = []
+            if(res.result.data.length===0){
+              console.log("没有记录")
+            }
+            else{
+              console.log('房间记录',res.result.data)
+              let rooms = res.result.data
+              for(let i=0;i<rooms.length;i++){
+                // 医生信息
+                let curDoctor = {}
+                for(let doctor of that.data.doctor_list){
+                  if(doctor.openid===rooms[i].doctorID){
+                    curDoctor = doctor
+                    break;
+                  }
+                }
+                mydoctors.push(curDoctor)
+              }
+            }
+            console.log('mydoctors',mydoctors)
+            that.setData({
+              mydoctors:mydoctors
+            })
+          },
+          fail:error => {
+            console.log(error);   
+          },
+          complete:res => {
+            wx.hideLoading()
+          }
+        })
+      }
+    }
+  },
+
   // 跳转详细对话框
   toDetail:function(e){
+    let that = this
     let hisopenid = e.currentTarget.dataset.index;
     console.log("对方id",hisopenid)
     //自己身份
@@ -56,9 +206,13 @@ Page({
       this.setData({
         doctorID:hisopenid,
         patientID:app.globalData.openid
+      },()=>{
+        that.findRoom()
       })
     }
-    
+  },
+
+  findRoom(){
     //查找chat-rooms
     var roomID;
     wx.cloud.callFunction({
@@ -102,7 +256,6 @@ Page({
         console.log(error);
       }
     })
-      
   },
 
   // 上拉刷新

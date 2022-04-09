@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-
-
   },
 
   /**
@@ -37,7 +35,7 @@ toDetail(event){
   console.log(event.currentTarget.dataset.id)
 
   wx.navigateTo({
-    url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
+    url: '/pages/stats/detail/detail?id=' + event.currentTarget.dataset.id,
   })
 
 },
@@ -71,7 +69,6 @@ toDetail(event){
               list[l].isPrized=true
             }
           }
-
           
         }
         that.setData({

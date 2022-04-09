@@ -1,0 +1,11 @@
+/* pages/me/type/type.wxss */
+.typebar .type{
+  width: 300rpx;
+  height: 300rpx;
+  margin: 200rpx auto;
+  border-radius: 50rpx;
+  background-color: #b2aaff;
+  text-align: center;
+  line-height: 300rpx;
+  font-size: large;
+}

@@ -1,66 +1,90 @@
-// pages/home/home.js
+//AppID
+//APPID：wx3342629a4c7e98ad APPSecret：069b3f4769338442785b63a4b480d4f0
+
+const APPID = "wx3342629a4c7e98ad"; //不是真是数据
+//AppSecret
+const APPSECRET = "069b3f4769338442785b63a4b480d4f0"; //不是真是数据
 Page({
+  onLoad:function(){
+    this.getArticleList()
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+},
+  //获取公众号文章列表
+  getArticleList(){
+    var that=this;
+    wx.request({
+      url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`,
+      method: "GET",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) =>{
+        //console.log(res);
+       // var ACCESS_TOKEN=res.data.access_token;
+        that.get(res.data.access_token)
+      },
+      error: function (res) {
+        console.log(res);
+      }
+    })
+   
+     
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+get(accesstoken){
+  wx.request({
+    url: `https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=${accesstoken}`,
+    method: "POST",
+    data: {
+      "type": 'news',
+       "offset": 0,
+       "count": 3
+     },
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    success: (res)=>{
+      console.log('微信推文列表',res);
+      var that = this;
+    //定义一个数组，用于存放文章对象
+    var articleArr=[];
+    //获取到的文章列表数组
+    console.log(res.data.item);
+    var article=res.data.item;
+    for(var i=0;i<article.length;i++)
+    {
+      var obj={
+      // 公众号文章的链接url
+        url:article[i].content.news_item[0].url,
+        //公众号文章的封面图片地址url
+        thumbUrl:article[i].content.news_item[0].thumb_url
+      };
+      articleArr.push(obj);
+    }
+    //console.log(articleArr);
+    that.setData({
+      //将整理好的数据赋值给swiperList
+      swiperList:articleArr
+    });
 
+    data: {
+    swiperList: []
+    };
+    },
+    error: function (res) {
+      console.log(res);
+    }
+  })
+},
+
+   //点击轮播图事件
+   entenArt: function (e) {
+    var index=e.currentTarget.dataset.index;
+    var url=this.data.swiperList[index].url;
+    wx.navigateTo({
+      //url太长且会被截取，编码一下，避免这种情况
+      url:`../tweet/tweet?url=${encodeURIComponent(url)}`,
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

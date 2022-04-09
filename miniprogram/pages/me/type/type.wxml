@@ -1,0 +1,4 @@
+<view class="typebar">
+    <view class="type" bindtap="toDoctor">我是医生</view>
+    <view class="type" bindtap="toPatient">我是患者</view>
+</view>

@@ -2,9 +2,9 @@
  
  <!--顶部导航栏-->
  <view class="swiper-tab">
-   <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">学习情况查看</view>
-   <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">患者近况提交</view>
-   <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">分享抗癌故事</view>
+   <view class="tab-item {{currentTab==0 ? 'on' : ''}}" style="{{currentTab==0 ? 'font-size: larger' :''}}"  data-current="0" bindtap="swichNav">学习情况查看</view>
+   <view class="tab-item {{currentTab==1 ? 'on' : ''}}" style="{{currentTab==1 ? 'font-size: larger' :''}}" data-current="1" bindtap="swichNav">患者近况提交</view>
+   <view class="tab-item {{currentTab==2 ? 'on' : ''}}" style="{{currentTab==2 ? 'font-size: larger' :''}}" data-current="2" bindtap="swichNav">分享抗癌故事</view>
  </view>
 
  <!--内容主体-->
@@ -15,33 +15,69 @@
         <Calendar id="Calendar" bind:select="select"></Calendar>
     </view>
     
-    <view wx:if="{{open==false}}" style='width:90%;margin:0 auto;text-align:but ;padding:10rpx 10rpx;'>
-        <button type='primary' bindtap='toggleType'>展开</button>
-
-        <view>{{selectVal}}</view>
+    <view  style='width:90%;margin:0 auto;text-align:but ;padding:10rpx 10rpx;'>
+        <button  type='primary' bindtap='toggleType'>{{open==false?'收起':'展开'}}</button>
+        <view class="read">{{selectVal}}阅读篇数:{{Read}}</view>
     </view>
 
-    <view wx:else >
+<!--    <view wx:else >
         <button type='primary' bindtap='toggleType'>收起</button>
-        <view>{{selectVal}}</view>
-    </view>
+        <view class="read">{{selectVal}}阅读篇数:5</view>
+    </view>-->
      
         <view class="garage-status">
           <canvas class="canvas" type="2d" id="progress"></canvas>
           
           <view class="status-ctn">
             <view class="desc-text">今日阅读字数</view>
-            <view class="status-count" >20000</view>
+            <view class="status-count" >200</view>
             <view class="mubiao">目标：10000</view>
           </view>
         </view>
 
    </swiper-item>
 
-
    <!--近况提交-->
    <swiper-item class="back2">
-     <view >我是tab2</view>
+    <view class="page">
+ 
+ <!--子导航栏-->
+ <view class="swiper-tab1">
+   <view class="tab-item1 {{currentTab1==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav1">填写此次近况</view>
+   <view class="tab-item1 {{currentTab1==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav1">历史评估查询</view>
+ </view>
+
+ <!--内容主体-->
+ <swiper class="swiper1" current="{{currentTab1}}" duration="200" bindchange="swiperChange1">
+   <swiper-item class="back11">
+    <view style="width: 90%;margin:10% auto;"  class="sub">
+      <label class="itemTitle">呕吐相关情况说明:</label>
+        <textarea class="text" type="text"  placeholder-class="place-holder" placeholder="点击开始记录" 	confirm-type="done" maxlength="300">
+        </textarea>
+    </view>
+
+    <view style="width: 90%;margin:8% auto;"  class="sub">
+      <label class="itemTitle">呕吐相关情况说明:</label>
+        <textarea class="text" type="text"  placeholder-class="place-holder" placeholder="点击开始记录" 	confirm-type="done" maxlength="300">
+        </textarea>
+    </view>
+   </swiper-item>
+
+
+
+
+   <swiper-item class="">
+    <view style="width: 90%;margin:10% auto;"  class="history">
+      <view style="margin: 0 auto; font-weight: 600;">历史评估次数：</view>
+    </view>
+
+    <view style="width: 90%;margin:10% auto;"  class="history">
+      <view style="margin: 0 auto; font-weight: 600;">此次风险评分：</view>
+    </view>
+   </swiper-item>
+
+ </swiper>
+</view>
    </swiper-item>
 
 
@@ -50,11 +86,10 @@
    
    <scroll-view scroll-y="{{true}}" style="height: 1400rpx;" >
     <view class="list">
-
      
       <view class="camera-box" bindtap="topublishByq">
-  <image src="../../images/相机.png" class="camera-img"></image>
-</view>
+          <image src="../../images/相机.png" class="camera-img"></image>
+      </view>
 
 <block wx:for="{{actionsList}}" wx:for-index="numm" wx:key="index">
 
@@ -71,20 +106,20 @@
 
 <!--单图-->
       <view class="imags-wrap">
-        <block wx:if="{{item.images.length==1}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index" wx:for-index="indexx">
-          <image src="{{imgItem}}" class="image-1" bindtap="previewImg" data-src="{{imgItem}}" data-src="imgItem" data-index="{{numm}}"></image>
+        <block wx:if="{{item.images.length == 1}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index" wx:for-index="indexx">
+          <image src="{{imgItem}}" class="image-1" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
         </block>
 <!--2,3图-->
         <block wx:if="{{item.images.length==2||item.images.length==3}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
-          <image src="{{imgItem}}" class="image-2-3" bindtap="previewImg" data-src="{{imgItem}}" data-src="imgItem" data-index="{{numm}}"></image>
+          <image src="{{imgItem}}" class="image-2-3" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
         </block>
 <!--四图-->
         <block wx:if="{{item.images.length==4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
-          <image src="{{imgItem}}" class="image-4" bindtap="previewImg" data-src="{{imgItem}}" data-src="imgItem" data-index="{{numm}}"></image>
+          <image src="{{imgItem}}" class="image-4" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
         </block>    
 <!--5-9图-->
         <block wx:if="{{item.images.length>4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
-          <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src="{{imgItem}}" data-src="imgItem" data-index="{{numm}}"></image>
+          <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
         </block>
       </view>
 
@@ -105,7 +140,7 @@
 
         <view class="hudong-cell" bindtap="toDetail" data-id="{{item._id}}">
         <image src="../../images/评论.png" class="hudong-img"></image>
-        <view>评论</view>
+        <view>{{item.commentList.length>0?item.commentList.length:'评论'}}</view>
         </view>
 
         <view class="hudong-cell" catchtap="prizeAction" data-id="{{item._id}}">

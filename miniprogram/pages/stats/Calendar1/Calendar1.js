@@ -1,6 +1,7 @@
 Page({
    //日历，学习情况查看上半部分
     data: {
+        read:'0',
         value: '2018-11-11',
         week: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         lastMonth: 'lastMonth',
@@ -13,7 +14,8 @@ Page({
     select(e) {
         // console.log(e)
         this.setData({
-            selectVal:e.detail
+            selectVal:e.detail,
+            read:e.read
         })
     },
     

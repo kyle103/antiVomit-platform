@@ -80,14 +80,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 .imags-wrap{
   margin-top: 10rpx;
 }
 .image-1{
-  width: 500rpx;
-  height: 250rpx;
+  width: 350rpx;
+  height: 300rpx;
   
 }
 .image-2-3{
@@ -146,7 +145,7 @@
   background-color: #f1f1f1;
 }
 .back2{
-  background-color: #5a40eb;
+  background-color: #ffffff;
 }
 .back3{
   background-color: #ffffff;
@@ -176,6 +175,14 @@
   margin-top: 30rpx;
   font-size: larger;
 }
+/*日历*/
+.read{
+  margin-top: 20rpx;
+  font-size: larger;
+  color: #3178E4;
+  margin-left: 0;
+}
+/*end*/
 /*圆环图*/
 .garage-status{
   top:58%;
@@ -183,9 +190,70 @@
   left: 28%;
   right: 28%;
 }
+/*近况提交*/
+.page {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+ 
+.swiper-tab1 {
+  display: flex;
+  flex-direction: row;
+  line-height: 80rpx;
+  margin-top: 30rpx;
+  border-bottom: 2rpx solid #777;
+
+}
+ 
+.tab-item1 {
+  width: 30%;
+  background-color: rgb(230, 225, 235);
+  border-radius: 30rpx;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;/*加粗*/
+  margin-left: 15%;
+  color: #777;
+}
+ 
+.swiper1 {
+  height: 1400rpx;
+  background: #4057d6;
+}
+ 
+.on {
+  color: blue;
+  border-bottom: 5rpx solid blue;
+}
+.sub{
+  background-color:#ffffff;
+  width: 100%;
+  height: 550rpx;
+  border-radius: 20rpx;
+  letter-spacing: 3rpx;
+}
+.text{
+height: 505rpx;
+width: 650rpx;
+}
+.place-holder {
+  font-size: 30rpx;
+}
+.back11{
+background-color: #4152ec;
+width: 100%;
+border-radius: 20rpx;
+}
+.history{
+background-color: #ffffff;
+width: 100%;
+height: 550rpx;
+border-radius: 20rpx;
+letter-spacing: 3rpx;
+}
 
 .desc-text{
-  color: rgb(163, 159, 154);
+  color: rg b(163, 159, 154);
   top: 75rpx;
   left: 72rpx;
   position: absolute;

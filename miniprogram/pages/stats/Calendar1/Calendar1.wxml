@@ -17,7 +17,7 @@
 
     <view wx:else >
         <button type='primary' bindtap='toggleType'>收起</button>
-        <view>{{selectVal}}</view>
+        <view>{{selectVal}}  {{read}}</view>
     </view>
 
 

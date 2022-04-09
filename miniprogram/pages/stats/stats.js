@@ -1,5 +1,6 @@
 const util=require("../../util/util")
 const app=getApp()
+
 import MpProgress from '../../components/mp-progress/progress.min';
 Page({
   onReady(){
@@ -8,7 +9,7 @@ Page({
       percent:100,
       canvasId: 'progress',
       canvasSize: {width: 300, height: 300},//400
-      barStyle: [{width: 20,lineCap:'round',fillStyle:'#56B37F', fillStyle: '#f0f0f0'}, {width: 20, animate:true, fillStyle: [{position: 0, color: '#56B37F'}, {position: 1, color: '#c0e674'}]}],
+      barStyle: [{width: 20,lineCap:'round',fillStyle:'#56B37F', fillStyle: '#f7f7f7'}, {width: 20, animate:true, fillStyle: [{position: 0, color: '#56B37F'}, {position: 1, color: '#c0e674'}]}],
     });
     
     // 开始绘制进度，60代表60%
@@ -48,51 +49,23 @@ Page({
         hasUserInfo: true
       })
     },
-     /*//圆环图，学习情况查看下半部分
-     data :{
-      config: {
-        canvasSize: {
-          width: 400,
-          height: 400,
-        },
-        percent: 100,
-        animate:false,
-        barStyle: [{width: 20,lineCap: 'round', fillStyle: '#56B37F', fillStyle: '#f0f0f0'}, {width: 20, animate: true, fillStyle: [{position: 0, color: '#56B37F'}, {position: 1, color: '#c0e674'}]}],
-        needDot: false,
-        dotStyle: [{r: 24, fillStyle: '#ffffff', shadow: 'rgba(0,0,0,.15)'}, {r: 10, fillStyle: '#56B37F'}]
-      },
-      percentage: 80,
-    },
-  
-    // 事件处理函数
-    bindViewTap() {
-      wx.navigateTo({
-        url: '../logs/logs'
-      })
-    },
-    onLoad() {
-      if (wx.getUserProfile) {
-        this.setData({
-          canIUseGetUserProfile: true
-        })
-      }
-    }, //结束*/
 
-   //日历，学习情况查看上半部分
    data: {
+    Read:'555',
     value: '2018-11-11',
     week: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     lastMonth: 'lastMonth',
     nextMonth:'nextMonth',
     selectVal: '',
-    open:true,
+    open:false,
 },
 
 //组件监听事件
 select(e) {
-    // console.log(e)
+    console.log(e)
     this.setData({
-        selectVal:e.detail
+        selectVal:e.detail,
+      
     })
 },
 
@@ -108,20 +81,6 @@ toggleType(){
   data: {
       // tab切换  
       currentTab: 0,
-  },
-  opendLocation(event){
-    console.log(event.currentTarget.dataset.index)
-    var that = this;
-    wx.openLocation({
-      latitude: that.data.actionsList[event.currentTarget.dataset.index].latitude,
-      longitude: that.data.actionsList[event.currentTarget.dataset.index].longitude,
-    })
-  },
-  toUserDetail(e){
-    console.log(e.currentTarget.dataset.openid)
-    wx.navigateTo({
-      url: '/pages/me1/me1?openid=' + e.currentTarget.dataset.openid,/*/pages/me1/me1?openid=*/
-    })
   },
   swichNav: function (e) {
       console.log(e);
@@ -150,61 +109,102 @@ toggleType(){
           path: 'path' // 分享路径
       }
   },
-  topublishByq(){
-  if(app.globalData.userInfo==null){
-    wx.navigateTo({
-      url: '/pages/au/au',
+
+  //近况提交
+    data: {
+      // 子tab切换  
+      currentTab1: 0,
+  },
+  swichNav1: function (e) {
+      console.log(e);
+      var that = this;
+      if (this.data.currentTab1 === e.target.dataset.current) {
+          return false;
+      } else {
+          that.setData({
+              currentTab1: e.target.dataset.current,
+          })
+      }
+  },
+  swiperChange1: function (e) {
+      console.log(e);
+      this.setData({
+          currentTab1: e.detail.current,
+      })
+
+  },
+
+  onShareAppMessage: function () {
+      // 用户点击右上角分享
+      return {
+          title: 'title', // 分享标题
+          desc: 'desc', // 分享描述
+          path: 'path' // 分享路径
+      }
+  },
+  //发布动态
+
+  data: {
+    
+  },
+  opendLocation(event){
+    console.log(event.currentTarget.dataset.index)
+    var that = this;
+    wx.openLocation({
+      latitude: that.data.actionsList[event.currentTarget.dataset.index].latitude,
+      longitude: that.data.actionsList[event.currentTarget.dataset.index].longitude,
     })
-  }
-  else{
+  },
+  toUserDetail(e){
+    console.log(e.currentTarget.dataset.openid)
     wx.navigateTo({
-      url: '/pages/publishByq/publishByq',/*/pages/publishByq/publishByq*/
+      url: '/pages/stats/me1/me1?openid=' + e.currentTarget.dataset.openid,
     })
-  }
-},
+  },
+  onShow(){
+    this.getActionsList()
+  },
+  onLoad: function () {
 
-
-toDetail(event){
-
-  console.log(event.currentTarget.dataset.id)
-
-  wx.navigateTo({
-    url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,/*/pages/detail/detail?id= */
-  })
-
-},
-
-  onLoad:function(){
     console.log(app.globalData.userInfo)
 
-    var that=this;
+    var that = this;
     setTimeout(function(){
       console.log(app.globalData.openid)
       that.setData({
-        myOpenid:app.globalData.openid
+        myOpenid: app.globalData.openid
       })
     },2000)
-    this.getActionsList()
-  },
 
-    getActionsList(){
-    var that=this
+  
+  },
+  getActionsList(){
+    var that = this // desc asc
+    // 模糊搜索的话加上这个
+    // .where({
+    //   text: wx.cloud.database().RegExp({
+    //     regexp: that.data.keyValue
+    //   })
+    // })
     wx.cloud.database().collection('actions').orderBy('time','desc').get({
       success(res){
         console.log(res)
+
         //格式化时间
-        var list=res.data
-        for(var  l in list){
-          list[l].time=util.formatTime(new Date(list[l].time))
-        }
-        for(var  l in list){
-          for(var j in list[l].prizeList){
-            if(list[l].prizeList[j].openid==app.globalData.openid){
-              list[l].isPrized=true
-            }
-          }
+        var list = res.data
+        for(var l in list){
+          list[l].time = util.formatTime(new Date(list[l].time))
         }
 
+        for(var l in list){
+          for(var j in list[l].prizeList){
+
+            if(list[l].prizeList[j].openid == app.globalData.openid){
+              list[l].isPrized = true
+            }
+
+          }
+        }
         for(var l in list){
           if(list[l].commentList.length != 0){
 
@@ -214,21 +214,42 @@ toDetail(event){
 
           }
         }
-
         that.setData({
-          actionsList: list
+          actionsList :list
         })
 
       }
     })
-    },
+  },
+  topublishByq(){
+    
+    if(app.globalData.userInfo == null){
+      wx.navigateTo({
+        url: '/pages/au/au',
+      })
+    }else {
+      wx.navigateTo({
+        url: '/pages/stats/publishByq/publishByq',
+      })
+    }
+    
+  },
+  toDetail(event){
 
-  
+    console.log(event.currentTarget.dataset.id)
+
+    wx.navigateTo({
+      url: '/pages/stats/detail/detail?id=' + event.currentTarget.dataset.id,
+    })
+
+  },
+
   deleteAction(event){
 
-    console.log(event.target.dataset.id)
+    console.log(event.currentTarget.dataset.id)
+
     var that = this;
-    wx.cloud.database().collection(`actions`) .doc(event.target.dataset.id).remove({
+    wx.cloud.database().collection('actions').doc(event.currentTarget.dataset.id).remove({
       success(res){
         console.log(res)
         wx.showToast({
@@ -237,11 +258,15 @@ toDetail(event){
         that.getActionsList()
       }
     })
+
   },
+
   onPullDownRefresh(){
 
     this.getActionsList()
+
   },
+
   prizeAction(event){
     if(app.globalData.userInfo == null){
       wx.navigateTo({
@@ -266,11 +291,20 @@ toDetail(event){
           }
           if(tag){
             //之前点赞过 删除点赞记录
-            action.prizeList.splice(index,1)
+            //action.prizeList.splice(index,1)
+
+            //解决手机取消点赞时候设置为null的bug
+            let prizeList = []
+            for(let i in action.prizeList){
+              if(index != i){
+                prizeList.push(action.prizeList[i])
+              }
+            }
+
             console.log(action)
             wx.cloud.database().collection('actions').doc(event.currentTarget.dataset.id).update({
               data: {
-                prizeList: action.prizeList
+                prizeList: prizeList
               },
               success(res){
 
@@ -305,7 +339,10 @@ toDetail(event){
         }
       })
 
-    }  
+    }
+    
+
+    
 
   },
   delteComment(event){
@@ -345,7 +382,11 @@ toDetail(event){
       }
     })
     
+
+
+
   },
+
   onShareAppMessage(event){
 
     if(event.from == 'button'){
@@ -355,26 +396,31 @@ toDetail(event){
       return {
         title: this.data.actionsList[index].text,
         imageUrl: this.data.actionsList[index].images[0],
-        path:'pages/detail/detail?id=' + this.data.actionsList[index]._id/*pages/detail/detail?id=*/ 
+        path:'pages/detail/detail?id=' + this.data.actionsList[index]._id
       }
     }
     if(event.from == 'menu'){
       return {
         title: '欢迎进入朋友圈列表',
         imageUrl: '',
-        path:'pages/index3/index3'
+        path:'pages/index/index'
       }
     }
+    
+
   },
   previewImg(event){
     var that = this;
-    console.log(event.currentTarget.dataset.src)
+    console.log(event)
     
     wx.previewImage({
       current: event.currentTarget.dataset.src,//当前显示图片的路径
       urls: that.data.actionsList[event.currentTarget.dataset.index].images,
     })
 
-  }
+  },
+//学习情况查看，记录学习篇数
+
+
 
 })

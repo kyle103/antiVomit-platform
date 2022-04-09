@@ -72,7 +72,7 @@ Component({
                             scrollLeft = that.data.DATE * 45 - res.windowWidth / 2 - 22.5;
                         }
                     } else {
-                        // 点选具体某一天 滚到到指定日期
+                        // 点选具体某一天 滚到指定日期
                         scrollLeft = date * 45 - res.windowWidth / 2 - 22.5;
                     }
 

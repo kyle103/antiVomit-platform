@@ -13,33 +13,28 @@
         "miniprogram": {
             "list": [
                 {
-                    "name": "",
-                    "pathName": "pages/doctor/chatroom/chatroom",
+                    "id": -1,
+                    "name": "db guide",
+                    "pathName": "pages/databaseGuide/databaseGuide",
+                    "query": ""
+                },
+                {
+                    "name": "pyq",
+                    "pathName": "pages/index3/index3",
                     "query": "",
+                    "launchMode": "default",
                     "scene": null
                 },
                 {
-                    "name": "",
-                    "pathName": "pages/doctor/doctor",
+                    "name": "cesh",
+                    "pathName": "pages/me1/me1",
                     "query": "",
+                    "launchMode": "default",
                     "scene": null
                 },
                 {
-                    "name": "",
-                    "pathName": "pages/articles/addArticle/addArticle",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "学习情况查看",
-                    "pathName": "pages/Calendar1/Calendar1",
-                    "query": "",
-                    "scene": null,
-                    "launchMode": "default"
-                },
-                {
-                    "name": "学习情况",
-                    "pathName": "pages/index1/index1",
+                    "name": "朋友圈个人主页",
+                    "pathName": "pages/index3/index3",
                     "query": "",
                     "launchMode": "default",
                     "scene": null
@@ -52,11 +47,11 @@
                     "scene": null
                 },
                 {
-                    "name": "环形图",
-                    "pathName": "pages/rounded/rounded",
+                    "name": "read",
+                    "pathName": "pages/index1/index1",
                     "query": "",
-                    "launchMode": "default",
-                    "scene": null
+                    "scene": null,
+                    "launchMode": "default"
                 }
             ]
         }
