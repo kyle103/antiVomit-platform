@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 {
   "usingComponents": {},
   "navigationBarTitleText": "健康档案"
 
 
+=======
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "健康档案"
+
+
+>>>>>>> 7a0a98e (界面美化)
 }

@@ -45,6 +45,14 @@
         "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
         "mp-toptips": "weui-miniprogram/toptips/toptips"
     },
+<<<<<<< HEAD
+=======
+    "permission": {
+        "scope.userLocation": {
+          "desc": "展示你的位置信息"
+        }
+      },
+>>>>>>> 7a0a98e (界面美化)
     "sitemapLocation": "sitemap.json",
     "style": "v2",
     "lazyCodeLoading": "requiredComponents",

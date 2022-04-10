@@ -11,6 +11,11 @@
  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
  <!--学习情况查看-->
    <swiper-item class="back1">
+<<<<<<< HEAD
+=======
+   <view>暂未开放</view>
+   <!--
+>>>>>>> 7a0a98e (界面美化)
     <view>
         <Calendar id="Calendar" bind:select="select"></Calendar>
     </view>
@@ -19,11 +24,14 @@
         <button  type='primary' bindtap='toggleType'>{{open==false?'收起':'展开'}}</button>
         <view class="read">{{selectVal}}阅读篇数:{{Read}}</view>
     </view>
+<<<<<<< HEAD
 
 <!--    <view wx:else >
         <button type='primary' bindtap='toggleType'>收起</button>
         <view class="read">{{selectVal}}阅读篇数:5</view>
     </view>-->
+=======
+>>>>>>> 7a0a98e (界面美化)
      
         <view class="garage-status">
           <canvas class="canvas" type="2d" id="progress"></canvas>
@@ -34,20 +42,36 @@
             <view class="mubiao">目标：10000</view>
           </view>
         </view>
+<<<<<<< HEAD
+=======
+  -->
+>>>>>>> 7a0a98e (界面美化)
 
    </swiper-item>
 
    <!--近况提交-->
    <swiper-item class="back2">
     <view class="page">
+<<<<<<< HEAD
  
  <!--子导航栏-->
+=======
+暂未开放
+<!--子导航栏-->
+ <!--内容主体-->
+ <!--
+
+>>>>>>> 7a0a98e (界面美化)
  <view class="swiper-tab1">
    <view class="tab-item1 {{currentTab1==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav1">填写此次近况</view>
    <view class="tab-item1 {{currentTab1==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav1">历史评估查询</view>
  </view>
 
+<<<<<<< HEAD
  <!--内容主体-->
+=======
+
+>>>>>>> 7a0a98e (界面美化)
  <swiper class="swiper1" current="{{currentTab1}}" duration="200" bindchange="swiperChange1">
    <swiper-item class="back11">
     <view style="width: 90%;margin:10% auto;"  class="sub">
@@ -60,6 +84,10 @@
       <label class="itemTitle">呕吐相关情况说明:</label>
         <textarea class="text" type="text"  placeholder-class="place-holder" placeholder="点击开始记录" 	confirm-type="done" maxlength="300">
         </textarea>
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 7a0a98e (界面美化)
     </view>
    </swiper-item>
 
@@ -77,6 +105,10 @@
    </swiper-item>
 
  </swiper>
+<<<<<<< HEAD
+=======
+ -->
+>>>>>>> 7a0a98e (界面美化)
 </view>
    </swiper-item>
 
@@ -107,6 +139,7 @@
 <!--单图-->
       <view class="imags-wrap">
         <block wx:if="{{item.images.length == 1}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index" wx:for-index="indexx">
+<<<<<<< HEAD
           <image src="{{imgItem}}" class="image-1" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
         </block>
 <!--2,3图-->
@@ -120,6 +153,21 @@
 <!--5-9图-->
         <block wx:if="{{item.images.length>4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
           <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"></image>
+=======
+          <image src="{{imgItem}}" class="image-1" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}" mode="aspectFill"></image>
+        </block>
+<!--2,3图-->
+        <block wx:if="{{item.images.length==2||item.images.length==3}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-2-3" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+        </block>
+<!--四图-->
+        <block wx:if="{{item.images.length==4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-4" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+        </block>    
+<!--5-9图-->
+        <block wx:if="{{item.images.length>4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+>>>>>>> 7a0a98e (界面美化)
         </block>
       </view>
 

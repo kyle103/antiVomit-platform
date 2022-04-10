@@ -26,13 +26,21 @@ yuantu  492*280-->
 <swiper autoplay="true" circular="true" indicator-dots="true" interval="4000" indicator-active-color="#ff0000">
        <navigator url="../home/tweet/tweet">
         <swiper-item>
+<<<<<<< HEAD
           <image src="https://s1.ax1x.com/2022/04/09/LiuzTO.png " mode="widthFix"></image>
+=======
+          <image src="https://s1.ax1x.com/2022/04/10/LkS4ot.jpg" mode="widthFix"></image>
+>>>>>>> 7a0a98e (界面美化)
         </swiper-item>
        </navigator>
         
         <navigator url="../home/tweet/tweet2/tweet2">
           <swiper-item>
+<<<<<<< HEAD
           <image src="https://s1.ax1x.com/2022/04/09/LiKbE8.png " mode="widthFix"></image>
+=======
+          <image src="https://s1.ax1x.com/2022/04/10/LkSbQg.jpg " mode="widthFix"></image>
+>>>>>>> 7a0a98e (界面美化)
         </swiper-item>
         </navigator>
 

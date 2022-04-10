@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--导航条-->
 <view class="navbar">
   <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
@@ -54,3 +55,61 @@
   </scroll-view>
 </view>
 
+=======
+<!--导航条-->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+<!--内容-->
+<view wx:if="{{currentTab==0}}">
+  <scroll-view scroll-y="false">
+    <view class="doctor_floor light bg-purple"
+          wx:for="{{doctor_list}}"
+          wx:item="item"
+          wx:key="id"
+          bindtap="toDetail"
+          data-index="{{item.openid}}"
+          bindscrolltolower="scrolltolower">
+          <!-- <image class="background" src="/images/方框1.png"></image> -->
+          <view class="avatar">
+              <text class="iconfont icon-yisheng"></text>
+          </view>   
+          
+
+          <view class="info"> 
+            <text class="name">{{item.name}}</text>
+            <text class="title">{{item.title}}</text>
+            <view class="hospital">{{item.hospital}}</view>
+            <view class="excel">擅长：{{item.excel}}</view>
+          </view>   
+    </view>
+  </scroll-view>
+</view>
+
+<view wx:elif="{{currentTab==1}}">
+  <scroll-view scroll-y="false">
+    <!-- 病人的我的咨询,if和for不能一起 -->
+    <view class="doctor_floor light bg-purple"
+          wx:for="{{mydoctors}}"
+          wx:item="item"
+          wx:key="id"
+          bindtap="toDetail"
+          data-index="{{item.openid}}"
+          bindscrolltolower="scrolltolower">
+          <!-- <image class="background" src="/images/方框1.png"></image> -->
+          <view class="avatar">
+              <text class="iconfont icon-yisheng"></text>
+          </view>   
+          <view class="info"> 
+            <text class="name">{{item.name}}</text>
+            <text class="title">{{item.title}}</text>
+            <view class="hospital">{{item.hospital}}</view>
+            <view class="excel">擅长：{{item.excel}}</view>
+            <!-- <view class="excel">{{item.msg}}</view> -->
+          </view> 
+          <text class="cuIcon-newfill" hidden="{{!item.newMsg}}"></text>  
+    </view>
+  </scroll-view>
+</view>
+
+>>>>>>> 7a0a98e (界面美化)
