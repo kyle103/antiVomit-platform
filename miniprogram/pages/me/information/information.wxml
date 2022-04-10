@@ -51,7 +51,7 @@
                     <text class="cuIcon-edit" data-index="{{index}}" bindtap="medicineEdit"></text>
                 </view>
                 <view class="iconbg">
-                    <text class="cuIcon-close" bindtap="medicineClose"></text>
+                    <text class="cuIcon-close" data-index="{{index}}"bindtap="medicineClose"></text>
                 </view>
             </view>
         </view>

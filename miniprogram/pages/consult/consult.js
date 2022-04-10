@@ -10,8 +10,12 @@ Page({
   },
 
   toQA(){
-    wx.navigateTo({
-      url: '/pages/consult/question/question',
+    // wx.navigateTo({
+    //   url: '/pages/consult/question/question',
+    // })
+    wx.showToast({
+      title: '暂未开放，敬请期待',
+      icon:'none'
     })
   },
 

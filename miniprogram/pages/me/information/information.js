@@ -47,6 +47,7 @@ Page({
   },
   medicineEdit(e){
     let id = e.currentTarget.dataset.index
+    console.log(id)
     let medicineList=this.data.medicineList
     let startdate = medicineList[id].startdate
     let enddate = medicineList[id].enddate
@@ -60,7 +61,9 @@ Page({
     })
   },
   medicineClose(e){
+    console.log(e)
     let id = e.currentTarget.dataset.index
+    console.log(id)
     let medicineList=this.data.medicineList
     medicineList.splice(id,1)
     this.setData({
@@ -130,15 +133,20 @@ Page({
         action:'auth'
       },
       success: res => {
-        let {name,sex,age,illness,hospital,medicineList} = res.result.result.patientInfo
-        that.setData({
-          name,
-          sex,
-          age,
-          illness,
-          hospital,
-          medicineList  
-        })
+        if(res.result.errCode==-1){
+
+        }
+        else{
+          let {name,sex,age,illness,hospital,medicineList} = res.result.result.patientInfo
+          that.setData({
+            name,
+            sex,
+            age,
+            illness,
+            hospital,
+            medicineList  
+          })
+        }
         wx.hideLoading() 
       },
       fail: res => {

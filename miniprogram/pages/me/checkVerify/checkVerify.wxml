@@ -22,8 +22,12 @@
         class="image_item" src="{{item}}" mode="aspectFit" bindtap="previewImg" data-url="{{item}}">           
         </image>      
     </view>
-    <button style="margin: 0 30rpx;" bindtap="yes" data-index="{{item.openid}}" data-documentid="{{item.documentID}}">同意</button>
+
+    <button style="margin: 0 30rpx;" bindtap="yes" data-index="{{item.openid}}" data-documentid="{{item.documentID}}"
+    style="width: 40%;margin: 5%;">同意</button>
     <button bindtap="no" data-index="{{item.openid}}"
-    data-documentid="{{item.documentID}}">拒绝</button>
+    data-documentid="{{item.documentID}}" 
+    style="width: 40%;margin: 5%;">拒绝</button>
+
   </view>
 </scroll-view>

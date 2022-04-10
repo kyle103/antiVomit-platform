@@ -1,5 +1,3 @@
-<mp-toptips msg="{{errMsg}}" type="error" show="{{errMsg}}"></mp-toptips>
-<music-player songInfo="{{songInfo}}" style="position:fixed;width:100%;z-index:999" />
 <!--聊天内容-->
 <!-- <chat-box roomID="{{roomID}}"></chat-box> -->
 <scroll-view class="cu-chat" scroll-y="true" enable-back-to-top enable-flex scroll-into-view="{{scrollId}}"
@@ -19,13 +17,6 @@
       </view>
       <view class="date">{{item._createTime}} {{item.userInfo.nickName}}</view>
     </view>
-    <!-- <view class="cu-item" wx:if="{{item.openid != openid && item.msgType == 'image'}}" id="msg-{{index}}">
-      <view class="cu-avatar radius" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
-      <view class="main" bindtap="viewImage" data-url="{{item.content}}">
-        <image src="{{item.content}}" class="radius" mode="widthFix"></image>
-      </view>
-      <view class="date">{{item._createTime}} {{item.userInfo.nickName}}</view>
-    </view> -->
     <!--自己发送的信息-->
     <view class="cu-item self" wx:if="{{item.openid == openid && item.msgType == 'text'}}" id="msg-{{index}}">
       <view class="main">

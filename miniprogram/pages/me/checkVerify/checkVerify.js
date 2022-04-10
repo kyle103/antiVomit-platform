@@ -75,6 +75,8 @@ Page({
 
   yes(e){
     let that = this
+    console.log(e)
+    console.log(e.currentTarget.dataset.index)
     // 用户status
     wx.cloud.callFunction({
       name: 'cloud-user',

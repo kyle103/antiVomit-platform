@@ -36,7 +36,8 @@
         
     </navigator>
  
-    <navigator url="/pages/me/record/index" >
+    <!-- <navigator url="/pages/me/record/index" > -->
+    <navigator bindtap="sorry">
         <view class="bar">
              <view class="iconfont icon-jilu1" ></view>
             <view class="tips">积分兑换</view>
@@ -45,7 +46,8 @@
     </navigator>
     
 
-    <navigator url="/pages/me/aboutus/index" >
+    <!-- <navigator url="/pages/me/help/index" > -->
+    <navigator bindtap="sorry">
         <view class="bar">
             <view class="iconfont icon-guanyu" ></view>
             <view class="tips">帮助</view>
@@ -53,7 +55,8 @@
         </view>       
     </navigator>
 
-    <navigator url="/pages/me/help/index" >
+    <!-- <navigator url="/pages/me/yijian/index" > -->
+    <navigator bindtap="sorry">
         <view class="bar">
             <view class="iconfont icon-bangzhu" ></view>
             <view class="tips">意见反馈</view>

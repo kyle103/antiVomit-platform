@@ -71,7 +71,7 @@
 }
 .image-1 {
   width: 350rpx;
-  height: 300rpx;
+  height: 380rpx;
 }
 .image-2-3 {
   width: 180rpx;
