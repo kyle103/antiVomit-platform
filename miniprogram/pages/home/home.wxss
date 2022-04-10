@@ -1,16 +1,10 @@
 /* pages/home/home.wxss */
-<<<<<<< HEAD
-.swiper1 swiper{
-  width: 750rpx;
-  height: 340rpx;
-=======
 .swiper1{
   height: 400rpx;
 }
 .swiper1 swiper{
   width: 750rpx;
   height: 400rpx;
->>>>>>> 7a0a98e (界面美化)
 }
 .swiper1 swiper image
 {

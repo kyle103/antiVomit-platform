@@ -71,11 +71,7 @@
 }
 .image-1 {
   width: 350rpx;
-<<<<<<< HEAD
-  height: 300rpx;
-=======
   height: 380rpx;
->>>>>>> 7a0a98e (界面美化)
 }
 .image-2-3 {
   width: 180rpx;

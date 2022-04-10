@@ -13,40 +13,24 @@
 
       <block wx:if="{{action.images.length == 1}}">
         <!-- 单图布局 -->
-<<<<<<< HEAD
-        <image src="{{item}}" class="image-1" bindtap="previewImg" data-src="{{item}}" ></image>
-=======
         <image src="{{item}}" class="image-1" bindtap="previewImg" data-src="{{item}}" mode="aspectFill"></image>
->>>>>>> 7a0a98e (界面美化)
       </block>
 
 
       <block wx:if="{{action.images.length == 2 || action.images.length == 3}}">
         <!-- 2-3张图布局 -->
-<<<<<<< HEAD
-        <image src="{{item}}" class="image-2-3" bindtap="previewImg" data-src="{{item}}"></image>
-=======
         <image src="{{item}}" class="image-2-3" bindtap="previewImg" data-src="{{item}}"mode="aspectFill"></image>
->>>>>>> 7a0a98e (界面美化)
       </block>
 
 
       <block wx:if="{{action.images.length == 4}}">
         <!-- 4图布局 -->
-<<<<<<< HEAD
-        <image src="{{item}}" class="image-4" bindtap="previewImg" data-src="{{item}}"></image>
-=======
         <image src="{{item}}" class="image-4" bindtap="previewImg" data-src="{{item}}"mode="aspectFill"></image>
->>>>>>> 7a0a98e (界面美化)
       </block>
 
       <block wx:if="{{action.images.length > 4}}">
         <!-- 5-9张图布局 -->
-<<<<<<< HEAD
-        <image src="{{item}}" class="image-5-9" bindtap="previewImg" data-src="{{item}}"></image>
-=======
         <image src="{{item}}" class="image-5-9" bindtap="previewImg" data-src="{{item}}"mode="aspectFill"></image>
->>>>>>> 7a0a98e (界面美化)
       </block>
 
     </block>
