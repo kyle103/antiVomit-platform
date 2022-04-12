@@ -1,5 +1,0 @@
-{
-  "usingComponents": {
-    "chat-box":"../../components/chatbox/index"
-  }
-}
