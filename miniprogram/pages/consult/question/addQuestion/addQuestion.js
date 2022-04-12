@@ -1,4 +1,4 @@
-// pages/articles/articleDetail/articlePage.js
+// pages/consult/question/addQuestion/addQuestion.js
 Page({
 
   /**
@@ -14,6 +14,41 @@ Page({
   onLoad: function (options) {
 
   },
+
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    let {question} = e.detail.value
+    if(question.length===0){
+      wx.showToast({
+        title: '温馨提示：问题不能为空！',
+        icon:'none'
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '上传中',
+      mask:true
+    })
+    wx.cloud.callFunction({
+      name: 'cloud-question',
+      data: {
+        action:'addQuestion',
+        question
+      },
+      success: res => {
+        wx.hideLoading();
+        wx.navigateTo({
+          url: '/pages/consult/question/question',
+        })
+      },
+      fail: res => {
+        wx.hideLoading();
+      }
+    })
+
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

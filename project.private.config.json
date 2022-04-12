@@ -76,6 +76,20 @@
           "name": "",
           "pathName": "pages/consult/consult",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/consult/question/question",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/consult/question/addQuestion/addQuestion",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }

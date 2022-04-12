@@ -1,11 +1,11 @@
 <view class="whole">
   <image class="bg" src="https://img.tukuppt.com/ad_preview/00/19/28/5c99faae01344.jpg!/fw/980" alt="" mode="aspectFill"/>
   <view class="question box" bindtap="toQA">
-    <image src="../../images/吐无忧-02.png" alt="" mode="aspectFill"/>
+    <image src="cloud://cloud1-1g1funj3c1f0e32e.636c-cloud1-1g1funj3c1f0e32e-1308469358/background/吐无忧-02.png" alt="" mode="aspectFill"/>
     <view class="title">答疑解惑</view>
   </view>
   <view class="consult box" bindtap="toConsult">
-    <image src="../../images/吐无忧-02.png" alt="" mode="aspectFill"/>
+    <image src="cloud://cloud1-1g1funj3c1f0e32e.636c-cloud1-1g1funj3c1f0e32e-1308469358/background/吐无忧-02.png" alt="" mode="aspectFill"/>
     <view class="title">线上咨询</view>  
   </view>
 </view>

@@ -5,7 +5,46 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navbar: ['公开咨询', '我的提问'],
+    currentTab: 0,
+  },
 
+  navbarTap(e){
+    let curid = e.currentTarget.dataset.idx
+    let that = this
+    this.setData({
+      currentTab: curid
+    })
+    if(curid===0){
+      this.onShow()
+    }
+    else{
+      // 我的咨询
+      wx.cloud.callFunction({
+        name:'cloud-question',
+        data:{
+          action:'myQuestion',
+        },
+        success:res=>{
+          console.log(res)
+          that.setData({
+            questions:res.result.data
+          })
+        }
+      })
+    }
+  },
+
+  addPosts(){
+    wx.navigateTo({
+      url: '/pages/consult/question/addQuestion/addQuestion',
+    })
+  },
+
+  lookDetail(e){
+    wx.navigateTo({
+      url: '/pages/consult/question/questionDetail/questionDetail?index='+e.currentTarget.dataset.index,
+    })
   },
 
   /**
@@ -26,7 +65,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this
+    wx.cloud.callFunction({
+      name:'cloud-question',
+      data:{
+        action:'questionList',
+      },
+      success:res=>{
+        console.log(res.result)
+        that.setData({
+          questions:res.result.data,
+          currentTab:0
+        })
+      }
+    })
   },
 
   /**

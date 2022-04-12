@@ -29,42 +29,50 @@ Page({
       success: res => {
         console.log(res)
         verifyList = res.result.data
-        //所有图片
-        verifyList.forEach(element => {
-          element.images.forEach(url=>{
-            tmpImgList.push(url)
+        if(verifyList.length==0){
+          that.setData({
+            none:false
           })
-        });
-        //  获取全体医生列表,筛选与认证人名字相同的医生
-        wx.cloud.callFunction({
-          name: 'cloud-doctor',
-          data:{
-            action:'pendingDoctorList'
-          },
-          success: res => {
-            console.log(res)
-            let doctorList = res.result.data
-            for(let i=0;i<verifyList.length;i++){
-              for(let doctor of doctorList){
-                if(verifyList[i].documentID===doctor._id){
-                  verifyList[i].doctor = doctor
-                  break
+          wx.hideLoading()
+        }
+        else{
+          //所有图片
+          verifyList.forEach(element => {
+            element.images.forEach(url=>{
+              tmpImgList.push(url)
+            })
+          });
+          //  获取全体医生列表,筛选与认证人名字相同的医生
+          wx.cloud.callFunction({
+            name: 'cloud-doctor',
+            data:{
+              action:'pendingDoctorList'
+            },
+            success: res => {
+              console.log(res)
+              let doctorList = res.result.data
+              for(let i=0;i<verifyList.length;i++){
+                for(let doctor of doctorList){
+                  if(verifyList[i].documentID===doctor._id){
+                    verifyList[i].doctor = doctor
+                    break
+                  }
                 }
               }
-            }
-            that.setData({
-              verifyList:verifyList,
-              tempFilePaths:tmpImgList
-            },()=>{
-              console.log(that.data)
-            })
-            wx.hideLoading()
-          },
-          fail: res => {
-            console.log("请求医生fail",res)
-            wx.hideLoading()
-          },
-        })
+              that.setData({
+                verifyList:verifyList,
+                tempFilePaths:tmpImgList
+              },()=>{
+                console.log(that.data)
+              })
+              wx.hideLoading()
+            },
+            fail: res => {
+              console.log("请求医生fail",res)
+              wx.hideLoading()
+            },
+          })
+        }
       },
       fail: res => {
         wx.hideLoading();

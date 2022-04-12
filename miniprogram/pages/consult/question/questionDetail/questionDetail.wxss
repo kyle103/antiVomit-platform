@@ -1,0 +1,62 @@
+/* pages/consult/question/questionDetail/questionDetail.wxss */
+.title{
+  font-size: 40rpx;
+  font-weight: 700;
+  margin: 20rpx 5rpx;
+}
+.questions-block{
+  width:90%;
+  /* height: 200rpx; */
+  margin: 20rpx 5%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.question-info{
+  width: 95%;
+  margin: 2.5%;
+}
+.ava{
+  /* width: 85rpx;
+  height: 85rpx; */
+  width: 85rpx;
+  height: 85rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.question{
+  width: 100%;
+  font-size: 17px;
+  color: #333333;
+  font-weight: 500;
+  word-break: break-all;
+}
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  height: 20%;
+}
+.date{
+  color: #767676; 
+  font-size: 27rpx;
+  width: 45%;
+}
+
+textarea{
+  width: 95%;
+  margin: auto;
+  background-color: #a1a09e0b;
+  height: 300rpx;
+}
+
+.saveBtn {
+  margin-top: 40rpx;
+  background-color: #b2aaff;
+  color: white;
+}
+.saveBtn:active {
+  background-color: #6600ff;
+}

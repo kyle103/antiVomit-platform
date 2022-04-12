@@ -82,7 +82,7 @@ page {
   border-bottom: solid #e9e9e9;
   display: flex;
   width: 100%;
-  height: 220rpx;
+  /* height: 220rpx; */
   position: relative;
 }
 .active{
@@ -108,7 +108,7 @@ page {
 
 .doctor_floor .info{
   width: 600rpx;
-  height:150rpx;
+  /* height:150rpx; */
   margin:10rpx
 }
 
@@ -123,13 +123,11 @@ page {
 }
 
 .doctor_floor .info .excel{
-  height: 100rpx;
+  /* height: 100rpx; */
   color:#3d3d3d;
-  overflow: hidden;
-  /*超出隐藏*/
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  /*超出显示为省略号*/
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
 }

@@ -27,7 +27,7 @@
 
 
 <view class="user_content" >
-    <navigator hidden="{{usertype=='doctor'}}" url="/pages/me/information/information">
+    <navigator hidden="{{usertype!='patient'}}" url="/pages/me/information/information">
         <view class="bar">
             <view class="iconfont icon-geren"></view>
             <view class="tips">健康档案</view>
@@ -36,11 +36,11 @@
         
     </navigator>
  
-    <!-- <navigator url="/pages/me/record/index" > -->
-    <navigator bindtap="sorry">
+    <navigator hidden="{{usertype!='admin'}}"
+    url="/pages/me/checkVerify/checkVerify">
         <view class="bar">
              <view class="iconfont icon-jilu1" ></view>
-            <view class="tips">积分兑换</view>
+            <view class="tips">医生审核</view>
             <view class="arrow"> </view>
         </view>       
     </navigator>
