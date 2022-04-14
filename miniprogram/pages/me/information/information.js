@@ -107,7 +107,7 @@ Page({
       success: res => {
         wx.hideLoading();
         wx.switchTab({
-          url: '/pages/home/home',
+          url: '/pages/me/me',
         })
       },
       fail: res => {
