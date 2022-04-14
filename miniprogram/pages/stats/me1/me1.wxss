@@ -49,7 +49,6 @@
   width: 36rpx;
   height: 36rpx;
   margin-right: 10rpx;
-
 }
 .hudong-box {
   display: flex;
