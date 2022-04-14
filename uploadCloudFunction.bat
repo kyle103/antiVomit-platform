@@ -1,0 +1,1 @@
+"D:\Program Files\微信web开发者工具\cli.bat" cloud functions deploy --e cloud1-1g1funj3c1f0e32e --n quickstartFunctions --r --project "E:\WeChatProjects\antiVomit" --report_first --report

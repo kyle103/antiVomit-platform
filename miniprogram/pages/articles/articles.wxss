@@ -1,0 +1,36 @@
+/* pages/doctor/doctor.wxss */
+/* 搜索框 */
+
+/* 无结果 */
+.none{
+  margin: auto;
+  width: 500rpx;
+  font-size: 40px;
+  text-align: center;
+}
+
+/* 文章列表 */
+scroll-view{
+  background-color: white;
+}
+.article-item{
+  border-bottom: solid #d3d3d3;
+  width: 100%;
+  height: 320rpx;
+  padding: 30rpx;
+}
+.article-item .date{
+  color: #5948ff;
+}
+.article-item .title{
+  font-size: large;
+  font-weight: 700;
+}
+.article-item .content{
+  color: rgb(94, 94, 94);
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

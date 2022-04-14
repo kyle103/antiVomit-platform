@@ -1,0 +1,20 @@
+/* pages/consult/question/addQuestion/addQuestion.wxss */
+/* page {
+  background-color: #a1a09e0b;
+} */
+textarea,.tips{
+  width: 95%;
+  margin: auto;
+}
+textarea{
+  background-color: #a1a09e0b;
+  height: 300rpx;
+}
+.saveBtn {
+  margin-top: 70rpx;
+  background-color: #b2aaff;
+  color: white;
+}
+.saveBtn:active {
+  background-color: #6600ff;
+}

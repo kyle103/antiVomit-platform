@@ -1,0 +1,2 @@
+<button bindtap="onAdd" style=" margin-bottom: 50rpx; background: #3ef;" >ADD</button>
+<button bindtap="onCounterInc" style="background: #3ef;" >change</button>

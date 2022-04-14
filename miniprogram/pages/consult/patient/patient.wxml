@@ -1,0 +1,36 @@
+<scroll-view scroll-y="false">
+  <!-- 医生的我的咨询 -->
+  <view class="doctor_floor light bg-purple"
+        wx:for="{{mypatients}}"
+        wx:item="item"
+        wx:key="id"
+        bindtap="toDetail"
+        data-index="{{item.openid}}"
+        bindscrolltolower="scrolltolower">
+        <view class="avatar">
+            <view class="cu-avatar radius" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+        </view>   
+        <view class="info"> 
+          <text class="name">{{item.patientInfo.name}}</text>
+          <text class="sex">{{item.patientInfo.sex}}</text>
+          <text class="age">{{item.patientInfo.age}}岁</text>
+          <view class="hospital">现就诊医院：{{item.patientInfo.hospital}}</view>
+          <view class="illness">现主要诊断：{{item.patientInfo.illness}}</view>
+          <view class="medicine">抗肿瘤治疗方案（所用药物、疗程）：</view>
+          <view class="medicineBar"
+              wx:for="{{item.patientInfo.medicineList}}"
+              wx:key="*this">
+              <view class="medicine">{{item.medicine}}</view>
+              <view class="date">
+                  <view class="picker">
+                      开始时间: {{item.startdate}}
+                  </view>
+                  <view class="picker">
+                      结束时间: {{item.enddate}}
+                  </view>
+              </view>
+          </view>
+        </view>   
+        <text class="cuIcon-newfill" hidden="{{!item.newMsg}}"></text>  
+  </view>
+</scroll-view>

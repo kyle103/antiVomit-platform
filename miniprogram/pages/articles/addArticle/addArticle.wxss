@@ -1,0 +1,5 @@
+/* pages/addArticle/addArticle.wxss */
+input{
+  height: 100rpx;
+  margin: 10rpx;
+}

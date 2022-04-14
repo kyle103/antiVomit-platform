@@ -1,0 +1,65 @@
+/* pages/home/home.wxss */
+.swiper1{
+  height: 400rpx;
+}
+.swiper1 swiper{
+  width: 750rpx;
+  height: 400rpx;
+}
+.swiper1 swiper image
+{
+  width: 100%;
+}
+
+.btn1 {
+  width: 500rpx;
+  height: 200rpx;
+  margin-top: 60rpx;
+  background-color: rgb(255, 255, 255);
+  color: rgb(10, 1, 1);
+  border-radius: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 5px gainsboro; 
+}
+
+.btnImg {
+  margin-right: 8rpx;
+  height: 160rpx;
+  width: 160rpx;
+}
+
+.btn1::after {
+  border: 15rpx;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.btn2 {
+  width: 80%;
+  height: 200rpx;
+  margin-top: 60rpx;
+  background-color: rgb(255, 255, 255);
+  color: rgb(10, 1, 1);
+  border-radius: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 5px gainsboro; 
+}
+
+.btnImg1 {
+  margin-right: 8rpx;
+  height: 160rpx;
+  width: 160rpx;
+}
+
+.btn2::after {
+  border-radius: 98rpx;
+  border: 0; 
+}
+.words{
+  font-size: medium;
+}

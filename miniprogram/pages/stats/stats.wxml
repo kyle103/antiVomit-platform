@@ -1,0 +1,183 @@
+<scroll-view scroll-x class="bg-white nav text-center fixed" scroll-with-animation :scroll-left="scrollLeft">
+  <view class="cu-item {{index==selected?'text-green cur':''}}" wx:for="{{workTypeArr}}" wx:key="index" data-index="{{index}}" bindtap="handleSelect">
+    {{item}}
+  </view>
+</scroll-view>
+
+<view style="height: 50px;"></view>
+<view wx:if="{{selected==0}}" class="flex-sub flex flex-direction padding-lr padding-top" style="width: 100%;height: calc(100% - 50px);">
+  <view style="width: 100%;height: 50%;" class="padding-bottom">
+    <view class="cu-card bg-white radius" style="width: 100%;height: 100%;">
+      <view class="padding-sm solid-bottom text-lg">
+        <text class="cuIcon-titles text-blue text-bold"></text>
+        <text class="text-bold">学习篇数</text>
+      </view>
+      <view style="height: calc(100% - 35px);" class="study-bar padding-xs">
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bars" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+  </view>
+  <view style="width: 100%;height: 50%;" class="padding-bottom">
+    <view class="cu-card bg-white radius" style="width: 100%;height: 100%;">
+      <view class="padding-sm solid-bottom text-lg">
+        <text class="cuIcon-titles text-blue text-bold"></text>
+        <text class="text-bold">阅读字数</text>
+      </view>
+      <view style="height: calc(100% - 35px);" class="padding-xs">
+        <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ecPie }}"></ec-canvas>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{selected==1}}" class="flex-sub flex flex-direction padding-lr padding-top" style="width: 100%;height: calc(100% - 50px);">
+  <view class="flex justify-between padding-lr-xl padding-tb">
+    <view class="cu-btn {{!patient?'bg-grey':'bg-green'}} round" data-patient="1" bindtap="handleTap">填写此次近况</view>
+    <view class="cu-btn {{patient?'bg-grey':'bg-green'}} round" data-patient="0" bindtap="handleTap">历史评估查询</view>
+  </view>
+  <block wx:if="{{patient}}">
+    <view style="width: 100%;height: calc(100% - 70px);">
+      <view style="width: 100%;height: 50%;" class="padding-bottom">
+        <view class="cu-card bg-white radius padding" style="width: 100%;height: 100%;">
+          <view class="padding-bottom-xs text-bold">呕吐相关情况说明：</view>
+          <textarea placeholder="点击开始记录" style="height: 100%;width: 100%;"></textarea>
+        </view>
+      </view>
+      <view style="width: 100%;height: 50%;" class="padding-bottom">
+        <view class="cu-card bg-white radius padding" style="width: 100%;height: 100%;">
+          <view class="padding-bottom-xs text-bold">呕吐相关情况说明：</view>
+          <textarea placeholder="点击开始记录" style="height: 100%;width: 100%;"></textarea>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view style="width: 100%;height: calc(100% - 50px);">
+      <view style="width: 100%;height: 50%;" class="padding-bottom">
+        <view class="cu-card bg-white radius" style="width: 100%;height: 100%;">
+          <view class="padding-sm solid-bottom text-lg">
+            <text class="cuIcon-titles text-blue text-bold"></text>
+            <text class="text-bold">历史评估次数</text>
+          </view>
+          <view style="height: calc(100% - 35px);" class="study-bar padding-xs">
+            <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
+          </view>
+        </view>
+      </view>
+      <view style="width: 100%;height: 50%;" class="padding-bottom">
+        <view class="cu-card bg-white radius" style="width: 100%;height: 100%;">
+          <view class="padding-sm solid-bottom text-lg">
+            <text class="cuIcon-titles text-blue text-bold"></text>
+            <text class="text-bold">此次风险评估</text>
+          </view>
+          <view style="height: calc(100% - 35px);" class="padding-xs">
+            <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ecPieScore }}"></ec-canvas>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+<view wx:if="{{selected==2}}">
+
+  <scroll-view scroll-y="{{true}}" style="height: 1400rpx;margin-top: 12%;" >
+ 
+    <view class="list">
+     
+      <view class="camera-box" bindtap="topublishByq">
+          <image src="../../images/xiangji.png" class="camera-img"></image>
+      </view>
+
+<block wx:for="{{actionsList}}" wx:for-index="numm" wx:key="index">
+
+<view class="message" >
+
+  <view class="left" bindtap="toUserDetail"data-openid="{{item._openid}}">
+    <image src="{{item.faceImg}}" class="face-img"></image>
+  </view>
+  <view class="right"  >
+    <view class="nickname">{{item.nickName}}</view>
+      <view bindtap="toDetail" data-id="{{item._id}}">
+        {{item.text}}
+      </view>
+
+<!--单图-->
+      <view class="imags-wrap">
+        <block wx:if="{{item.images.length == 1}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index" wx:for-index="indexx">
+          <image src="{{imgItem}}" class="image-1" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}" mode="aspectFill"></image>
+        </block>
+<!--2,3图-->
+        <block wx:if="{{item.images.length==2||item.images.length==3}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-2-3" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+        </block>
+<!--四图-->
+        <block wx:if="{{item.images.length==4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-4" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+        </block>    
+<!--5-9图-->
+        <block wx:if="{{item.images.length>4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+          <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src="{{imgItem}}"data-index="{{numm}}"mode="aspectFill"></image>
+        </block>
+      </view>
+
+      <view class="time-delete">
+        <view class="time">{{item.time}}</view>
+        <view class="delete" wx:if="{{myOpenid==item._openid}}"  catchtap="deleteAction" data-id="{{item._id}}">删除</view>
+      </view>
+
+      <view wx:if="{{item.address}}" class="addreess" bindtap="opendLocation" data-index="{{numm}}">{{item.address}}</view>
+
+      <view class="hudong-box">
+        <button open-type="share" size="mini" class="share-button" data-index="{{index}}">
+          <view class="hudong-cell">
+          <image src="../../images/zhuanfa.png" class="hudong-img"></image>
+          <view class="share-text">分享</view>
+          </view>
+        </button>
+
+        <view class="hudong-cell" bindtap="toDetail" data-id="{{item._id}}">
+        <image src="../../images/pinglun.png" class="hudong-img"></image>
+        <view>{{item.commentList.length>0?item.commentList.length:'评论'}}</view>
+        </view>
+
+        <view class="hudong-cell" catchtap="prizeAction" data-id="{{item._id}}">
+          <image src="{{item.isPrized?'/images/zan.png':'/images/dianzan.png'}}" class="hudong-img" style="position: relative; left: 10rpx; top: -1rpx"></image>
+          <view>{{item.prizeList.length>0?item.prizeList.length:'点赞'}}</view>
+        </view>
+      </view>
+  <!--点赞列表-->
+      <view class="prize-box" wx:if="{{item.prizeList.length!=0}}">
+        <image src="../../images/aixin.png" class="prize-img"></image>
+          <block wx:for="{{item.prizeList}}" wx:key="index" wx:for-item="nickItem" wx:for-index="nickIndex">
+            <view>{{nickItem.nickName}}<text wx:if="{{nickIndex < item.prizeList.length-1}}">,</text></view>
+          </block>
+      </view>
+
+      <!--评论列表-->
+      <view class="comment-box" wx:if="{{item.commentList.length > 0}}">
+
+        <block wx:for="{{item.commentList}}" wx:for-item="comItem" wx:for-index="comIndex">
+          <view class="commet" bindlongtap="{{myOpenid == comItem.openid?'delteComment':''}}" data-id="{{item._id}}" data-index="{{comIndex}}">
+            <text class="comment-nickname">{{comItem.nickName}}<text wx:if="{{!comItem.toOpenid}}">：</text>
+            </text>
+              <block wx:if="{{comItem.toOpenid}}">
+                <text>回复</text>
+                <text class="comment-nickname">{{comItem.toNickname}}：</text>
+              </block>
+            <text>{{comItem.text}}</text>
+          </view>
+        </block>
+
+</view>
+
+
+  </view>
+
+</view>
+</block>
+
+
+    </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,23 @@
+<searchbar
+  placeholder="请输入关键字"
+  bind:handleSearch="search"
+  bind:cancelSearch="cancelSearch"
+></searchbar>
+
+<scroll-view style="height: 720px;" scroll-y="false">
+  <view class="none" hidden="{{none}}">
+    <text class="cuIcon-edit"></text>
+    <view>暂时没有搜索结果</view>
+  </view>
+  <view class="article-item"
+        wx:for="{{articles}}"
+        wx:item="item"
+        wx:key="id"
+        bindtap="toDetail"
+        data-index="{{item.url}}"
+        bindscrolltolower="scrolltolower">
+        <view class="date">{{item.date}}</view>
+        <view class="title">{{item.title}}</view>
+        <view class="content">{{item.content}}</view>
+  </view>
+</scroll-view>
