@@ -1,0 +1,9 @@
+{  "usingComponents": {
+  "Calendar": "../../components/calendar/calendar",
+  "mpProgress": "../../components/mp-progress/component/mp-progress",
+  "ec-canvas": "../../ec-canvas/ec-canvas"
+},
+  "navigationBarTitleText": "抗吐之路",
+  "navigationBarBackgroundColor": "#EDEDED",
+  "enablePullDownRefresh": true
+}

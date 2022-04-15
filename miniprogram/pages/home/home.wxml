@@ -1,0 +1,69 @@
+<!--pages/home/home.wxml
+yuantu  492*280-->
+<!--
+<view class="swiper1">
+<swiper autoplay="true" circular="true" indicator-dots="true" interval="4000" indicator-active-color="#ff0000">
+<swiper-item>
+<navigator src="" >
+  <image  mode="widthFix" src="https://img.alicdn.com/tfs/TB1FjZ7VWL7gK0jSZFBXXXZZpXa-520-280.png"></image>
+</navigator>
+</swiper-item>
+
+<swiper-item>
+<navigator url="" >
+  <image  mode="widthFix" src="https://gtms03.alicdn.com/tps/i3/TB1gXd1JXXXXXapXpXXvKyzTVXX-520-280.jpg"></image>
+</navigator>
+</swiper-item>
+<swiper-item>
+<navigator url="">
+  <image  mode="widthFix" src="https://gtms01.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></image>
+</navigator>
+</swiper-item>
+</swiper>
+</view>-->
+
+<view class="swiper1">
+<swiper autoplay="true" circular="true" indicator-dots="true" interval="4000" indicator-active-color="#ff0000">
+       <navigator url="../home/tweet/tweet">
+        <swiper-item>
+          <image src="https://s1.ax1x.com/2022/04/10/LkS4ot.jpg" mode="widthFix"></image>
+        </swiper-item>
+       </navigator>
+        
+        <navigator url="../home/tweet/tweet2/tweet2">
+          <swiper-item>
+          <image src="https://s1.ax1x.com/2022/04/10/LkSbQg.jpg " mode="widthFix"></image>
+        </swiper-item>
+        </navigator>
+
+        <navigator url="../home/tweet/tweet3/tweet3">
+          <swiper-item>
+            <image src="https://s1.ax1x.com/2022/04/09/LiM0IS.png"mode="widthFix"></image>
+          </swiper-item>
+        </navigator>
+
+        <swiper-item wx:for="{{swiperList}}" wx:key="url" wx:for-item="data">
+          <image bindtap="entenArt"  mode="widthFix" src="{{data.thumbUrl}}" data-index="{{index}}" data-value="{{data.value}}"></image>
+        </swiper-item>
+    
+    </swiper>
+</view>
+
+
+
+<navigator target="miniProgram" app-id="wxd947200f82267e58" path=" pages/wjxqList/wjxqList?activityId=mKLRcqD" hover-class="none">
+  <button class='btn1' style="width: 80%;"  >
+    <image  class='btnImg' src='../../images/p1.png'></image>
+    <view class="words">担心呕吐，我需要评估</view>
+ </button>
+</navigator>
+
+
+
+
+<navigator 	target="miniProgram" app-id="wxd947200f82267e58" path="pages/wjxqList/wjxqList?activityId=PSaju7Y" hover-class="none">
+  <button class='btn2' style="width: 80%;">
+    <image class='btnImg1' src='../../images/p2.png'></image>
+    <view class="words">发生呕吐，我需要帮助</view>
+ </button>
+</navigator>

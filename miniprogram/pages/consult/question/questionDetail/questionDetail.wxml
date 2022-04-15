@@ -1,0 +1,35 @@
+<!--pages/consult/question/questionDetail/questionDetail.wxml-->
+<view class="title">提问</view>
+<view class="questions-block"   bindtap="lookDetail" data-index="{{item._id}}">
+  <view class="question-info">
+    <!-- <image class="ava" src="{{item.avatar}}"/> -->
+    <view class="question">{{item.question}} </view>
+    <view class="bottom">
+      <view class="date">
+        {{item.qtime}}
+      </view>
+    </view> 
+  </view> 
+</view> 
+
+<view class="title">回答</view>
+<view class="none" wx:if="{{none==true}}">暂时还没有回答</view>
+<block wx:for="{{item.answers}}" wx:key="*this" > 
+  <view class="questions-block">
+    <view class="question-info">
+      <!-- <image class="ava" src="{{item.avatar}}"/> -->
+      <view class="question">{{item.answer}} </view>
+      <view class="bottom">
+        <view class="date">
+          {{item.atime}}
+        </view>
+      </view> 
+    </view> 
+  </view> 
+</block>
+
+<view class="title">我要回答</view>
+<form catchsubmit="formSubmit">
+  <textarea name="myanswer" placeholder="请输入回答" value="{{myanswer}}"></textarea>
+  <button style="width:200rpx" class="saveBtn" formType="submit">提交</button>
+</form>

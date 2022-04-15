@@ -1,0 +1,280 @@
+page {
+  height: 100% !important;
+  width: 100%;
+}
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+.swiper-tab {
+  display: flex;
+  flex-direction: row;
+  line-height: 80rpx;
+  border-bottom: 2rpx solid #777;
+
+}
+ 
+.tab-item {
+  width: 33.3%;
+  text-align: center;
+  font-size: 15px;
+  color: #777;
+}
+ 
+.swiper {
+  height: 1400rpx;
+  background: #dfdfdf;
+}
+ 
+.on {
+  color: blue;
+  border-bottom: 5rpx solid blue;
+}
+.message{
+  display:flex;
+  flex-direction: row;
+  padding: 20rpx 20rpx 40rpx 20rpx;
+}
+.face-img{
+  width: 100rpx;
+  height: 100rpx;
+}
+.left{
+  margin-right: 15rpx;
+}
+.right{
+  width: 580rpx;
+}
+.nickname{
+  color: #586894;
+  font-weight: 550;
+  font-size: 34rpx;
+  margin-bottom: 15rpx;
+}
+.time-delete{
+  display: flex;
+  flex-direction: row;
+  font-size: 28rpx;
+}
+.time-delete{
+  margin: 10rpx 0rpx 10rpx 0rpx;
+}
+.time{
+  color: #7f7f7f ;
+  margin-right: 20rpx;
+}
+.delete{
+  color: #586894;
+}
+.hudong-img{
+  width:40rpx ;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+.hudong-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #7f7f7f;
+  margin: 10rpx 0rpx 10rpx 0rpx;
+ 
+}
+.hudong-cell{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.imags-wrap{
+  margin-top: 10rpx;
+}
+.image-1{
+  width: 350rpx;
+  height: 380rpx;
+  
+}
+.image-2-3{
+  width: 180rpx;
+  height: 180rpx;
+  margin-right: 6rpx;
+}
+.image-4{
+  width:240rpx ;
+  height:240rpx ;
+  margin-right: 6rpx;
+}
+.image-5-9{
+  width: 180rpx;
+  height: 180rpx;
+  margin-right:6rpx ;
+}
+.prize-box{
+  background-color: #f7f7f7;
+  display: flex;
+  margin-top: 20rpx;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding:20rpx 20rpx ;
+  color:#586894;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #ededed;
+}
+.prize-img{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+.comment-box{
+  background-color: #f7f7f7;
+  padding: 20rpx 20rpx;
+  font-size: 30rpx;
+  width: 100%;
+}
+.comment-nickname{
+  color: #586894;
+}
+.comment{
+ margin-bottom: 20rpx;
+}
+.camera-box{
+  text-align: right;
+  margin: 5rpx 20rpx 0rpx 0rpx;
+}
+.camera-img{
+  width: 65rpx;
+  height: 55rpx;
+}
+.back1{
+  background-color: #f1f1f1;
+}
+.back2{
+  background-color: #ffffff;
+}
+.back3{
+  background-color: #ffffff;
+}
+.share-button {
+  background-color: #f6f6f6;
+  margin: 0 0;
+}
+.share-text {
+  font-weight: 500;
+  font-size: 28rpx;
+}
+.addreess {
+  color: #586B94;
+  font-size: 30rpx;
+}
+.list{
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.learn{
+  margin-top: 30rpx;
+  font-size: larger;
+}
+/*日历*/
+.read{
+  margin-top: 20rpx;
+  font-size: larger;
+  color: #3178E4;
+  margin-left: 0;
+}
+/*end*/
+/*圆环图*/
+.garage-status{
+  top:58%;
+  position: absolute;
+  left: 28%;
+  right: 28%;
+}
+/*近况提交*/
+.page {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+ 
+.swiper-tab1 {
+  display: flex;
+  flex-direction: row;
+  line-height: 80rpx;
+  margin-top: 30rpx;
+  border-bottom: 2rpx solid #777;
+
+}
+ 
+.tab-item1 {
+  width: 30%;
+  background-color: rgb(230, 225, 235);
+  border-radius: 30rpx;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;/*加粗*/
+  margin-left: 15%;
+  color: #777;
+}
+ 
+.swiper1 {
+  height: 1400rpx;
+  background: #4057d6;
+}
+ 
+.on {
+  color: blue;
+  border-bottom: 5rpx solid blue;
+}
+.sub{
+  background-color:#ffffff;
+  width: 100%;
+  height: 550rpx;
+  border-radius: 20rpx;
+  letter-spacing: 3rpx;
+}
+.text{
+height: 505rpx;
+width: 650rpx;
+}
+.place-holder {
+  font-size: 30rpx;
+}
+.back11{
+background-color: #4152ec;
+width: 100%;
+border-radius: 20rpx;
+}
+.history{
+background-color: #ffffff;
+width: 100%;
+height: 550rpx;
+border-radius: 20rpx;
+letter-spacing: 3rpx;
+}
+
+.desc-text{
+  color: rg b(163, 159, 154);
+  top: 75rpx;
+  left: 72rpx;
+  position: absolute;
+}
+.status-count{
+  position: absolute;
+  top:112rpx;
+  /*left:66rpx;/*66*/
+  left: 66rpx;
+  font-size: xx-large;
+  color: rgb(199, 48, 68);
+}
+.mubiao{
+  position: absolute;
+  top: 200rpx;
+  left: 75rpx;
+  color: rgb(163, 159, 154);
+}
+/*end*/
+
+
