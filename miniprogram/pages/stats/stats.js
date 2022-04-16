@@ -4,7 +4,6 @@ import MpProgress from '../../components/mp-progress/progress.min';
 import * as echarts from '../../ec-canvas/echarts';
 let barChart, pieChart, lineChart, pieScoreChart
 Page({
-
 	data: {
 		workTypeArr: ['学习情况查看', '患者近况', '分享抗癌故事'],
 		selected: 0,

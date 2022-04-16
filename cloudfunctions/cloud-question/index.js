@@ -1,3 +1,4 @@
+
 const cloud = require('wx-server-sdk')
 // 时间工具类
 const timeutil = require('./timeutil');
@@ -90,4 +91,5 @@ async function answerQuestion(event) {
       answerNum:_.inc(1)
     }
   });
+
 }
