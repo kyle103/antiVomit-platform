@@ -51,7 +51,7 @@ yuantu  492*280-->
 
 
 
-<navigator target="miniProgram" app-id="wxd947200f82267e58" path=" pages/wjxqList/wjxqList?activityId=mKLRcqD" hover-class="none">
+<navigator bindsuccess="addTimes" target="miniProgram" app-id="wxd947200f82267e58" path=" pages/wjxqList/wjxqList?activityId=mKLRcqD" hover-class="none">
   <button class='btn1' style="width: 80%;"  >
     <image  class='btnImg' src='../../images/p1.png'></image>
     <view class="words">担心呕吐，我需要评估</view>

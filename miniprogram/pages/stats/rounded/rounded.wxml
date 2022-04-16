@@ -1,9 +1,0 @@
-
-<view class="garage-status">
-  <canvas class="canvas" type="2d" id="progress"></canvas>
-  <view class="status-ctn">
-    <view class="desc-text">今日阅读字数</view>
-    <view class="status-count" >10000</view>
-    <view class="mubiao">目标：10000</view>
-  </view>
-</view>

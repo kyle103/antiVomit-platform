@@ -1,4 +1,6 @@
 // pages/home/home.js
+const app = getApp() // 全局APP
+const _ = app.db.command
 Page({
 
   /**
@@ -99,8 +101,17 @@ Page({
     wx.navigateTo({
       url: '/pages/articles/articleDetail/articleDetail?url='+ e.currentTarget.dataset.index,
     })
+    //更新阅读篇数
+    app.db.collection('echart').where({
+      _openid: app.globalData.openid,
+      time:app.moment().format('l')
+    })
+    .update({
+      data: {
+        numbers:_.inc(1)
+      },
+    })
   
-
   },
 
   // 上拉刷新

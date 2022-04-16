@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "圆环图",
-  "usingComponents": {
-    "mpProgress": "../../components/mp-progress/component/mp-progress"
-  }
-}

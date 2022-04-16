@@ -1,10 +1,53 @@
 const app = getApp() // 全局APP
 const util=require("../../util/util")
-import MpProgress from '../../components/mp-progress/progress.min';
 import * as echarts from '../../ec-canvas/echarts';
 let barChart, pieChart, lineChart, pieScoreChart
 Page({
+	//为新用户添加学习记录
+	onReady :function (e) {
+		//console.log(app.globalData.openid)
+		app.db.collection('echart').where({
+			_openid: app.globalData.openid,
+			time:app.moment().format('l')
+		  }).
+		 get().then(res=>{
+		console.log("查询成功",res.data)//打印返回结果
+		if(res.data.length==0){
+			for(var i=0;i<=7;i++){//获取日期
+				var day1 = new Date();
+				day1.setTime(day1.getTime()-24*60*60*1000*i);
+				var year = day1.getFullYear()
+				var month = day1.getMonth() + 1
+				var day = day1.getDate()
+				if(month < 10){
+					month = '0' + month;
+				};
+				if(day < 10) {
+					day = '0' + day;}
+				var theday= year+"-" + month + "-" + day;
+				//
+				app.db.collection('echart').add({
+					data:{
+					  _openid: app.globalData.openid,
+					  dataType:'read',
+					  numbers:0,
+					  time:theday,
+					  times:0
+					},
+						success(res){
+							console.log("添加记录成功")
+						}
+					  })
+			  }
+	
+		}
+    }).catch(err=>{
+		  console.log("查询失败",err)
+    })
+		
+	},
 	data: {
+		inputVal: "",//近况提交内容记录
 		workTypeArr: ['学习情况查看', '患者近况', '分享抗癌故事'],
 		selected: 0,
 		patient: true, // 是否是患者填写
@@ -251,7 +294,7 @@ Page({
 		const endTime = app.moment().format('l')
 		const startTime = app.moment().subtract(7, 'd').format('l')//横轴
 		const _ = app.db.command
-		app.db.collection('echart').where({ dataType: 'read', time: _.gte(startTime).and(_.lte(endTime)) }).orderBy('time', 'asc').get({
+		app.db.collection('echart').where({ _openid: app.globalData.openid, dataType: 'read', time: _.gte(startTime).and(_.lte(endTime)) }).orderBy('time', 'asc').get({
 			success: ({ data }) => {
 				if (data.length > 0) {
 					const xData = data.map(item => item.time.slice(-2))
@@ -378,7 +421,7 @@ Page({
 		const endTime = app.moment().format('l')
 		const startTime = app.moment().subtract(7, 'd').format('l')//横轴
 		const _ = app.db.command
-		app.db.collection('echart').where({ dataType: 'read', time: _.gte(startTime).and(_.lte(endTime)) }).orderBy('time', 'asc').get({
+		app.db.collection('echart').where({ _openid: app.globalData.openid, dataType: 'read', time: _.gte(startTime).and(_.lte(endTime)) }).orderBy('time', 'asc').get({
 			success: ({ data }) => {
 				if (data.length > 0) {
 					const xData = data.map(item => item.time.slice(-2))
@@ -407,6 +450,42 @@ Page({
 				}
 			}
 		})
+	},
+	//提交近况
+	bindTextAreaBlur: function(e) {
+		this.setData({
+		  inputVal:e.detail.value
+		}) 
+	},    
+	formSubmit: function(e) {
+		if(app.globalData.userInfo == null){
+			wx.navigateTo({
+			  url: '/pages/au/au',
+			})
+		  }else{
+			console.log(this.data.inputVal)
+			if(this.data.inputVal=="")
+			{}else{
+				wx.cloud.database().collection('statusRecords').add({
+					data:{
+					  text:this.data.inputVal,
+					  time:Date.now(),
+					  nickName:app.globalData.userInfo.nickName,
+					},
+						success(res){
+						  wx.hideLoading({
+							success: (res) => {},
+						  })
+						  wx.showToast({
+							title: '提交成功！',
+							mask:true
+						  })
+						}
+					  })
+			}
+
+		  }
+
 	},
 	//发布动态
 	getUserProfile(e) {
@@ -446,6 +525,19 @@ Page({
 	  },
 	  
 	  onShow(){
+/*		var day1 = new Date();
+		day1.setTime(day1.getTime()-24*60*60*1000*7);
+		var year = day1.getFullYear()
+		var month = day1.getMonth() + 1
+		var day = day1.getDate()
+		if(month < 10){
+			month = '0' + month;
+		};
+		if(day < 10) {
+			day = '0' + day;}
+		var day7= year+"-" + month + "-" + day;
+		console.log(day7)
+		*/
 		this.getActionsList()
 		const that = this
 		setTimeout(() => {

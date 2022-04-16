@@ -37,17 +37,17 @@
   <block wx:if="{{patient}}">
     <view style="width: 100%;height: calc(100% - 70px);">
       <view style="width: 100%;height: 50%;" class="padding-bottom">
+        <form bindsubmit="formSubmit" >
         <view class="cu-card bg-white radius padding" style="width: 100%;height: 100%;">
-          <view class="padding-bottom-xs text-bold">呕吐相关情况说明：</view>
-          <textarea placeholder="点击开始记录" style="height: 100%;width: 100%;"></textarea>
-        </view>
-      </view>
-      <view style="width: 100%;height: 50%;" class="padding-bottom">
-        <view class="cu-card bg-white radius padding" style="width: 100%;height: 100%;">
-          <view class="padding-bottom-xs text-bold">呕吐相关情况说明：</view>
-          <textarea placeholder="点击开始记录" style="height: 100%;width: 100%;"></textarea>
-        </view>
-      </view>
+            <view class="padding-bottom-xs text-bold">呕吐相关情况说明：</view>
+            <textarea style="height: 100%;width: 100%;"  bindblur="bindTextAreaBlur" placeholder="点击开始记录" value="{{inputVal}}" />
+          </view>
+            <view class="insert-button">
+              <button formType="submit" type="primary" class="subbutton">提交</button>
+            </view>
+          </form>
+        </view> 
+      
     </view>
   </block>
   <block wx:else>
