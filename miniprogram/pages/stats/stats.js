@@ -458,6 +458,7 @@ Page({
 		}) 
 	},    
 	formSubmit: function(e) {
+		var that = this
 		if(app.globalData.userInfo == null){
 			wx.navigateTo({
 			  url: '/pages/au/au',
@@ -473,13 +474,16 @@ Page({
 					  nickName:app.globalData.userInfo.nickName,
 					},
 						success(res){
-						  wx.hideLoading({
-							success: (res) => {},
-						  })
 						  wx.showToast({
 							title: '提交成功！',
-							mask:true
+							mask:true,
+							success: function() {       
+								that.setData({         
+									inputVal: ''
+								})
+							},
 						  })
+
 						}
 					  })
 			}
