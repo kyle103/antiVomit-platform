@@ -99,6 +99,8 @@ Page({
     wx.navigateTo({
       url: '/pages/articles/articleDetail/articleDetail?url='+ e.currentTarget.dataset.index,
     })
+  
+
   },
 
   // 上拉刷新

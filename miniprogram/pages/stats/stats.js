@@ -447,17 +447,6 @@ Page({
 	  },
 	  
 	  onShow(){
-		/*var now = new Date();//今天的日期
-		var a = now.getFullYear()
-		var b= now.getMonth() + 1
-		var c =now.getDate()
-		if(b < 10){
-			b = '0' + b;
-		};
-		if(c < 10) {
-			c = '0' +c;}
-		var today=a+"-" + b + "-" + c;
-		console.log(today)*/
 		this.getActionsList()
 		const that = this
 		setTimeout(() => {

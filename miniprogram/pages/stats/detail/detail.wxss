@@ -9,8 +9,8 @@
   margin-right: 15rpx;
 }
 .face-img {
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 20rpx;
 }
 .right {

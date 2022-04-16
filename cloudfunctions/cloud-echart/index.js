@@ -33,8 +33,10 @@ const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-    try {
-      return await db.collection('echart').where({
+  
+  try {
+      await db.collection('echart').where({
+        dataType:'read',
         time:day7
       })
       .update({
@@ -43,24 +45,18 @@ exports.main = async (event, context) => {
           times:0,
           numbers:0
         },
-      })
+      }),
+      await db.collection('echart').where({
+        dataType:'words'
+       })
+       .update({
+         data: {
+           time:today,
+           numbers:0
+         },
+       })
     } catch(e) {
       console.error(e)
     }
   }
-  // 云函数入口函数
-exports.main = async (event, context) => {
-    try {
-      return await db.collection('echart').where({
-       dataType:'words'
-      })
-      .update({
-        data: {
-          time:today,
-          numbers:0
-        },
-      })
-    } catch(e) {
-      console.error(e)
-    }
-  }
+

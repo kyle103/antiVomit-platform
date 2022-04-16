@@ -36,8 +36,9 @@ ec-canvas {
   padding: 20rpx 20rpx 40rpx 20rpx;
 }
 .face-img{
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
 }
 .left{
   margin-right: 15rpx;
