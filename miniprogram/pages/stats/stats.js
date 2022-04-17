@@ -5,48 +5,68 @@ let barChart, pieChart, lineChart, pieScoreChart
 Page({
 	//为新用户添加学习记录
 	onReady :function (e) {
+		var now=new Date();
+		now.setTime(now.getTime()-24*60*60*1000);
+		var year = now.getFullYear()
+		var month = now.getMonth() + 1
+		var day = now.getDate()
+		if(month < 10){
+			month = '0' + month;
+		};
+		if(day < 10) {
+			day = '0' + day;}
+		var yesterday= year+"-" + month + "-" + day;
 		//console.log(app.globalData.openid)
-		app.db.collection('echart').where({
-			_openid: app.globalData.openid,
-			time:app.moment().format('l')
-		  }).
-		 get().then(res=>{
-		console.log("查询成功",res.data)//打印返回结果
-		if(res.data.length==0){
-			for(var i=0;i<=7;i++){//获取日期
-				var day1 = new Date();
-				day1.setTime(day1.getTime()-24*60*60*1000*i);
-				var year = day1.getFullYear()
-				var month = day1.getMonth() + 1
-				var day = day1.getDate()
-				if(month < 10){
-					month = '0' + month;
-				};
-				if(day < 10) {
-					day = '0' + day;}
-				var theday= year+"-" + month + "-" + day;
-				//
-				app.db.collection('echart').add({
-					data:{
-					  _openid: app.globalData.openid,
-					  dataType:'read',
-					  numbers:0,
-					  time:theday,
-					  times:0
-					},
-						success(res){
-							console.log("添加记录成功")
-						}
-					  })
-			  }
-	
-		}
-    }).catch(err=>{
-		  console.log("查询失败",err)
-    })
+		if(app.globalData.userInfo == null){
+			wx.navigateTo({
+			  url: '/pages/au/au',
+			})
+		  }
+		  else{
+			app.db.collection('echart').where({
+				_openid: app.globalData.openid,
+				time:yesterday
+			  }).
+			 get().then(res=>{
+			console.log("查询成功",res.data)//打印返回结果
+			if(res.data.length==0){
+				for(var i=0;i<=7;i++){//获取日期
+					var day1 = new Date();
+					day1.setTime(day1.getTime()-24*60*60*1000*i);
+					var year = day1.getFullYear()
+					var month = day1.getMonth() + 1
+					var day = day1.getDate()
+					if(month < 10){
+						month = '0' + month;
+					};
+					if(day < 10) {
+						day = '0' + day;}
+					var theday= year+"-" + month + "-" + day;
+					//
+					app.db.collection('echart').add({
+						data:{
+						  _openid: app.globalData.openid,
+						  dataType:'read',
+						  numbers:0,
+						  time:theday,
+						  times:0
+						},
+							success(res){
+								console.log("添加记录成功")
+							}
+						  })
+				  }
+		
+			}
+		}).catch(err=>{
+			  console.log("查询失败",err)
+		})
+		  }
+
 		
 	},
 	data: {
+		score:0,
 		inputVal: "",//近况提交内容记录
 		workTypeArr: ['学习情况查看', '患者近况', '分享抗癌故事'],
 		selected: 0,
@@ -195,7 +215,8 @@ Page({
 		},
 		ecPieScore: {
 			onInit: function (canvas, width, height, devicePixelRatio) {
-				var value = 80;//这里控制着圆环图的进度，最近一次评估得分
+				var value =40;//这里控制着圆环图的进度，最近一次评估得分
+				//console.log(value,app.updateScore())
 				pieScoreChart = echarts.init(canvas, null, { width, height, devicePixelRatio });
 				canvas.setChart(pieScoreChart);
 				var option = {
@@ -288,6 +309,7 @@ Page({
 		const { patient } = app.dataset(e)
 		this.setData({ patient: patient == 1 })
 		if (!this.data.patient) this.updateLine()
+
 	},
 	// 更新bar图表
 	updateBar() {
@@ -450,7 +472,16 @@ Page({
 				}
 			}
 		})
-	},
+	},//更新评估分数
+	/*updateScore(){
+		let resCustomer =await db.collection('EvalScore').where({
+		  _openid: this.globalData.openid,
+		}).get()
+		this.setData({
+		  score: resCustomer.data
+		})
+	  return score
+	},*/
 	//提交近况
 	bindTextAreaBlur: function(e) {
 		this.setData({
@@ -491,6 +522,7 @@ Page({
 		  }
 
 	},
+
 	//发布动态
 	getUserProfile(e) {
 		// 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -529,6 +561,7 @@ Page({
 	  },
 	  
 	  onShow(){
+		  
 /*		var day1 = new Date();
 		day1.setTime(day1.getTime()-24*60*60*1000*7);
 		var year = day1.getFullYear()
@@ -547,6 +580,7 @@ Page({
 		setTimeout(() => {
 			that.updateBar()
 			that.updatePie()
+
 		}, 350)
 	  },
 	  onLoad: function () {

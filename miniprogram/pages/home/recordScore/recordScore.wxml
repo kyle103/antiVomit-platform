@@ -1,0 +1,9 @@
+
+<form bindsubmit="formSubmit" >
+        <view style="width: 100%;height: 100rpx;margin-top: 5%;margin-left: 2%;">
+            <textarea maxlength="3" style="height: 100%;width: 100%;"  bindblur="bindTextAreaBlur" placeholder="在此记录下本次评估的分数" auto-focus="true" value="{{inputVal}}" />
+          </view>
+            <view class="insert-button">
+              <button formType="submit" type="primary">提交</button>
+            </view>
+</form>

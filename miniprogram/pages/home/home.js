@@ -9,14 +9,8 @@ Page({
       //更新评估次数
       addTimes:function(e){
         console.log("跳转成功")
-        app.db.collection('echart').where({
-          _openid: app.globalData.openid,
-          time:app.moment().format('l')
-        })
-        .update({
-          data: {
-            times:_.inc(1)
-          },
+        wx.redirectTo({
+          url: '../home/recordScore/recordScore'
         })
       }
 
