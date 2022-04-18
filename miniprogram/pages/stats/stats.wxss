@@ -126,7 +126,7 @@ ec-canvas {
   margin-right: 10rpx;
 }
 .comment-box{
-  background-color: #f7f7f7;
+  background-color: #f0f0f0;
   padding: 20rpx 20rpx;
   font-size: 30rpx;
   width: 100%;

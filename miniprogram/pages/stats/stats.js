@@ -5,18 +5,6 @@ let barChart, pieChart, lineChart, pieScoreChart
 Page({
 	//为新用户添加学习记录
 	onReady :function (e) {
-		var now=new Date();
-		now.setTime(now.getTime()-24*60*60*1000);
-		var year = now.getFullYear()
-		var month = now.getMonth() + 1
-		var day = now.getDate()
-		if(month < 10){
-			month = '0' + month;
-		};
-		if(day < 10) {
-			day = '0' + day;}
-		var yesterday= year+"-" + month + "-" + day;
-		//console.log(app.globalData.openid)
 		if(app.globalData.userInfo == null){
 			wx.navigateTo({
 			  url: '/pages/au/au',
@@ -24,8 +12,7 @@ Page({
 		  }
 		  else{
 			app.db.collection('echart').where({
-				_openid: app.globalData.openid,
-				time:yesterday
+				_openid: app.globalData.openid
 			  }).
 			 get().then(res=>{
 			console.log("查询成功",res.data)//打印返回结果
@@ -42,7 +29,6 @@ Page({
 					if(day < 10) {
 						day = '0' + day;}
 					var theday= year+"-" + month + "-" + day;
-					//
 					app.db.collection('echart').add({
 						data:{
 						  _openid: app.globalData.openid,
@@ -562,19 +548,19 @@ Page({
 	  
 	  onShow(){
 		  
-/*		var day1 = new Date();
-		day1.setTime(day1.getTime()-24*60*60*1000*7);
-		var year = day1.getFullYear()
-		var month = day1.getMonth() + 1
-		var day = day1.getDate()
-		if(month < 10){
-			month = '0' + month;
+		var now = new Date();
+		now.setTime(now.getTime()-24*60*60*1000*8);
+		var a = now.getFullYear()
+		var b= now.getMonth() + 1
+		var c =now.getDate()
+		if(b < 10){
+			b = '0' + b;
 		};
-		if(day < 10) {
-			day = '0' + day;}
-		var day7= year+"-" + month + "-" + day;
-		console.log(day7)
-		*/
+		if(c < 10) {
+			c = '0' +c;}
+		var today=a+"-" + b + "-" + c;
+		console.log(today)
+		
 		this.getActionsList()
 		const that = this
 		setTimeout(() => {

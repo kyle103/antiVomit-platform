@@ -12,9 +12,9 @@ if(b < 10){
 if(c < 10) {
     c = '0' +c;}
 var today=a+"-" + b + "-" + c;
-//七天前的时间
+//8天前的时间
 var day1 = new Date();
-day1.setTime(day1.getTime()-24*60*60*1000*7);
+day1.setTime(day1.getTime()-24*60*60*1000*8);
 var year = day1.getFullYear()
 var month = day1.getMonth() + 1
 var day = day1.getDate()
@@ -23,7 +23,7 @@ if(month < 10){
 };
 if(day < 10) {
     day = '0' + day;}
-var day7= year+"-" + month + "-" + day;
+var day8= year+"-" + month + "-" + day;
 
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV
@@ -33,11 +33,11 @@ const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  
+    //console.log(today)
   try {
       await db.collection('echart').where({
         dataType:'read',
-        time:day7
+        time:day8
       })
       .update({
         data: {
