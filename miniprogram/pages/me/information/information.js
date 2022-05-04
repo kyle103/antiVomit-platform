@@ -73,18 +73,20 @@ Page({
 
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    let values = Object.values(e.detail.value)
-    for(let v of values){
-      if(v.length===0){
+    let {name,sex,age,illness,hospital} = e.detail.value
+    // let values = Object.values(e.detail.value)
+    // for(let v of values){
+    //   if(v.length===0){
+      if(name.length===0&&sex.length===0&&age
+        .length===0&&illness.length===0&&hospital.length===0){
         wx.showToast({
           title: '温馨提示：健康档案项不能为空！',
           icon:'none'
         })
         return
       }
-    }
+    // }
     let {medicineList} = this.data
-    let {name,sex,age,illness,hospital} = e.detail.value
     let patientInfo = {
       name,
       sex,
