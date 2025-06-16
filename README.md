@@ -1,3 +1,4 @@
+2025.6.16从https://gitee.com/muqingyou/antiVomit-platform 迁移
 # page目录结构
 
 home首页
